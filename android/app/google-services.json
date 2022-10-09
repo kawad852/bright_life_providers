@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "60154629314",
+    "project_id": "bright-life-1eafe",
+    "storage_bucket": "bright-life-1eafe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60154629314:android:e7bf7d534310cee04d7f5b",
+        "android_client_info": {
+          "package_name": "com.bright_life_providers.wecan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "60154629314-mk212tuprap5645c3ko7nteurbsk0fcs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBkdXudBHCDfLHlQyZStXYv51Jo75Pdh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "60154629314-mk212tuprap5645c3ko7nteurbsk0fcs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -24,11 +24,15 @@ class ProviderOrderCtrl extends GetxController {
     required String name,
     required double price,
   }) {
-    var value = {
-      'price': price,
-      'name': name,
-    };
-    extras.add(value);
+    if (price == 0.0 && name.isEmpty) {
+      extras.add({});
+    } else {
+      var value = {
+        'price': price,
+        'name': name,
+      };
+      extras.add(value);
+    }
   }
 
   void addSize({

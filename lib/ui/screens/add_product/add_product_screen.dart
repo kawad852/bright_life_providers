@@ -53,6 +53,7 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("length:: ${addExtraWidgetStateKeys.length}");
     final bool showFab = MediaQuery.of(context).viewInsets.bottom == 0.0;
 
     return Scaffold(
@@ -62,7 +63,7 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
               title: "Save Changes".tr,
               onPressed: () {
                 var sizesValidators = [];
-                var extrasValidators = [];
+                // var extrasValidators = [];
                 for (var element in addSizeWidgetStateKeys) {
                   if (element.currentState!.formKey.currentState!.validate()) {
                     sizesValidators.add(true);
@@ -75,17 +76,23 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                   }
                 }
                 for (var element in addExtraWidgetStateKeys) {
-                  if (element.currentState!.formKey.currentState!.validate()) {
-                    extrasValidators.add(true);
-                    ProviderOrderCtrl.find.addExtra(
-                      name: element.currentState!.nameCtrl.text,
-                      price: double.parse(element.currentState!.priceCtrl.text),
-                    );
-                  } else {
-                    extrasValidators.add(false);
-                  }
+                  ProviderOrderCtrl.find.addExtra(
+                    name: element.currentState!.nameCtrl.text,
+                    price: double.parse(element.currentState!.priceCtrl.text.isEmpty ? '0.0' : element.currentState!.priceCtrl.text),
+                  );
                 }
-                if (_formKey.currentState!.validate() && !sizesValidators.contains(false) && !extrasValidators.contains(false)) {
+                // for (var element in addExtraWidgetStateKeys) {
+                //   if (element.currentState!.formKey.currentState!.validate()) {
+                //     extrasValidators.add(true);
+                //     ProviderOrderCtrl.find.addExtra(
+                //       name: element.currentState!.nameCtrl.text,
+                //       price: double.parse(element.currentState!.priceCtrl.text),
+                //     );
+                //   } else {
+                //     extrasValidators.add(false);
+                //   }
+                // }
+                if (_formKey.currentState!.validate() && !sizesValidators.contains(false)) {
                   FocusManager.instance.primaryFocus?.unfocus();
                   ProviderOrderCtrl.find.fetchOrder(
                     name: nameCtrl.text,
@@ -100,7 +107,7 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
           : null,
       appBar: BaseAppBar(title: 'Add New Order'.tr),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+        padding: const EdgeInsets.fromLTRB(20, 40, 20, 100),
         child: Container(
           padding: const EdgeInsets.all(20.0),
           decoration: BoxDecoration(
