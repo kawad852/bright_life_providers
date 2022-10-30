@@ -1,7 +1,8 @@
 import 'package:bright_life_providers/translation/translation.dart';
-import 'package:bright_life_providers/ui/screens/add_product/add_product_screen.dart';
+import 'package:bright_life_providers/ui/screens/home/home_screen.dart';
 import 'package:bright_life_providers/utils/material_theme.dart';
 import 'package:bright_life_providers/utils/shared_prefrences.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -10,14 +11,14 @@ import 'package:get/get.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  // options: const FirebaseOptions(
-  //   apiKey: "XXX",
-  //   appId: "XXX",
-  //   messagingSenderId: "XXX",
-  //   projectId: "XXX",
-  // ),
-  // );
+  await Firebase.initializeApp(
+      // options: const FirebaseOptions(
+      //   apiKey: "XXX",
+      //   appId: "XXX",
+      //   messagingSenderId: "XXX",
+      //   projectId: "XXX",
+      // ),
+      );
   await MySharedPreferences.init();
   //TODO: change later
   MySharedPreferences.isPassedIntro = true;
@@ -70,7 +71,7 @@ class _MyAppState extends State<MyApp> {
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      home: const AddOrderScreen(),
+      home: const HomeScreen(),
     );
   }
 }

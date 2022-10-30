@@ -1,6 +1,6 @@
 import 'package:bright_life_providers/controllers/registration/sign_in_ctrl.dart';
-import 'package:bright_life_providers/ui/widgets/CustomTextCirleButton.dart';
 import 'package:bright_life_providers/ui/widgets/blur_image.dart';
+import 'package:bright_life_providers/ui/widgets/custom_text_circle_button.dart';
 import 'package:bright_life_providers/ui/widgets/custom_text_field.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:flutter/material.dart';

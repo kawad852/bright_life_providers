@@ -13,6 +13,7 @@ class OrderBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.symmetric(vertical: 5),
       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
       alignment: Alignment.center,
       decoration: BoxDecoration(

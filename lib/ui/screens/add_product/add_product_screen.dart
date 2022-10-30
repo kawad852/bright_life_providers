@@ -53,7 +53,6 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("length:: ${addExtraWidgetStateKeys.length}");
     final bool showFab = MediaQuery.of(context).viewInsets.bottom == 0.0;
 
     return Scaffold(
