@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
           child: Column(
-            children: const [
+            children: [
               HomeHeader(),
               OrdersFilterWidget(),
               OrdersBuilder(),
