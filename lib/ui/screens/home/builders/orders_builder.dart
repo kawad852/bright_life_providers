@@ -1,6 +1,7 @@
 import 'package:bright_life_providers/controllers/filter_ctrl_refactor.dart';
 import 'package:bright_life_providers/models/orders_model.dart';
 import 'package:bright_life_providers/ui/screens/home/widgets/order_bubble.dart';
+import 'package:bright_life_providers/ui/screens/order_details/order_details_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +28,14 @@ class OrdersBuilder extends StatelessWidget {
                     ),
             itemBuilder: (context, snapshot) {
               final data = snapshot.data();
-              return OrderBubble(
-                title: '#${data.orderId}',
-                status: data.status,
+              return InkWell(
+                onTap: (){
+                  Get.to(const OrderDetailsScreen());
+                },
+                child: OrderBubble(
+                  title: '#${data.orderId}',
+                  status: data.status,
+                ),
               );
             },
           ),
