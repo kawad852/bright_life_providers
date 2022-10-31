@@ -4,7 +4,8 @@ const Map<String, String> en = {
   "Email address or phone Number": "Email address or phone Number",
   "Password": "Password",
   "Sign in": "Sign in",
-  "Something went Wrong, try again later": "Something went Wrong, try again later",
+  "Something went Wrong, try again later":
+      "Something went Wrong, try again later",
   "Enter your email": "Enter your email",
   "Enter your password": "Enter your password",
   "Add New Order": "Add New Order",
@@ -18,4 +19,17 @@ const Map<String, String> en = {
   "Category": "Category",
   "Save Changes": "Save Changes",
   "": "",
+
+  ///TODO: (Bisher) translate to arabic
+  "Filter Date": "Filter Date",
+  "This Week": "This Week",
+  "This Month": "This Month",
+  "Last 3 Month": "Last 3 Month",
+  "This Year": "This Year",
+  "Order Status": "Order Status",
+  "Pending": "Pending",
+  "In progress": "In progress",
+  "Completed": "Completed",
+  "Canceled": "Canceled",
+  "On Delivery": "On Delivery",
 };

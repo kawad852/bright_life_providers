@@ -1,3 +1,4 @@
+import 'package:bright_life_providers/binding/filter_binding.dart';
 import 'package:bright_life_providers/translation/translation.dart';
 import 'package:bright_life_providers/ui/screens/home/home_screen.dart';
 import 'package:bright_life_providers/utils/material_theme.dart';
@@ -72,6 +73,7 @@ class _MyAppState extends State<MyApp> {
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       home: const HomeScreen(),
+      initialBinding: FilterBinding(),
     );
   }
 }
