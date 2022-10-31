@@ -12,6 +12,7 @@ class OrdersBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<KhaledFilterCtrl>(
+      id: '123',
       builder: (controller) {
         return Expanded(
           child: FirestoreListView<OrderModel>(
@@ -21,7 +22,7 @@ class OrdersBuilder extends StatelessWidget {
                       fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
                       toFirestore: (order, _) => order.toJson(),
                     )
-                : FirebaseFirestore.instance.collection('orders').where('status', isEqualTo: controller.selectedStatus.value).orderBy('created_at', descending: false).withConverter<OrderModel>(
+                : FirebaseFirestore.instance.collection('orders').where('status', isEqualTo: controller.filterStatus.value).orderBy('created_at', descending: false).withConverter<OrderModel>(
                       fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
                       toFirestore: (order, _) => order.toJson(),
                     ),
