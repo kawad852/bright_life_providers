@@ -1,7 +1,9 @@
+import 'package:bright_life_providers/ui/screens/notification/notification.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:bright_life_providers/utils/base/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({Key? key}) : super(key: key);
@@ -30,7 +32,9 @@ class HomeHeader extends StatelessWidget {
           ],
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.to(() => NotificationScreen());
+          },
           style: ElevatedButton.styleFrom(
             elevation: 0,
             fixedSize: const Size(66.0, 66.0),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class OrderItemTile extends StatelessWidget {
   final int count;
   final String title;
-  final double price;
+  final String price;
 
   const OrderItemTile({
     Key? key,
@@ -29,7 +29,7 @@ class OrderItemTile extends StatelessWidget {
           const SizedBox(width: 10,),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               color: MyColors.grey070,
               fontSize: 14,
             ),

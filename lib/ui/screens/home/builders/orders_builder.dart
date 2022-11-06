@@ -18,19 +18,32 @@ class OrdersBuilder extends StatelessWidget {
           child: FirestoreListView<OrderModel>(
             padding: const EdgeInsets.symmetric(vertical: 20),
             query: controller.filterStatus.value.isEmpty
-                ? FirebaseFirestore.instance.collection('orders').orderBy('created_at', descending: false).withConverter<OrderModel>(
-                      fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
+                ? FirebaseFirestore.instance
+                    .collection('orders')
+                    .orderBy('created_at', descending: false)
+                    .withConverter<OrderModel>(
+                      fromFirestore: (snapshot, _) =>
+                          OrderModel.fromJson(snapshot.data()!),
                       toFirestore: (order, _) => order.toJson(),
                     )
-                : FirebaseFirestore.instance.collection('orders').where('status', isEqualTo: controller.selectedStatus.value).orderBy('created_at', descending: false).withConverter<OrderModel>(
-                      fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
+                : FirebaseFirestore.instance
+                    .collection('orders')
+                    .where('status', isEqualTo: controller.selectedStatus.value)
+                    .orderBy('created_at', descending: false)
+                    .withConverter<OrderModel>(
+                      fromFirestore: (snapshot, _) =>
+                          OrderModel.fromJson(snapshot.data()!),
                       toFirestore: (order, _) => order.toJson(),
                     ),
             itemBuilder: (context, snapshot) {
               final data = snapshot.data();
               return InkWell(
-                onTap: (){
-                  Get.to(const OrderDetailsScreen());
+                onTap: () {
+                  Get.to(
+                    () => OrderDetailsScreen(
+                      id: data.orderId,
+                    ),
+                  );
                 },
                 child: OrderBubble(
                   title: '#${data.orderId}',
