@@ -3,7 +3,6 @@ import 'package:bright_life_providers/ui/screens/notification/widget/notidicatio
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 
 class NotificationScreen extends StatelessWidget {
@@ -29,10 +28,6 @@ class NotificationScreen extends StatelessWidget {
         padding: const EdgeInsets.only(top: 18, right: 18, left: 18),
         itemBuilder: (context, snapshot) {
           final data = snapshot.data();
-          // FirebaseFirestore.instance
-          //     .collection('notification')
-          //     .doc(data.notificationId.toString())
-          //     .update({'viewed': true});
           return NotificationItem(
             orderNum: '${data.notificationId}',
             status: data.status,

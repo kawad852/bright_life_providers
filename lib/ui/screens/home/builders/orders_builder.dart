@@ -1,3 +1,4 @@
+import 'package:bright_life_providers/binding/view_order_binding.dart';
 import 'package:bright_life_providers/controllers/filter_ctrl_refactor.dart';
 import 'package:bright_life_providers/models/orders_model.dart';
 import 'package:bright_life_providers/ui/screens/home/widgets/order_bubble.dart';
@@ -43,6 +44,7 @@ class OrdersBuilder extends StatelessWidget {
                     () => OrderDetailsScreen(
                       id: data.orderId,
                     ),
+                    binding: ViewOrderBinding(),
                   );
                 },
                 child: OrderBubble(

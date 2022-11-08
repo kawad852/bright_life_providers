@@ -15,6 +15,12 @@ class _CustomStopwatchState extends State<CustomStopwatch> {
   final stopWatchTimer = StopWatchTimer(mode: StopWatchMode.countUp);
 
   @override
+  void dispose() async {
+    super.dispose();
+    await stopWatchTimer.dispose();
+  }
+  @override
+
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 15),
@@ -138,9 +144,4 @@ class _CustomStopwatchState extends State<CustomStopwatch> {
     );
   }
 
-  @override
-  void dispose() async {
-    super.dispose();
-    await stopWatchTimer.dispose();
-  }
 }

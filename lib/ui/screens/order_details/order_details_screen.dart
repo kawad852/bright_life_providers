@@ -32,25 +32,22 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<ViewOrderModel?>(
-        future: ViewOrderCtrl.find.fetchData(widget.id),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return const Scaffold(
-                appBar: BaseAppBar(title: ''),
-                body: Center(
+    return Scaffold(
+      appBar: BaseAppBar(
+        title: '#${widget.id}',
+      ),
+      body: FutureBuilder<ViewOrderModel?>(
+          future: ViewOrderCtrl.find.fetchData(widget.id),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return const Center(
                   child: CircularProgressIndicator(),
-                ),
-              );
-            case ConnectionState.done:
-            default:
-              if (snapshot.hasData) {
-                return Scaffold(
-                  appBar: BaseAppBar(
-                    title: '#${snapshot.data!.order!.id}',
-                  ),
-                  body: ListView(
+                );
+              case ConnectionState.done:
+              default:
+                if (snapshot.hasData) {
+                  return ListView(
                     padding: const EdgeInsets.fromLTRB(25, 10, 25, 30),
                     children: [
                       const Text(
@@ -288,15 +285,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         ),
                       ),
                     ],
-                  ),
-                );
-              } else {
-                return const Scaffold(
-                  appBar: BaseAppBar(title: ''),
-                  body: FailedWidget(),
-                );
-              }
-          }
-        });
+                  );
+                } else {
+                  return const FailedWidget();
+                }
+            }
+          }),
+    );
   }
 }

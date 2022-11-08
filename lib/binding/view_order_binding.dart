@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
-import 'package:bright_life_providers/controllers/home/filter_ctrl.dart';
 import 'package:bright_life_providers/controllers/home/view_order_ctrl.dart';
 
-class NavBarBinding implements Bindings {
+class ViewOrderBinding extends Bindings {
+
   @override
   void dependencies() {
-    Get.put(FilterController());
+    Get.lazyPut(() => ViewOrderCtrl());
   }
+
 }
