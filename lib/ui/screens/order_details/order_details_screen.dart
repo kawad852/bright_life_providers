@@ -5,12 +5,12 @@ import 'package:bright_life_providers/ui/screens/order_details/widgets/price_ite
 import 'package:bright_life_providers/ui/screens/order_details/widgets/stopwatch.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
 import 'package:bright_life_providers/ui/widgets/custom_network_image.dart';
+import 'package:bright_life_providers/ui/widgets/failed_widget.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:bright_life_providers/ui/widgets/failed_widget.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
   final int id;
@@ -37,7 +37,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         title: '#${widget.id}',
       ),
       body: FutureBuilder<ViewOrderModel?>(
-          future: ViewOrderCtrl.find.fetchData(widget.id),
+          future: ViewOrderCtrl.find.initialize,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
@@ -149,13 +149,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         itemCount: snapshot.data!.order!.products!.length,
                         itemBuilder: (context, index) {
                           return OrderItemTile(
-                            count: snapshot
-                                    .data!.order!.products![index].quantity ??
-                                0,
-                            title:
-                                '${snapshot.data!.order!.products![index].productName}',
-                            price:
-                                '${snapshot.data!.order!.products![index].price}',
+                            count: snapshot.data!.order!.products![index].quantity ?? 0,
+                            title: '${snapshot.data!.order!.products![index].productName}',
+                            price: '${snapshot.data!.order!.products![index].price}',
                           );
                         },
                       ),
@@ -163,14 +159,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         height: 25,
                         thickness: 1,
                       ),
-                      PriceItemTile(
-                          title: 'Total',
-                          price: '${snapshot.data!.order!.total}'),
-                      PriceItemTile(
-                          title: 'Tax', price: '${snapshot.data!.order!.tax}'),
-                      PriceItemTile(
-                          title: 'delivery fee',
-                          price: '${snapshot.data!.order!.deliveryFee}'),
+                      PriceItemTile(title: 'Total', price: '${snapshot.data!.order!.total}'),
+                      PriceItemTile(title: 'Tax', price: '${snapshot.data!.order!.tax}'),
+                      PriceItemTile(title: 'delivery fee', price: '${snapshot.data!.order!.deliveryFee}'),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 2),
                         child: Row(
@@ -193,15 +184,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           ],
                         ),
                       ),
-                      PriceItemTile(
-                          title: 'Discount',
-                          price: '${snapshot.data!.order!.discount}'),
-                      PriceItemTile(
-                          title: 'Bright Life Percentage',
-                          price: '${snapshot.data!.order!.percentage}'),
-                      PriceItemTile(
-                          title: 'order value',
-                          price: '${snapshot.data!.order!.orderValue}'),
+                      PriceItemTile(title: 'Discount', price: '${snapshot.data!.order!.discount}'),
+                      PriceItemTile(title: 'Bright Life Percentage', price: '${snapshot.data!.order!.percentage}'),
+                      PriceItemTile(title: 'order value', price: '${snapshot.data!.order!.orderValue}'),
                       const Divider(
                         height: 25,
                         thickness: 1,
@@ -222,11 +207,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           hint: const Center(
                             child: Text(
                               'Order Status',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14),
+                              style: TextStyle(color: Colors.black, fontFamily: 'Montserrat', fontWeight: FontWeight.w600, fontSize: 14),
                             ),
                           ),
                           items: status
@@ -250,8 +231,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           ),
                           buttonWidth: Get.width,
                           buttonHeight: 50,
-                          buttonPadding:
-                              const EdgeInsets.only(left: 14, right: 14),
+                          buttonPadding: const EdgeInsets.only(left: 14, right: 14),
                           isExpanded: true,
                           icon: const RotatedBox(
                             quarterTurns: 3,
@@ -279,8 +259,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           onPressed: () {},
                           label: const Text(
                             'SAVE',
-                            style:
-                                TextStyle(fontSize: 22, color: MyColors.text),
+                            style: TextStyle(fontSize: 22, color: MyColors.text),
                           ),
                         ),
                       ),

@@ -20,21 +20,12 @@ class OrdersBuilder extends StatelessWidget {
           child: FirestoreListView<OrderModel>(
             padding: const EdgeInsets.symmetric(vertical: 20),
             query: controller.filterStatus.value.isEmpty
-                ? FirebaseFirestore.instance
-                    .collection('orders')
-                    .orderBy('created_at', descending: false)
-                    .withConverter<OrderModel>(
-                      fromFirestore: (snapshot, _) =>
-                          OrderModel.fromJson(snapshot.data()!),
+                ? FirebaseFirestore.instance.collection('orders').orderBy('created_at', descending: false).withConverter<OrderModel>(
+                      fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
                       toFirestore: (order, _) => order.toJson(),
                     )
-                : FirebaseFirestore.instance
-                    .collection('orders')
-                    .where('status', isEqualTo: controller.selectedStatus.value)
-                    .orderBy('created_at', descending: false)
-                    .withConverter<OrderModel>(
-                      fromFirestore: (snapshot, _) =>
-                          OrderModel.fromJson(snapshot.data()!),
+                : FirebaseFirestore.instance.collection('orders').where('status', isEqualTo: controller.selectedStatus.value).orderBy('created_at', descending: false).withConverter<OrderModel>(
+                      fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
                       toFirestore: (order, _) => order.toJson(),
                     ),
             itemBuilder: (context, snapshot) {
@@ -45,7 +36,7 @@ class OrdersBuilder extends StatelessWidget {
                     () => OrderDetailsScreen(
                       id: data.orderId,
                     ),
-                    binding: ViewOrderBinding(),
+                    binding: ViewOrderBinding(id: data.orderId),
                   );
                 },
                 child: OrderBubble(
