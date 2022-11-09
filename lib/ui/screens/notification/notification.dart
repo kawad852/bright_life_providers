@@ -2,18 +2,14 @@ import 'package:bright_life_providers/models/notification/notification_model.dar
 import 'package:bright_life_providers/ui/screens/notification/widget/notidication_item.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
+import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatelessWidget {
-  NotificationScreen({Key? key}) : super(key: key);
+  const NotificationScreen({Key? key}) : super(key: key);
 
-  final Query<NotificationModel> query = FirebaseFirestore.instance
-      .collection('notification')
-      .orderBy('created_at', descending: true)
-      .withConverter<NotificationModel>(
-        fromFirestore: (snapshot, _) =>
-            NotificationModel.fromJson(snapshot.data()!),
+  static final Query<NotificationModel> query = FirebaseFirestore.instance.collection('notification').orderBy('created_at', descending: true).withConverter<NotificationModel>(
+        fromFirestore: (snapshot, _) => NotificationModel.fromJson(snapshot.data()!),
         toFirestore: (notification, _) => notification.toJson(),
       );
 
