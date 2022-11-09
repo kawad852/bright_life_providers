@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class PriceItemTile extends StatelessWidget {
 
   final String title;
-  final double price;
+  final String price;
 
   const PriceItemTile({
     Key? key,

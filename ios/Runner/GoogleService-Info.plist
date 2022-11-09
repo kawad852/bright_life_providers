@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>60154629314-f9avsuveudcj2fqbidkhm0jon246pqg6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.60154629314-f9avsuveudcj2fqbidkhm0jon246pqg6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyACackke6RiGvAbzs-vUf1BvKqm7ofKqp8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>60154629314</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.brightLifeProviders</string>
+	<key>PROJECT_ID</key>
+	<string>bright-life-1eafe</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bright-life-1eafe.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:60154629314:ios:2acffb57f630266a4d7f5b</string>
+</dict>
+</plist>
