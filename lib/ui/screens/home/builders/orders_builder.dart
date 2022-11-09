@@ -14,6 +14,7 @@ class OrdersBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<KhaledFilterCtrl>(
+      id: '123',
       builder: (controller) {
         return Expanded(
           child: FirestoreListView<OrderModel>(

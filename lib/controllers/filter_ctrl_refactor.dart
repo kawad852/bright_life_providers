@@ -17,6 +17,6 @@ class KhaledFilterCtrl extends GetxController {
 
   void filter() {
     filterStatus.value = selectedStatus.value;
-    update();
+    update(['123']);
   }
 }
