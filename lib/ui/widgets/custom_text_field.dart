@@ -19,6 +19,9 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? hintStyle;
   final Widget? prefixIcon;
   final bool filled;
+  final Color fillColor;
+  final Color borderColor;
+  final Function(String)? onChanged;
 
   final InputDecoration? decoration;
   final int? maxLength;
@@ -44,6 +47,9 @@ class CustomTextField extends StatelessWidget {
     this.decoration,
     this.maxLength,
     this.filled = false,
+    this.fillColor = Colors.white,
+    this.borderColor = MyColors.textFormFieldBorder,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -60,9 +66,10 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       validator: validator,
       controller: controller,
+      onChanged: onChanged,
       decoration: InputDecoration(
         filled: filled,
-        fillColor: Colors.white,
+        fillColor: fillColor,
         contentPadding: const EdgeInsets.all(12),
         isDense: true,
         label: label == null
@@ -92,11 +99,11 @@ class CustomTextField extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Color.fromRGBO(39, 39, 49, 0.2)),
+          borderSide:  BorderSide(color: borderColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: MyColors.primary),
+          borderSide:  BorderSide(color: borderColor),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

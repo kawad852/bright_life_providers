@@ -1,6 +1,8 @@
 import 'package:bright_life_providers/binding/base/nav_bar.dart';
 import 'package:bright_life_providers/translation/translation.dart';
+import 'package:bright_life_providers/ui/base/nav_bar.dart';
 import 'package:bright_life_providers/ui/screens/home/home_screen.dart';
+import 'package:bright_life_providers/ui/screens/search/search.dart';
 import 'package:bright_life_providers/utils/material_theme.dart';
 import 'package:bright_life_providers/utils/shared_prefrences.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -73,7 +75,7 @@ class _MyAppState extends State<MyApp> {
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      home: const HomeScreen(),
+      home: const BaseNavBar(),
       initialBinding: NavBarBinding(),
     );
   }

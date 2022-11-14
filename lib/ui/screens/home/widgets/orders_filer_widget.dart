@@ -18,9 +18,9 @@ class OrdersFilterWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            "Orders",
-            style: TextStyle(fontSize: 22),
+           Text(
+            "Orders".tr,
+            style: const TextStyle(fontSize: 22),
           ),
           GestureDetector(
             onTap: () {
@@ -56,19 +56,19 @@ class OrdersFilterWidget extends StatelessWidget {
                                 onChanged: (bool? value) {
                                   controller.toggle('pending', value!);
                                 },
-                                title: 'Pending',
+                                title: 'Pending'.tr,
                                 value: controller.selectedStatus.value == 'pending' ? true : false,
                               ),
                               StatusListTile(
                                 onChanged: (bool? value) {
                                   controller.toggle('completed', value!);
                                 },
-                                title: 'Completed',
+                                title: 'Completed'.tr,
                                 value: controller.selectedStatus.value == 'completed' ? true : false,
                               ),
                               const Spacer(),
                               CustomFABButton(
-                                title: 'Filtering',
+                                title: 'Filtering'.tr,
                                 onPressed: () {
                                   controller.filter();
                                   Get.back();

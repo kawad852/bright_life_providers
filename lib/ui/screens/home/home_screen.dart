@@ -25,10 +25,10 @@ class HomeScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
           child: Column(
-            children: [
-              const HomeHeader(),
+            children: const [
+              HomeHeader(),
               OrdersFilterWidget(),
-              const OrdersBuilder(),
+              OrdersBuilder(),
             ],
           ),
         ),

@@ -4,6 +4,7 @@ import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -16,8 +17,8 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const BaseAppBar(
-        title: 'Notification',
+      appBar: BaseAppBar(
+        title: 'Notification'.tr,
       ),
       body: FirestoreListView<NotificationModel>(
         query: query,

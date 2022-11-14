@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool withBackButton;
   const BaseAppBar({
     Key? key,
     required this.title,
+    this.withBackButton = true,
   }) : super(key: key);
 
   @override
@@ -19,10 +21,10 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       backgroundColor: Colors.transparent,
       elevation: 0,
-      leading: const Padding(
+      leading: withBackButton?const Padding(
         padding: EdgeInsets.all(8.0),
         child: CustomBackButton(),
-      ),
+      ):null,
     );
   }
 

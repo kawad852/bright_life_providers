@@ -13,11 +13,13 @@ class MyColors {
   static const Color green9AD = Color(0xFF73A9AD);
   static const Color green9F2 = Color(0xFFF4F9F2);
   static const Color greenFAA = Color(0xFFC4DFAA);
+  static const Color greenFD4= Color(0xFFE1EFD4);
 
   //white
   static const Color white = Color(0xFFFFFFFF);
 
   //grey
+  static const Color grey = Color.fromARGB(255, 162, 162, 162);
   static const Color greyFF0 = Color(0xFFEFEFF0);
   static const Color grey397 = Color(0xFF929397);
   static const Color grey070 = Color(0xFF707070);
@@ -28,6 +30,8 @@ class MyColors {
   //red
   static const Color red868 = Color(0xFFC76868);
 
-
   static const Color orderAccepted = Color(0xFF73A9AD);
+
+  static const textFormFieldBorder = Color.fromRGBO(39, 39, 49, 0.2);
+
 }
