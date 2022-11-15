@@ -35,4 +35,7 @@ class MyIcons {
   static const String deleteAccount = "${_path}deleteAccount.svg";
   static const String shuffle = "${_path}shuffle.svg";
   static const String add = "${_path}add.svg";
+  static const String profileBbG = "${_path}profile-bb-g.svg";
+  static const String profileBbD = "${_path}profile-bb-d.svg";
+  static const String lifeRing = "${_path}life-ring.svg";
 }

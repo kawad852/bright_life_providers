@@ -1,4 +1,5 @@
 import 'package:bright_life_providers/ui/screens/home/home_screen.dart';
+import 'package:bright_life_providers/ui/screens/profile/profile.dart';
 import 'package:bright_life_providers/ui/screens/search/search.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:bright_life_providers/utils/base/icons.dart';
@@ -33,6 +34,13 @@ class _BaseNavBarState extends State<BaseNavBar> {
         activeColorPrimary: MyColors.primary,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
+      PersistentBottomNavBarItem(
+        icon: SvgPicture.asset(MyIcons.profileBbG),
+        inactiveIcon: SvgPicture.asset(MyIcons.profileBbD),
+        title: ("Search"),
+        activeColorPrimary: MyColors.primary,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
     ];
   }
 
@@ -40,6 +48,7 @@ class _BaseNavBarState extends State<BaseNavBar> {
     return [
       const HomeScreen(),
       const SearchScreen(),
+      const ProfileScreen(),
     ];
   }
 
