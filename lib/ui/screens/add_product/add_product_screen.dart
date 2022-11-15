@@ -16,14 +16,14 @@ import 'package:get/get.dart';
 final addSizeWidgetStateKeys = <GlobalKey<AddSizeWidgetState>>[GlobalKey()];
 final addExtraWidgetStateKeys = <GlobalKey<AddExtraWidgetState>>[GlobalKey()];
 
-class AddOrderScreen extends StatefulWidget {
-  const AddOrderScreen({Key? key}) : super(key: key);
+class AddProductScreen extends StatefulWidget {
+  const AddProductScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddOrderScreen> createState() => _AddOrderScreenState();
+  State<AddProductScreen> createState() => _AddProductScreenState();
 }
 
-class _AddOrderScreenState extends State<AddOrderScreen> {
+class _AddProductScreenState extends State<AddProductScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late TextEditingController nameCtrl, descriptionCtrl, priceCtrl;
   final ctrl = Get.lazyPut(() => ProviderOrderCtrl());
