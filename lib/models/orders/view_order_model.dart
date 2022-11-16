@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final viewOrderModel = viewOrderModelFromMap(jsonString);
+
 import 'dart:convert';
 
 class ViewOrderModel {
@@ -28,7 +32,7 @@ class ViewOrderModel {
     "status": status,
     "code": code,
     "msg": msg,
-    "Order": order?.toJson(),
+    "Order": order!.toJson(),
   };
 }
 
@@ -48,9 +52,12 @@ class Order {
     this.percentage,
     this.number,
     this.orderValue,
+    this.address,
     this.user,
     this.supplier,
     this.products,
+    this.review,
+    this.date,
   });
 
   int? id;
@@ -67,9 +74,12 @@ class Order {
   String? percentage;
   String? number;
   String? orderValue;
+  Address? address;
   Supplier? user;
   Supplier? supplier;
   List<Product>? products;
+  Review? review;
+  DateTime? date;
 
   Order orderFromJson(String str) => Order.fromJson(json.decode(str));
 
@@ -90,9 +100,12 @@ class Order {
     percentage: json["percentage"],
     number: json["number"],
     orderValue: json["order_value"],
+    address: Address.fromJson(json["address"]),
     user: Supplier.fromJson(json["user"]),
     supplier: Supplier.fromJson(json["supplier"]),
     products: List<Product>.from(json["products"].map((x) => Product.fromJson(x))),
+    review: Review.fromJson(json["review"]),
+    date: DateTime.parse(json["date"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -110,9 +123,80 @@ class Order {
     "percentage": percentage,
     "number": number,
     "order_value": orderValue,
-    "user": user?.toJson(),
-    "supplier": supplier?.toJson(),
+    "address": address!.toJson(),
+    "user": user!.toJson(),
+    "supplier": supplier!.toJson(),
     "products": List<dynamic>.from(products!.map((x) => x.toJson())),
+    "review": review!.toJson(),
+    "date": date!.toIso8601String(),
+  };
+}
+
+class Address {
+  Address({
+    this.id,
+    this.name,
+    this.city,
+    this.region,
+    this.street,
+    this.buildingNumber,
+    this.floorNumber,
+    this.apartmentNumber,
+    this.additionalTips,
+    this.userId,
+    this.long,
+    this.lat,
+    this.phoneNumber,
+  });
+
+  int? id;
+  String? name;
+  String? city;
+  String? region;
+  String? street;
+  String? buildingNumber;
+  String? floorNumber;
+  String? apartmentNumber;
+  String? additionalTips;
+  int? userId;
+  String? long;
+  String? lat;
+  String? phoneNumber;
+
+  Address addressFromJson(String str) => Address.fromJson(json.decode(str));
+
+  String addressToJson() => json.encode(toJson());
+
+  factory Address.fromJson(Map<String, dynamic> json) => Address(
+    id: json["id"],
+    name: json["name"],
+    city: json["city"],
+    region: json["region"],
+    street: json["street"],
+    buildingNumber: json["building_number"],
+    floorNumber: json["floor_number"],
+    apartmentNumber: json["apartment_number"],
+    additionalTips: json["additional_tips"],
+    userId: json["user_id"],
+    long: json["long"],
+    lat: json["lat"],
+    phoneNumber: json["phone_number"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "city": city,
+    "region": region,
+    "street": street,
+    "building_number": buildingNumber,
+    "floor_number": floorNumber,
+    "apartment_number": apartmentNumber,
+    "additional_tips": additionalTips,
+    "user_id": userId,
+    "long": long,
+    "lat": lat,
+    "phone_number": phoneNumber,
   };
 }
 
@@ -123,10 +207,9 @@ class Product {
     this.productName,
     this.productImage,
     this.quantity,
-    this.sizeId,
-    this.size,
-    this.extras,
+    this.items,
     this.note,
+    this.area,
     this.price,
   });
 
@@ -135,10 +218,9 @@ class Product {
   String? productName;
   String? productImage;
   int? quantity;
-  int? sizeId;
-  String? size;
-  List<Extra>? extras;
+  List<Item>? items;
   String? note;
+  String? area;
   String? price;
 
   Product productFromJson(String str) => Product.fromJson(json.decode(str));
@@ -151,10 +233,9 @@ class Product {
     productName: json["product_name"],
     productImage: json["product_image"],
     quantity: json["quantity"],
-    sizeId: json["size_id"],
-    size: json["size"],
-    extras: List<Extra>.from(json["extras"].map((x) => Extra.fromJson(x))),
+    items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
     note: json["note"],
+    area: json["area"],
     price: json["price"],
   );
 
@@ -164,39 +245,86 @@ class Product {
     "product_name": productName,
     "product_image": productImage,
     "quantity": quantity,
-    "size_id": sizeId,
-    "size": size,
-    "extras": List<dynamic>.from(extras!.map((x) => x.toJson())),
+    "items": List<dynamic>.from(items!.map((x) => x.toJson())),
     "note": note,
+    "area": area,
     "price": price,
   };
 }
 
-class Extra {
-  Extra({
+class Item {
+  Item({
     this.id,
-    this.name,
+    this.groupName,
+    this.itemName,
     this.price,
   });
 
   int? id;
-  String? name;
+  String? groupName;
+  String? itemName;
   String? price;
 
-  Extra extraFromJson(String str) => Extra.fromJson(json.decode(str));
+  Item itemFromJson(String str) => Item.fromJson(json.decode(str));
 
-  String extraToJson() => json.encode(toJson());
+  String itemToJson() => json.encode(toJson());
 
-  factory Extra.fromJson(Map<String, dynamic> json) => Extra(
+  factory Item.fromJson(Map<String, dynamic> json) => Item(
     id: json["id"],
-    name: json["name"],
+    groupName: json["group_name"],
+    itemName: json["item_name"],
     price: json["price"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "name": name,
+    "group_name": groupName,
+    "item_name": itemName,
     "price": price,
+  };
+}
+
+class Review {
+  Review({
+    this.id,
+    this.title,
+    this.content,
+    this.points,
+    this.user,
+    this.supplierId,
+    this.status,
+  });
+
+  int? id;
+  String? title;
+  String? content;
+  String? points;
+  Supplier? user;
+  Supplier? supplierId;
+  int? status;
+
+  Review reviewFromJson(String str) => Review.fromJson(json.decode(str));
+
+  String reviewToJson() => json.encode(toJson());
+
+  factory Review.fromJson(Map<String, dynamic> json) => Review(
+    id: json["id"],
+    title: json["title"],
+    content: json["content"],
+    points: json["points"],
+    user: Supplier.fromJson(json["user"]),
+    supplierId: Supplier.fromJson(json["supplier_id"]),
+    status: json["status"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "title": title,
+    "content": content,
+    "points": points,
+    "user": user!.toJson(),
+    "supplier_id": supplierId!.toJson(),
+    "status": status,
   };
 }
 
@@ -240,62 +368,6 @@ class Supplier {
     "phone": phone,
     "email": email,
     "image": image,
-    "address": address ?? address?.toJson(),
-  };
-}
-
-class Address {
-  Address({
-    this.id,
-    this.name,
-    this.city,
-    this.region,
-    this.street,
-    this.buildingNumber,
-    this.floorNumber,
-    this.apartmentNumber,
-    this.additionalTips,
-    this.userId,
-  });
-
-  int? id;
-  String? name;
-  String? city;
-  String? region;
-  String? street;
-  String? buildingNumber;
-  String? floorNumber;
-  String? apartmentNumber;
-  String? additionalTips;
-  int? userId;
-
-  Address addressFromJson(String str) => Address.fromJson(json.decode(str));
-
-  String addressToJson() => json.encode(toJson());
-
-  factory Address.fromJson(Map<String, dynamic> json) => Address(
-    id: json["id"],
-    name: json["name"],
-    city: json["city"],
-    region: json["region"],
-    street: json["street"],
-    buildingNumber: json["building_number"],
-    floorNumber: json["floor_number"],
-    apartmentNumber: json["apartment_number"],
-    additionalTips: json["additional_tips"],
-    userId: json["user_id"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "city": city,
-    "region": region,
-    "street": street,
-    "building_number": buildingNumber,
-    "floor_number": floorNumber,
-    "apartment_number": apartmentNumber,
-    "additional_tips": additionalTips,
-    "user_id": userId,
+    "address": address == null ? null : address!.toJson(),
   };
 }
