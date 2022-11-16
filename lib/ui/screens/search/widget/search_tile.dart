@@ -3,8 +3,8 @@ import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class CompanyListItem extends StatelessWidget {
-  const CompanyListItem({
+class SearchTile extends StatelessWidget {
+  const SearchTile({
     Key? key,
     required this.title,
     required this.description,

@@ -60,7 +60,7 @@ class SearchScreen extends StatelessWidget {
                             itemCount: SearchCtrl.find.model.value!.data!.length,
                             itemBuilder: (context, index) {
                               final data = SearchCtrl.find.model.value!.data![index];
-                              return CompanyListItem(
+                              return SearchTile(
                                 //TODO: missing api data
                                 image: data.image!,
                                 title: data.name!,
