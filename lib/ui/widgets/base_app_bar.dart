@@ -21,10 +21,12 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       backgroundColor: Colors.transparent,
       elevation: 0,
-      leading: withBackButton?const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: CustomBackButton(),
-      ):null,
+      leading: withBackButton
+          ? const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CustomBackButton(),
+            )
+          : null,
     );
   }
 

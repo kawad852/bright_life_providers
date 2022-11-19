@@ -64,7 +64,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         children: [
                           CustomNetworkImage(
                             url: '${snapshot.data!.order!.user!.image}',
-                            border: 10,
+                            border: 100,
                             width: 70,
                             height: 70,
                           ),
@@ -169,7 +169,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           children: [
                             Text(
                               'Payment method'.tr,
-                              style:const  TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 color: MyColors.text,
                               ),

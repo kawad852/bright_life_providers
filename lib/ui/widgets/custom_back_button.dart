@@ -14,11 +14,9 @@ class CustomBackButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         elevation: 0,
         backgroundColor: MyColors.greyFF0,
-        padding: EdgeInsets.zero,
-        // fixedSize: const Size(31, 31),
       ),
       child: const Icon(
-        Icons.arrow_back_ios_new,
+        Icons.arrow_back_ios,
         color: MyColors.primary,
         size: 20,
       ),
