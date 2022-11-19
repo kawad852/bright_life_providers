@@ -10,17 +10,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          DateTime now = DateTime.now();
-          var timer = Timestamp.fromDate(DateTime(now.year, now.month, now.day));
-          DateTime start = DateTime(now.year, now.month - 3, now.day);
-          DateTime end = DateTime(now.year, now.month, now.day, 1000, 10000, 1000);
-          print("time:: $start");
-          var myDoc = await FirebaseFirestore.instance.collection('orders').where('created_at', isGreaterThanOrEqualTo: start).get();
-          print("Test:: ${myDoc.docs.length}");
-        },
-      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
