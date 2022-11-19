@@ -1,4 +1,6 @@
+import 'package:bright_life_providers/binding/view_order_binding.dart';
 import 'package:bright_life_providers/controllers/search/search.dart';
+import 'package:bright_life_providers/ui/screens/order_details/order_details_screen.dart';
 import 'package:bright_life_providers/ui/screens/search/widget/search_tile.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
 import 'package:bright_life_providers/ui/widgets/custom_text_field.dart';
@@ -36,7 +38,7 @@ class SearchScreen extends StatelessWidget {
                 fillColor: MyColors.greenFD4,
                 borderColor: MyColors.greenFD4,
                 filled: true,
-                label: 'Enter Order Number'.tr,
+                label: 'Search in orders.'.tr,
                 prefixIcon: SvgPicture.asset(
                   MyIcons.search2,
                   fit: BoxFit.scaleDown,
@@ -55,19 +57,27 @@ class SearchScreen extends StatelessWidget {
                       ? const Center(child: CircularProgressIndicator())
                       : Expanded(
                           child: ListView.separated(
-                            padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
-                            separatorBuilder: (context, index) => const SizedBox(height: 15),
-                            itemCount: SearchCtrl.find.model.value!.data!.length,
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                20, 0, 20, 20),
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(height: 15),
+                            itemCount:
+                                SearchCtrl.find.model.value!.data!.length,
                             itemBuilder: (context, index) {
-                              final data = SearchCtrl.find.model.value!.data![index];
+                              final data =
+                                  SearchCtrl.find.model.value!.data![index];
                               return SearchTile(
-                                //TODO: missing api data
                                 image: data.image!,
                                 title: data.name!,
                                 description: data.description!,
                                 location: data.location!,
-                                rating: index == 0 ? 5.0 : 4.0,
-                                onTap: ()  {},
+                                rating: data.avgPoints!,
+                                onTap: () {
+                                  Get.to(
+                                    OrderDetailsScreen(id: data.id!),
+                                    binding: ViewOrderBinding(id: data.id!),
+                                  );
+                                },
                               );
                             },
                           ),

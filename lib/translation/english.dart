@@ -32,7 +32,7 @@ const Map<String, String> en = {
   // search
   "Search" : "Search",
   "Find the order you want":"Find the order you want",
-  "Enter Order Number":"Enter Order Number",
+  "Search in orders.":"Search in orders.",
   // Notification
   "Notification":"Notification",
   //profile

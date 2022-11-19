@@ -32,7 +32,7 @@ const Map<String, String> ar = {
   // search
   "Search": "بحث",
   "Find the order you want": "ابحث عن الطلب الذي تريده",
-  "Enter Order Number": "أدخل رقم الطلب",
+  "Search in orders.": "البحث في الطلبات",
   "Notification":"الاشعارات",
   //profile
   "Profile":"الملف الشخصي",

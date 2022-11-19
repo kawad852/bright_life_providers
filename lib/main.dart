@@ -1,6 +1,7 @@
 import 'package:bright_life_providers/binding/base/nav_bar.dart';
 import 'package:bright_life_providers/translation/translation.dart';
 import 'package:bright_life_providers/ui/base/nav_bar.dart';
+import 'package:bright_life_providers/ui/screens/registration/sign_in_screen.dart';
 import 'package:bright_life_providers/utils/material_theme.dart';
 import 'package:bright_life_providers/utils/shared_prefrences.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,16 +41,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // Widget _toggleScreen() {
-  //   if (MySharedPreferences.isLogIn) {
-  //     return const BaseNavBar();
-  //   } else if (!MySharedPreferences.isLogIn && !MySharedPreferences.isPassedIntro) {
-  //     return const IntroScreen();
-  //   } else {
-  //     return const SignInScreen();
-  //   }
-  // }
-  //
+  Widget _toggleScreen() {
+    if (MySharedPreferences.isLogIn) {
+      return const BaseNavBar();
+    } else {
+      return const SignInScreen();
+    }
+  }
+
   // Bindings? _initialBinding() {
   //   //TODO: test later
   //   if (MySharedPreferences.isLogIn) {
@@ -72,7 +71,7 @@ class _MyAppState extends State<MyApp> {
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      home: const BaseNavBar(),
+      home: _toggleScreen(),
       initialBinding: NavBarBinding(),
     );
   }

@@ -38,6 +38,7 @@ class Datum {
     this.name,
     this.phone,
     this.email,
+    this.avgPoints,
     this.image,
     this.cover,
     this.location,
@@ -50,6 +51,7 @@ class Datum {
   String? name;
   String? phone;
   String? email;
+  double? avgPoints;
   String? image;
   String? cover;
   String? location;
@@ -66,6 +68,7 @@ class Datum {
     name: json["name"],
     phone: json["phone"],
     email: json["email"],
+    avgPoints: json["avg_points"] ?? 0.0,
     image: json["image"],
     cover: json["cover"],
     location: json["location"],
@@ -79,6 +82,7 @@ class Datum {
     "name": name,
     "phone": phone,
     "email": email,
+    "avg_points": avgPoints,
     "image": image,
     "cover": cover,
     "location": location,

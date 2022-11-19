@@ -79,11 +79,11 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         name: json["name"],
-        lastName: json["last_name"],
-        phone: json["phone"],
+        lastName: json["last_name"]??'',
+        phone: json["phone"]??'',
         email: json["email"],
-        image: json["image"],
-        address: Address.fromJson(json["address"]),
+        image: json["image"]??'',
+        address: json["address"] == null ? null : Address.fromJson(json["address"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -93,7 +93,7 @@ class User {
         "phone": phone,
         "email": email,
         "image": image,
-        "address": address!.toJson(),
+        "address": address == null ? null : address!.toJson(),
       };
 }
 

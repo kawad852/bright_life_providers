@@ -1,3 +1,4 @@
+import 'package:bright_life_providers/controllers/registration/sign_out_ctrl.dart';
 import 'package:bright_life_providers/ui/screens/profile/widget/custom_listtile.dart';
 import 'package:bright_life_providers/ui/screens/profile/widget/help_button.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
@@ -152,9 +153,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ? 'Logout'.tr
                           : 'Login'.tr,
                       onTap: () {
-                        // Get.offAll(() => const SignInScreen());
-                        // MySharedPreferences.clearProfile();
-                        // SignOutController.fetchSignOutData(context: context);
+                        SignOutController.fetchSignOutData(context: context);
                       },
                     ),
                   ],
