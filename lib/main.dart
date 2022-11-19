@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutterfire_ui/i10n.dart';
 
 //khaled basem awad .. my saved project // ...
 // dddtt
@@ -63,11 +64,11 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       translations: Translation(),
-      // localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      // supportedLocales: const [
-      //   Locale('en', 'US'),
-      //   Locale('ar', 'JO'),
-      // ],
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: const [
+        Locale('en', 'US'),
+        Locale('ar', 'JO'),
+      ],
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
