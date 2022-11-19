@@ -4,6 +4,7 @@ class ApiUrl {
   //registration
   static const String signIn = "/api/v1/login";
   static const String signUp = "/api/v1/user-reg";
+  static const String signOut = "/api/v1/logout";
 
   //add product
   static const String addProduct = "/api/v1/products-create";

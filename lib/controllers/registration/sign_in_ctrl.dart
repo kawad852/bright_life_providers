@@ -1,5 +1,6 @@
 import 'package:bright_life_providers/api/registration/sign_in_api.dart';
 import 'package:bright_life_providers/models/registration/sign_in_model.dart';
+import 'package:bright_life_providers/ui/base/nav_bar.dart';
 import 'package:bright_life_providers/ui/screens/home/home_screen.dart';
 import 'package:bright_life_providers/ui/surfaces/custom_overlay_loader.dart';
 import 'package:bright_life_providers/utils/app_constants.dart';
@@ -25,9 +26,13 @@ class SignInCtrl {
       return;
     }
     if (model!.code == 200) {
-      Get.offAll(() => const HomeScreen());
+      Get.offAll(() => const BaseNavBar());
       MySharedPreferences.accessToken = model!.data!.token!;
       MySharedPreferences.email = model!.data!.user!.email!;
+      MySharedPreferences.fName = model!.data!.user!.name!;
+      MySharedPreferences.lName = model!.data!.user!.lastName!;
+      MySharedPreferences.userNumber = model!.data!.user!.phone!;
+      MySharedPreferences.userImage = model!.data!.user!.image!;
       MySharedPreferences.isLogIn = true;
     } else if (model!.code == 500) {
       Fluttertoast.showToast(msg: 'incorrect Email or password'.tr);

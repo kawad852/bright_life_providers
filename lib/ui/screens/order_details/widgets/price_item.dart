@@ -1,5 +1,6 @@
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PriceItemTile extends StatelessWidget {
 
@@ -27,7 +28,7 @@ class PriceItemTile extends StatelessWidget {
             ),
           ),
           Text(
-            '$price JOD',
+            '$price ${'JOD'.tr}',
             style: const TextStyle(
               color: MyColors.text,
               fontSize: 14,

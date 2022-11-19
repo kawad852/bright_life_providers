@@ -1,6 +1,7 @@
 import 'package:bright_life_providers/ui/screens/notification/notification.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:bright_life_providers/utils/base/icons.dart';
+import 'package:bright_life_providers/utils/shared_prefrences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -15,17 +16,17 @@ class HomeHeader extends StatelessWidget {
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             Text(
-              "Hi Green",
-              style: TextStyle(
+              "${"Hi".tr} ${MySharedPreferences.fName}",
+              style: const TextStyle(
                 color: MyColors.primary,
                 fontSize: 26,
               ),
             ),
             Text(
-              "Always Be Ready To Work",
-              style: TextStyle(
+              "Always Be Ready To Work".tr,
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
@@ -33,7 +34,7 @@ class HomeHeader extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            Get.to(() => NotificationScreen());
+            Get.to(() => const NotificationScreen());
           },
           style: ElevatedButton.styleFrom(
             elevation: 0,

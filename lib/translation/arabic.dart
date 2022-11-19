@@ -18,6 +18,7 @@ const Map<String, String> ar = {
   "Category": "الفئة",
   "Save Changes": "حفظ التغييرات",
   // home
+  "Hi" : "مرحبا",
   "Always Be Ready To Work": "كن دائما مستعد للعمل",
   "Orders": "الطلبات",
   // filters
@@ -31,7 +32,32 @@ const Map<String, String> ar = {
   // search
   "Search": "بحث",
   "Find the order you want": "ابحث عن الطلب الذي تريده",
-  "Enter Order Number": "أدخل رقم الطلب",
+  "Search in orders.": "البحث في الطلبات",
   "Notification":"الاشعارات",
-  "": "",
+  //profile
+  "Profile":"الملف الشخصي",
+  "Add Product / Service":"اضافة منتج / خدمة",
+  "My Wallet": "محفظتي",
+  "Privacy Policy":"سياسة الخصوصية",
+  "About App":"حول التطبيق",
+  "Logout":"تسجيل خروج",
+  "Login":"تسجيل دخول",
+  "English Language":"اللغة الإنجليزية",
+  "Arabic Language":"اللغة العربية",
+  //order details
+  "Delivery Address": "عنوان التسليم",
+  "Order details": "تفاصيل الطلب",
+  "Total": "المجموع",
+  "Tax": "ضريبة",
+  "delivery fee": "رسوم التوصيل",
+  "Payment method": "طريقة الدفع",
+  "Discount": "خصم",
+  "order value": "قيمة الطلب",
+  "JOD": "دينار",
+  "Client Information":"معلومات الزبون",
+  "Order Details":"تفاصيل الطلب",
+  "SAVE":"حفظ",
+  "Bright Life Percentage":" نسبة Bright Life"
+
+
 };

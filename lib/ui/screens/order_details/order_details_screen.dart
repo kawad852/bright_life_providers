@@ -50,9 +50,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   return ListView(
                     padding: const EdgeInsets.fromLTRB(25, 10, 25, 30),
                     children: [
-                      const Text(
-                        'Client Information',
-                        style: TextStyle(
+                      Text(
+                        'Client Information'.tr,
+                        style: const TextStyle(
                           color: MyColors.green9AD,
                           fontSize: 16,
                         ),
@@ -106,9 +106,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Delivery Address',
-                                style: TextStyle(
+                              Text(
+                                'Delivery Address'.tr,
+                                style: const TextStyle(
                                   color: MyColors.text,
                                   fontSize: 16,
                                 ),
@@ -135,9 +135,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         height: 25,
                         thickness: 1,
                       ),
-                      const Text(
-                        'Order Details',
-                        style: TextStyle(
+                      Text(
+                        'Order Details'.tr,
+                        style: const TextStyle(
                           color: MyColors.green9AD,
                           fontSize: 16,
                         ),
@@ -159,17 +159,17 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         height: 25,
                         thickness: 1,
                       ),
-                      PriceItemTile(title: 'Total', price: '${snapshot.data!.order!.total}'),
-                      PriceItemTile(title: 'Tax', price: '${snapshot.data!.order!.tax}'),
-                      PriceItemTile(title: 'delivery fee', price: '${snapshot.data!.order!.deliveryFee}'),
+                      PriceItemTile(title: 'Total'.tr, price: '${snapshot.data!.order!.total}'),
+                      PriceItemTile(title: 'Tax'.tr, price: '${snapshot.data!.order!.tax}'),
+                      PriceItemTile(title: 'delivery fee'.tr, price: '${snapshot.data!.order!.deliveryFee}'),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 2),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              'Payment method',
-                              style: TextStyle(
+                            Text(
+                              'Payment method'.tr,
+                              style:const  TextStyle(
                                 fontSize: 14,
                                 color: MyColors.text,
                               ),
@@ -184,16 +184,16 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           ],
                         ),
                       ),
-                      PriceItemTile(title: 'Discount', price: '${snapshot.data!.order!.discount}'),
-                      PriceItemTile(title: 'Bright Life Percentage', price: '${snapshot.data!.order!.percentage}'),
-                      PriceItemTile(title: 'order value', price: '${snapshot.data!.order!.orderValue}'),
+                      PriceItemTile(title: 'Discount'.tr, price: '${snapshot.data!.order!.discount}'),
+                      PriceItemTile(title: 'Bright Life Percentage'.tr, price: '${snapshot.data!.order!.percentage}'),
+                      PriceItemTile(title: 'order value'.tr, price: '${snapshot.data!.order!.orderValue}'),
                       const Divider(
                         height: 25,
                         thickness: 1,
                       ),
-                      const Text(
-                        'Order Status',
-                        style: TextStyle(
+                      Text(
+                        'Order Status'.tr,
+                        style: const TextStyle(
                           color: MyColors.green9AD,
                           fontSize: 16,
                         ),
@@ -204,10 +204,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       DropdownButtonHideUnderline(
                         child: DropdownButton2<String>(
                           value: statusDDV,
-                          hint: const Center(
+                          hint: Center(
                             child: Text(
-                              'Order Status',
-                              style: TextStyle(color: Colors.black, fontFamily: 'Montserrat', fontWeight: FontWeight.w600, fontSize: 14),
+                              'Order Status'.tr,
+                              style: const TextStyle(color: Colors.black, fontFamily: 'Montserrat', fontWeight: FontWeight.w600, fontSize: 14),
                             ),
                           ),
                           items: status
@@ -257,9 +257,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           onPressed: () {},
-                          label: const Text(
-                            'SAVE',
-                            style: TextStyle(fontSize: 22, color: MyColors.text),
+                          label: Text(
+                            'SAVE'.tr,
+                            style: const TextStyle(fontSize: 22, color: MyColors.text),
                           ),
                         ),
                       ),
