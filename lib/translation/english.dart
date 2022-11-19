@@ -18,6 +18,7 @@ const Map<String, String> en = {
   "Category": "Category",
   "Save Changes": "Save Changes",
   // home
+  "Hi" : "Hi",
   "Always Be Ready To Work":"Always Be Ready To Work",
   "Orders":"Orders",
   // filter
@@ -34,5 +35,30 @@ const Map<String, String> en = {
   "Enter Order Number":"Enter Order Number",
   // Notification
   "Notification":"Notification",
-  "": "",
+  //profile
+  "Profile":"Profile",
+  "Add Product / Service":"Add Product / Service",
+  "My Wallet": "My Wallet",
+  "Privacy Policy":"Privacy Policy",
+  "About App":"About App",
+  "Logout":"Logout",
+  "Login":"Login",
+  "English Language":"English Language",
+  "Arabic Language":"Arabic Language",
+  //order details
+  "Delivery Address": "Delivery Address",
+  "Order details": "Order details",
+  "Total": "Total",
+  "Tax": "Tax",
+  "delivery fee": "delivery fee",
+  "Payment method": "Payment method",
+  "Discount": "Discount",
+  "order value": "order value",
+  "JOD": "JOD",
+  "Client Information":"Client Information",
+  "Order Details":"Order Details",
+  "SAVE":"SAVE",
+  "Bright Life Percentage":"Bright Life Percentage"
+
+
 };

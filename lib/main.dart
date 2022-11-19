@@ -63,7 +63,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      // initialBinding: _initialBinding(),
       translations: Translation(),
       // localizationsDelegates: GlobalMaterialLocalizations.delegates,
       // supportedLocales: const [

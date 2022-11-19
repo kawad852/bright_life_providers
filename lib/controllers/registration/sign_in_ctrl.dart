@@ -28,6 +28,10 @@ class SignInCtrl {
       Get.offAll(() => const HomeScreen());
       MySharedPreferences.accessToken = model!.data!.token!;
       MySharedPreferences.email = model!.data!.user!.email!;
+      MySharedPreferences.fName = model!.data!.user!.name!;
+      MySharedPreferences.lName = model!.data!.user!.lastName!;
+      MySharedPreferences.userNumber = model!.data!.user!.phone!;
+      MySharedPreferences.userImage = model!.data!.user!.image!;
       MySharedPreferences.isLogIn = true;
     } else if (model!.code == 500) {
       Fluttertoast.showToast(msg: 'incorrect Email or password'.tr);

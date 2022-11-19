@@ -19,6 +19,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
   static Future<void> _showLanguageDialog(BuildContext context) async {
     showDialog<Languages>(
       context: context,
@@ -57,8 +58,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: 'Profile'.tr,
         withBackButton: false,
       ),
-      floatingActionButton: const HelpButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: const HelpButton(),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(35, 10, 35, 50),
         child: Stack(
@@ -77,23 +78,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    const Text(
-                      'Green DryClean',
+                    Text(
+                      '${MySharedPreferences.fName} ${MySharedPreferences.lName}',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: MyColors.secondary,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const Directionality(
+                    Directionality(
                       textDirection: TextDirection.ltr,
                       child: Padding(
-                        padding: EdgeInsets.only(top: 10, bottom: 20),
+                        padding: const EdgeInsets.only(top: 10, bottom: 20),
                         child: Text(
-                          '0780190006',
+                          MySharedPreferences.userNumber,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             color: MyColors.secondary,
                           ),
