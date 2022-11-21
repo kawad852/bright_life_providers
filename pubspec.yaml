@@ -56,8 +56,17 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   flutterfire_ui: ^0.4.3+4
   shimmer: ^2.0.0
+  rename: ^2.0.1
+  flutter_native_splash: ^2.2.15
+  flutter_launcher_icons: ^0.11.0
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/App-icon.png"
 
+flutter_native_splash:
+  background_image: assets/images/splash_bright.png
 
 dev_dependencies:
   flutter_test:
