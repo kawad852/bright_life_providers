@@ -1,26 +1,51 @@
+import 'dart:developer';
+
 import 'package:bright_life_providers/utils/base/colors.dart';
+import 'package:bright_life_providers/utils/status.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class CustomStopwatch extends StatefulWidget {
-  const CustomStopwatch({Key? key}) : super(key: key);
+  final int orderId;
+  final String docId;
+
+  const CustomStopwatch({
+    Key? key,
+    required this.orderId,
+    required this.docId,
+  }) : super(key: key);
 
   @override
   State<CustomStopwatch> createState() => _CustomStopwatchState();
 }
 
 class _CustomStopwatchState extends State<CustomStopwatch> {
-
   final stopWatchTimer = StopWatchTimer(mode: StopWatchMode.countUp);
+  final orderCollection = FirebaseFirestore.instance.collection('orders');
+  int? seconds;
+  String? docId;
+
+  @override
+  void initState() {
+    log('orderId:: ${widget.orderId}');
+    stopWatchTimer.secondTime.listen((seconds) {
+      log("event:: $seconds");
+      kOrderCollection.doc(widget.docId).update({
+        'work_time': seconds,
+      });
+    });
+    super.initState();
+  }
 
   @override
   void dispose() async {
+    stopWatchTimer.dispose();
     super.dispose();
-    await stopWatchTimer.dispose();
   }
-  @override
 
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 15),
@@ -37,9 +62,7 @@ class _CustomStopwatchState extends State<CustomStopwatch> {
             stream: stopWatchTimer.rawTime,
             initialData: 0,
             builder: (context, snapshot) {
-              final value = snapshot.data;
-              final displayTime =
-                  StopWatchTimer.getDisplayTime(value!, milliSecond: false);
+              final displayTime = StopWatchTimer.getDisplayTime(snapshot.data!, milliSecond: false);
               return Text(
                 displayTime,
                 style: const TextStyle(
@@ -114,7 +137,7 @@ class _CustomStopwatchState extends State<CustomStopwatch> {
                   InkWell(
                     onTap: () {
                       stopWatchTimer.onStopTimer();
-                      stopWatchTimer.onResetTimer();
+                      // stopWatchTimer.onResetTimer();
                     },
                     child: Container(
                       decoration: const BoxDecoration(
@@ -143,5 +166,4 @@ class _CustomStopwatchState extends State<CustomStopwatch> {
       ),
     );
   }
-
 }

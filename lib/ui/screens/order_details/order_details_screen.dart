@@ -6,7 +6,9 @@ import 'package:bright_life_providers/ui/screens/order_details/widgets/stopwatch
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
 import 'package:bright_life_providers/ui/widgets/custom_network_image.dart';
 import 'package:bright_life_providers/ui/widgets/failed_widget.dart';
+import 'package:bright_life_providers/ui/widgets/order_status_drop_down.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,14 +23,15 @@ class OrderDetailsScreen extends StatefulWidget {
 }
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
-  String? statusDDV;
-  List<String> status = [
-    'Pending',
-    'In Progress',
-    'Completed',
-    'Cancelled',
-    'On Delivery',
-  ];
+  late String docId;
+
+  @override
+  void initState() {
+    FirebaseFirestore.instance.collection('orders').where('order_id', isEqualTo: widget.id).get().then((value) {
+      docId = value.docs[0].id;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -201,52 +204,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                      DropdownButtonHideUnderline(
-                        child: DropdownButton2<String>(
-                          value: statusDDV,
-                          hint: Center(
-                            child: Text(
-                              'Order Status'.tr,
-                              style: const TextStyle(color: Colors.black, fontFamily: 'Montserrat', fontWeight: FontWeight.w600, fontSize: 14),
-                            ),
-                          ),
-                          items: status
-                              .map(
-                                (e) => DropdownMenuItem(
-                                  value: e,
-                                  child: Center(child: Text(e)),
-                                ),
-                              )
-                              .toList(),
-                          onChanged: (String? value) {
-                            setState(() {
-                              statusDDV = value;
-                            });
-                          },
-                          buttonDecoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                            color: MyColors.greenFAA.withOpacity(0.4),
-                          ),
-                          buttonWidth: Get.width,
-                          buttonHeight: 50,
-                          buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                          isExpanded: true,
-                          icon: const RotatedBox(
-                            quarterTurns: 3,
-                            child: Icon(
-                              Icons.arrow_back_ios_new,
-                              size: 15,
-                            ),
-                          ),
-                          style: const TextStyle(
-                            color: MyColors.textBlack,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                      const CustomStopwatch(),
+                      OrderStatusDropDown(docId: docId),
+                      //TODO: change later ==
+                      //TODO: handle when order is finished or other case
+                      if (snapshot.data!.order!.type != 'perhour') CustomStopwatch(orderId: snapshot.data!.order!.id!, docId: docId),
+                      const SizedBox(height: 30),
+                      //TODO: change to elevated button and handle status change
                       SizedBox(
                         width: double.infinity,
                         height: 66,
