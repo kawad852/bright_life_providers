@@ -29,6 +29,7 @@ class MyColors {
 
   //red
   static const Color red868 = Color(0xFFC76868);
+  static const Color red303 = Color(0xFFDB0303);
 
   static const Color orderAccepted = Color(0xFF73A9AD);
 
