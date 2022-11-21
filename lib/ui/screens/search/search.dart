@@ -3,6 +3,7 @@ import 'package:bright_life_providers/controllers/search/search.dart';
 import 'package:bright_life_providers/ui/screens/order_details/order_details_screen.dart';
 import 'package:bright_life_providers/ui/screens/search/widget/search_tile.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
+import 'package:bright_life_providers/ui/widgets/base_shimmer_loading.dart';
 import 'package:bright_life_providers/ui/widgets/custom_text_field.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:bright_life_providers/utils/base/icons.dart';
@@ -54,7 +55,12 @@ class SearchScreen extends StatelessWidget {
               () => SearchCtrl.find.searchQuery.isEmpty
                   ? const SizedBox.shrink()
                   : SearchCtrl.find.isLoading.value
-                      ? const Center(child: CircularProgressIndicator())
+                      ? const Expanded(
+                          child: BaseShimmerLoading(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                          ),
+                        )
                       : Expanded(
                           child: ListView.separated(
                             padding: const EdgeInsetsDirectional.fromSTEB(

@@ -1,6 +1,7 @@
 import 'package:bright_life_providers/controllers/registration/sign_out_ctrl.dart';
 import 'package:bright_life_providers/ui/screens/profile/widget/custom_listtile.dart';
 import 'package:bright_life_providers/ui/screens/profile/widget/help_button.dart';
+import 'package:bright_life_providers/ui/screens/wallet/wallet.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
 import 'package:bright_life_providers/ui/widgets/custom_network_image.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
@@ -110,7 +111,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     CustomListTile(
                       icon: MyIcons.wallet,
                       title: 'My Wallet'.tr,
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(()=>const WalletScreen());
+                      },
                     ),
                     ListTile(
                       title: Text(

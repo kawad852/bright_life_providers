@@ -55,6 +55,7 @@ dependencies:
   persistent_bottom_nav_bar: ^4.0.2
   flutter_rating_bar: ^4.0.1
   flutterfire_ui: ^0.4.3+4
+  shimmer: ^2.0.0
 
 
 
