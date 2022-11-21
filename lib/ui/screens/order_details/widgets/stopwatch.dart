@@ -10,11 +10,13 @@ import 'package:stop_watch_timer/stop_watch_timer.dart';
 class CustomStopwatch extends StatefulWidget {
   final int orderId;
   final String docId;
+  final int initialTime;
 
   const CustomStopwatch({
     Key? key,
     required this.orderId,
     required this.docId,
+    required this.initialTime,
   }) : super(key: key);
 
   @override
@@ -22,13 +24,16 @@ class CustomStopwatch extends StatefulWidget {
 }
 
 class _CustomStopwatchState extends State<CustomStopwatch> {
-  final stopWatchTimer = StopWatchTimer(mode: StopWatchMode.countUp);
+  late StopWatchTimer stopWatchTimer;
   final orderCollection = FirebaseFirestore.instance.collection('orders');
-  int? seconds;
   String? docId;
 
   @override
   void initState() {
+    stopWatchTimer = StopWatchTimer(
+      mode: StopWatchMode.countUp,
+      presetMillisecond: widget.initialTime,
+    );
     log('orderId:: ${widget.orderId}');
     stopWatchTimer.secondTime.listen((seconds) {
       log("event:: $seconds");
@@ -58,25 +63,36 @@ class _CustomStopwatchState extends State<CustomStopwatch> {
       ),
       child: Column(
         children: [
+          //TODO: fix start time
           StreamBuilder<int>(
             stream: stopWatchTimer.rawTime,
-            initialData: 0,
+            initialData: widget.initialTime,
             builder: (context, snapshot) {
-              final displayTime = StopWatchTimer.getDisplayTime(snapshot.data!, milliSecond: false);
-              return Text(
-                displayTime,
-                style: const TextStyle(
-                  fontSize: 40,
-                  color: MyColors.text,
-                ),
-              );
+              if (snapshot.data == 0.0) {
+                return Text(
+                  widget.initialTime.toString(),
+                  style: const TextStyle(
+                    fontSize: 40,
+                    color: MyColors.text,
+                  ),
+                );
+              } else {
+                final displayTime = StopWatchTimer.getDisplayTime(snapshot.data!, milliSecond: false);
+                return Text(
+                  displayTime,
+                  style: const TextStyle(
+                    fontSize: 40,
+                    color: MyColors.text,
+                  ),
+                );
+              }
             },
           ),
           const SizedBox(
             height: 10,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Column(
                 children: [
@@ -132,34 +148,34 @@ class _CustomStopwatchState extends State<CustomStopwatch> {
                   ),
                 ],
               ),
-              Column(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      stopWatchTimer.onStopTimer();
-                      // stopWatchTimer.onResetTimer();
-                    },
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: MyColors.greenFAA,
-                      ),
-                      width: 45,
-                      height: 45,
-                      child: Center(
-                        child: SvgPicture.asset('assets/icons/stop.svg'),
-                      ),
-                    ),
-                  ),
-                  const Text(
-                    'End',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: MyColors.text,
-                    ),
-                  ),
-                ],
-              ),
+              // Column(
+              //   children: [
+              //     InkWell(
+              //       onTap: () {
+              //         stopWatchTimer.onStopTimer();
+              //         // stopWatchTimer.onResetTimer();
+              //       },
+              //       child: Container(
+              //         decoration: const BoxDecoration(
+              //           shape: BoxShape.circle,
+              //           color: MyColors.greenFAA,
+              //         ),
+              //         width: 45,
+              //         height: 45,
+              //         child: Center(
+              //           child: SvgPicture.asset('assets/icons/stop.svg'),
+              //         ),
+              //       ),
+              //     ),
+              //     const Text(
+              //       'End',
+              //       style: TextStyle(
+              //         fontSize: 14,
+              //         color: MyColors.text,
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ],

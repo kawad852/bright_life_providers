@@ -17,8 +17,7 @@ class ViewOrderModel {
   String? msg;
   Order? order;
 
-  ViewOrderModel viewOrderModelFromJson(String str) =>
-      ViewOrderModel.fromJson(json.decode(str));
+  ViewOrderModel viewOrderModelFromJson(String str) => ViewOrderModel.fromJson(json.decode(str));
 
   String viewOrderModelToJson() => json.encode(toJson());
 
@@ -91,7 +90,8 @@ class Order {
         status: json["status"],
         paymentMethod: json["payment_method"],
         note: json["note"],
-        type: json["type"],
+        //TODO: change later
+        type: json["type"] ?? 'perhour',
         lat: json["lat"],
         long: json["long"],
         total: json["total"],
@@ -101,11 +101,10 @@ class Order {
         percentage: json["percentage"],
         number: json["number"],
         orderValue: json["order_value"],
-        address: json["address"]==null?null:Address.fromJson(json["address"]),
-        user: json["user"]==null?null:Supplier.fromJson(json["user"]),
-        supplier: json["supplier"]==null?null:Supplier.fromJson(json["supplier"]),
-        products: List<Product>.from(
-            json["products"].map((x) => Product.fromJson(x))),
+        address: json["address"] == null ? null : Address.fromJson(json["address"]),
+        user: json["user"] == null ? null : Supplier.fromJson(json["user"]),
+        supplier: json["supplier"] == null ? null : Supplier.fromJson(json["supplier"]),
+        products: List<Product>.from(json["products"].map((x) => Product.fromJson(x))),
         review: json["review"] == null ? null : Review.fromJson(json["review"]),
         date: DateTime.parse(json["date"]),
       );
@@ -125,11 +124,11 @@ class Order {
         "percentage": percentage,
         "number": number,
         "order_value": orderValue,
-        "address": address==null?null:address!.toJson(),
-        "user": user==null?null:user!.toJson(),
-        "supplier": supplier==null?null:supplier!.toJson(),
+        "address": address == null ? null : address!.toJson(),
+        "user": user == null ? null : user!.toJson(),
+        "supplier": supplier == null ? null : supplier!.toJson(),
         "products": List<dynamic>.from(products!.map((x) => x.toJson())),
-        "review": review==null?null:review!.toJson(),
+        "review": review == null ? null : review!.toJson(),
         "date": date!.toIso8601String(),
       };
 }
@@ -171,18 +170,18 @@ class Address {
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
         id: json["id"],
-        name: json["name"]??'',
-        city: json["city"]??'',
-        region: json["region"]??'',
-        street: json["street"]??'',
-        buildingNumber: json["building_number"]??'',
-        floorNumber: json["floor_number"]??'',
-        apartmentNumber: json["apartment_number"]??'',
-        additionalTips: json["additional_tips"]??'',
-        userId: json["user_id"]??0,
-        long: json["long"]??'',
-        lat: json["lat"]??'',
-        phoneNumber: json["phone_number"]??'',
+        name: json["name"] ?? '',
+        city: json["city"] ?? '',
+        region: json["region"] ?? '',
+        street: json["street"] ?? '',
+        buildingNumber: json["building_number"] ?? '',
+        floorNumber: json["floor_number"] ?? '',
+        apartmentNumber: json["apartment_number"] ?? '',
+        additionalTips: json["additional_tips"] ?? '',
+        userId: json["user_id"] ?? 0,
+        long: json["long"] ?? '',
+        lat: json["lat"] ?? '',
+        phoneNumber: json["phone_number"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -314,8 +313,8 @@ class Review {
         title: json["title"],
         content: json["content"],
         points: json["points"],
-        user: json["user"]==null?null:Supplier.fromJson(json["user"]),
-        supplierId: json["supplier_id"]==null?null:Supplier.fromJson(json["supplier_id"]),
+        user: json["user"] == null ? null : Supplier.fromJson(json["user"]),
+        supplierId: json["supplier_id"] == null ? null : Supplier.fromJson(json["supplier_id"]),
         status: json["status"],
       );
 
@@ -324,8 +323,8 @@ class Review {
         "title": title,
         "content": content,
         "points": points,
-        "user": user==null?null:user!.toJson(),
-        "supplier_id": supplierId==null?null:supplierId!.toJson(),
+        "user": user == null ? null : user!.toJson(),
+        "supplier_id": supplierId == null ? null : supplierId!.toJson(),
         "status": status,
       };
 }
@@ -355,13 +354,12 @@ class Supplier {
 
   factory Supplier.fromJson(Map<String, dynamic> json) => Supplier(
         id: json["id"],
-        name: json["name"]??'',
-        lastName: json["last_name"]??'',
-        phone: json["phone"]??'',
-        email: json["email"]??'',
-        image: json["image"]??'',
-        address:
-            json["address"] == null ? null : Address.fromJson(json["address"]),
+        name: json["name"] ?? '',
+        lastName: json["last_name"] ?? '',
+        phone: json["phone"] ?? '',
+        email: json["email"] ?? '',
+        image: json["image"] ?? '',
+        address: json["address"] == null ? null : Address.fromJson(json["address"]),
       );
 
   Map<String, dynamic> toJson() => {

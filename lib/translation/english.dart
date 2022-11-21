@@ -4,8 +4,7 @@ const Map<String, String> en = {
   "Email address or phone Number": "Email address or phone Number",
   "Password": "Password",
   "Sign in": "Sign in",
-  "Something went Wrong, try again later":
-      "Something went Wrong, try again later",
+  "Something went Wrong, try again later": "Something went Wrong, try again later",
   "Enter your email": "Enter your email",
   "Enter your password": "Enter your password",
   "Add New Order": "Add New Order",
@@ -68,4 +67,6 @@ const Map<String, String> en = {
   "Order Cancelled": "Order Cancelled",
   "Total recipient": "total recipient",
   "Balance": "Balance",
+  "min": "min",
+  "": "",
 };

@@ -66,4 +66,6 @@ const Map<String, String> ar = {
   "Order Cancelled": "الطلبات الملغاة",
   "Total recipient": "الإجمالي",
   "Balance": "الرصيد",
+  "min": "دقيقة",
+  "": "",
 };

@@ -1,4 +1,5 @@
 import 'package:bright_life_providers/controllers/home/view_order_ctrl.dart';
+import 'package:bright_life_providers/controllers/order_status_ctrl.dart';
 import 'package:bright_life_providers/models/orders/view_order_model.dart';
 import 'package:bright_life_providers/ui/screens/order_details/widgets/order_item.dart';
 import 'package:bright_life_providers/ui/screens/order_details/widgets/price_item.dart';
@@ -8,6 +9,7 @@ import 'package:bright_life_providers/ui/widgets/custom_network_image.dart';
 import 'package:bright_life_providers/ui/widgets/failed_widget.dart';
 import 'package:bright_life_providers/ui/widgets/order_status_drop_down.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
+import 'package:bright_life_providers/utils/status.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +26,21 @@ class OrderDetailsScreen extends StatefulWidget {
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   late String docId;
+  late int time;
+
+  final hideWatchStatus = [
+    kDelivering,
+    kCompleted,
+    kCanceled,
+    kRejected,
+  ];
 
   @override
   void initState() {
     FirebaseFirestore.instance.collection('orders').where('order_id', isEqualTo: widget.id).get().then((value) {
       docId = value.docs[0].id;
+      OrderStatusCtrl.find.statusDDV.value = value.docs[0].data()['status'];
+      time = value.docs[0].data()['work_time'];
     });
     super.initState();
   }
@@ -207,25 +219,57 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       OrderStatusDropDown(docId: docId),
                       //TODO: change later ==
                       //TODO: handle when order is finished or other case
-                      if (snapshot.data!.order!.type != 'perhour') CustomStopwatch(orderId: snapshot.data!.order!.id!, docId: docId),
+                      // if (snapshot.data!.order!.type == 'perhour' && OrderStatusCtrl.find.statusDDV.value == kInProgress)
+                      GetBuilder<OrderStatusCtrl>(
+                        builder: (controller) {
+                          if (controller.statusDDV.value == kInProgress && snapshot.data!.order!.type == 'perhour') {
+                            return CustomStopwatch(
+                              orderId: snapshot.data!.order!.id!,
+                              docId: docId,
+                              initialTime: time,
+                            );
+                          } else if (controller.statusDDV.value == kDelivering || controller.statusDDV.value == kCompleted || controller.statusDDV.value == kCanceled || controller.statusDDV.value == kRejected) {
+                            return Container(
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.symmetric(vertical: 15),
+                              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                              decoration: BoxDecoration(
+                                color: MyColors.greenFAA.withOpacity(0.4),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              child: Text(
+                                '${time / 60} ${'min'.tr}',
+                                style: const TextStyle(
+                                  fontSize: 40,
+                                  color: MyColors.text,
+                                ),
+                              ),
+                            );
+                          } else {
+                            return const SizedBox.shrink();
+                          }
+                        },
+                      ),
                       const SizedBox(height: 30),
                       //TODO: change to elevated button and handle status change
-                      SizedBox(
-                        width: double.infinity,
-                        height: 66,
-                        child: FloatingActionButton.extended(
-                          backgroundColor: MyColors.primary.withOpacity(0.5),
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          onPressed: () {},
-                          label: Text(
-                            'SAVE'.tr,
-                            style: const TextStyle(fontSize: 22, color: MyColors.text),
-                          ),
-                        ),
-                      ),
+                      // SizedBox(
+                      //   width: double.infinity,
+                      //   height: 66,
+                      //   child: FloatingActionButton.extended(
+                      //     backgroundColor: MyColors.primary.withOpacity(0.5),
+                      //     elevation: 0,
+                      //     shape: RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(10.0),
+                      //     ),
+                      //     onPressed: () {},
+                      //     label: Text(
+                      //       'SAVE'.tr,
+                      //       style: const TextStyle(fontSize: 22, color: MyColors.text),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   );
                 } else {
