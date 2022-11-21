@@ -18,7 +18,7 @@ const Map<String, String> ar = {
   "Category": "الفئة",
   "Save Changes": "حفظ التغييرات",
   // home
-  "Hi" : "مرحبا",
+  "Hi": "مرحبا",
   "Always Be Ready To Work": "كن دائما مستعد للعمل",
   "Orders": "الطلبات",
   // filters
@@ -33,17 +33,17 @@ const Map<String, String> ar = {
   "Search": "بحث",
   "Find the order you want": "ابحث عن الطلب الذي تريده",
   "Search in orders.": "البحث في الطلبات",
-  "Notification":"الاشعارات",
+  "Notification": "الاشعارات",
   //profile
-  "Profile":"الملف الشخصي",
-  "Add Product / Service":"اضافة منتج / خدمة",
+  "Profile": "الملف الشخصي",
+  "Add Product / Service": "اضافة منتج / خدمة",
   "My Wallet": "محفظتي",
-  "Privacy Policy":"سياسة الخصوصية",
-  "About App":"حول التطبيق",
-  "Logout":"تسجيل خروج",
-  "Login":"تسجيل دخول",
-  "English Language":"اللغة الإنجليزية",
-  "Arabic Language":"اللغة العربية",
+  "Privacy Policy": "سياسة الخصوصية",
+  "About App": "حول التطبيق",
+  "Logout": "تسجيل خروج",
+  "Login": "تسجيل دخول",
+  "English Language": "اللغة الإنجليزية",
+  "Arabic Language": "اللغة العربية",
   //order details
   "Delivery Address": "عنوان التسليم",
   "Order details": "تفاصيل الطلب",
@@ -54,10 +54,16 @@ const Map<String, String> ar = {
   "Discount": "خصم",
   "order value": "قيمة الطلب",
   "JOD": "دينار",
-  "Client Information":"معلومات الزبون",
-  "Order Details":"تفاصيل الطلب",
-  "SAVE":"حفظ",
-  "Bright Life Percentage":" نسبة Bright Life"
-
-
+  "Client Information": "معلومات الزبون",
+  "Order Details": "تفاصيل الطلب",
+  "SAVE": "حفظ",
+  "Bright Life Percentage": " نسبة Bright Life",
+  // wallet
+  "Sales": "المبيعات",
+  "No. Orders": "عدد الطلبات",
+  "Percentage": "نسبة",
+  "Penalties": "الغرامات",
+  "Order Cancelled": "الطلبات الملغاة",
+  "Total recipient": "الإجمالي",
+  "Balance": "الرصيد",
 };

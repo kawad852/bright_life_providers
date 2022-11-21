@@ -45,14 +45,14 @@ class WalletItem extends StatelessWidget {
               : RichText(
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  text: const TextSpan(
+                  text: TextSpan(
                     text: 'B',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: MyColors.green9AD,
                       fontSize: 22,
                     ),
                     children: <TextSpan>[
-                      TextSpan(
+                       const TextSpan(
                         text: 'R ',
                         style: TextStyle(
                           color: MyColors.greenFAA,
@@ -60,8 +60,8 @@ class WalletItem extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                        text: 'Percentage',
-                        style: TextStyle(
+                        text: title,
+                        style: const TextStyle(
                           color: MyColors.textBlack,
                           fontSize: 22,
                         ),
