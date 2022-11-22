@@ -7,8 +7,8 @@ import 'package:bright_life_providers/utils/shared_prefrences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:flutterfire_ui/i10n.dart';
+import 'package:get/get.dart';
 
 //khaled basem awad .. my saved project // ...
 // dddtt
@@ -76,6 +76,7 @@ class _MyAppState extends State<MyApp> {
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       home: _toggleScreen(),
+      // home: TimerTest(),
       initialBinding: NavBarBinding(),
     );
   }

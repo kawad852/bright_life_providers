@@ -1,9 +1,12 @@
 import 'package:bright_life_providers/utils/status.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrderStatusCtrl extends GetxController {
+  final int orderId;
+
+  OrderStatusCtrl({required this.orderId});
+
   static OrderStatusCtrl get find => Get.find();
 
   final statusDDV = Rxn<String>();
@@ -37,18 +40,18 @@ class OrderStatusCtrl extends GetxController {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: const Text('This is a demo alert dialog.'),
+          title: Text('Alert'.tr),
+          content: Text('Are you sure you want to change order status ?'.tr),
           actions: <Widget>[
             TextButton(
-              child: const Text('Cancel'),
+              child: Text('Cancel'.tr),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: const Text('Approve'),
-              onPressed: () {
+              child: Text('Approve'.tr),
+              onPressed: () async {
                 Navigator.of(context).pop();
                 updateStats(value, docId);
               },
@@ -59,9 +62,9 @@ class OrderStatusCtrl extends GetxController {
     );
   }
 
-  void updateStats(String? value, String docId) {
+  Future<void> updateStats(String? value, String docId) async {
     statusDDV.value = value;
-    kOrderCollection.doc(docId).update({
+    await kOrderCollection.doc(docId).update({
       'status': value,
     });
     update();

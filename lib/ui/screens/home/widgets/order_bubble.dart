@@ -1,12 +1,13 @@
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OrderBubble extends StatelessWidget {
-  final String title, status;
+  final String orderNum, status;
 
   const OrderBubble({
     Key? key,
-    required this.title,
+    required this.orderNum,
     required this.status,
   }) : super(key: key);
 
@@ -24,13 +25,13 @@ class OrderBubble extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            title,
-            style: const TextStyle(fontSize: 16, color: MyColors.textBlack),
+            status.tr,
+            //TODO: color based on status for next version
+            style: const TextStyle(fontSize: 16),
           ),
           Text(
-            status,
-            //TODO: color based on status
-            style: const TextStyle(fontSize: 16),
+            orderNum,
+            style: const TextStyle(fontSize: 16, color: MyColors.textBlack),
           ),
         ],
       ),

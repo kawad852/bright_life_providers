@@ -1,18 +1,8 @@
 import 'package:bright_life_providers/controllers/order_status_ctrl.dart';
-import 'package:bright_life_providers/utils/status.dart';
-import 'package:flutter/material.dart';
-import 'package:bright_life_providers/controllers/home/view_order_ctrl.dart';
-import 'package:bright_life_providers/models/orders/view_order_model.dart';
-import 'package:bright_life_providers/ui/screens/order_details/widgets/order_item.dart';
-import 'package:bright_life_providers/ui/screens/order_details/widgets/price_item.dart';
-import 'package:bright_life_providers/ui/screens/order_details/widgets/stopwatch.dart';
-import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
-import 'package:bright_life_providers/ui/widgets/custom_network_image.dart';
-import 'package:bright_life_providers/ui/widgets/failed_widget.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
+import 'package:bright_life_providers/utils/status.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class OrderStatusDropDown extends StatelessWidget {
@@ -34,11 +24,11 @@ class OrderStatusDropDown extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Alert'),
-          content: const Text('You cant change order status'),
+          title: Text('Alert'.tr),
+          content: Text('You cant change order status'.tr),
           actions: <Widget>[
             TextButton(
-              child: const Text('Ok'),
+              child: Text('Ok'.tr),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -64,9 +54,9 @@ class OrderStatusDropDown extends StatelessWidget {
             ),
             items: controller.status
                 .map(
-                  (e) => DropdownMenuItem(
-                    value: e,
-                    child: Center(child: Text(e)),
+                  (element) => DropdownMenuItem(
+                    value: element,
+                    child: Center(child: Text(element.tr)),
                   ),
                 )
                 .toList(),

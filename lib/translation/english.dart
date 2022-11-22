@@ -1,3 +1,5 @@
+import 'package:bright_life_providers/utils/status.dart';
+
 const Map<String, String> en = {
   "Welcome\nBack": "Welcome\nBack",
   "Forgot Password?": "Forgot Password?",
@@ -68,5 +70,18 @@ const Map<String, String> en = {
   "Total recipient": "total recipient",
   "Balance": "Balance",
   "min": "min",
-  "": "",
+  "Are you sure you want to change order status ?": "Are you sure you want to change order status ?",
+  "Alert": "Alert",
+  "Cancel": "Cancel",
+  "Approve": "Approve",
+  "You cant change order status": "You cant change order status",
+  kPending: "Pending",
+  kReceiving: "Receiving",
+  kReceived: "Received",
+  kInProgress: "In progress",
+  kDelivering: "delivering",
+  kCompleted: "Completed",
+  kCanceled: "Canceled",
+  kRejected: "Rejected",
+  "Ok": "Ok",
 };

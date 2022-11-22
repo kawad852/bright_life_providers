@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:bright_life_providers/utils/status.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -25,16 +24,11 @@ class CustomStopwatch extends StatefulWidget {
 
 class _CustomStopwatchState extends State<CustomStopwatch> {
   late StopWatchTimer stopWatchTimer;
-  final orderCollection = FirebaseFirestore.instance.collection('orders');
-  String? docId;
 
   @override
   void initState() {
-    stopWatchTimer = StopWatchTimer(
-      mode: StopWatchMode.countUp,
-      presetMillisecond: widget.initialTime,
-    );
-    log('orderId:: ${widget.orderId}');
+    stopWatchTimer = StopWatchTimer();
+    stopWatchTimer.setPresetSecondTime(widget.initialTime);
     stopWatchTimer.secondTime.listen((seconds) {
       log("event:: $seconds");
       kOrderCollection.doc(widget.docId).update({
@@ -63,29 +57,18 @@ class _CustomStopwatchState extends State<CustomStopwatch> {
       ),
       child: Column(
         children: [
-          //TODO: fix start time
           StreamBuilder<int>(
             stream: stopWatchTimer.rawTime,
             initialData: widget.initialTime,
             builder: (context, snapshot) {
-              if (snapshot.data == 0.0) {
-                return Text(
-                  widget.initialTime.toString(),
-                  style: const TextStyle(
-                    fontSize: 40,
-                    color: MyColors.text,
-                  ),
-                );
-              } else {
-                final displayTime = StopWatchTimer.getDisplayTime(snapshot.data!, milliSecond: false);
-                return Text(
-                  displayTime,
-                  style: const TextStyle(
-                    fontSize: 40,
-                    color: MyColors.text,
-                  ),
-                );
-              }
+              final displayTime = StopWatchTimer.getDisplayTime(snapshot.data!, milliSecond: false);
+              return Text(
+                displayTime,
+                style: const TextStyle(
+                  fontSize: 40,
+                  color: MyColors.text,
+                ),
+              );
             },
           ),
           const SizedBox(

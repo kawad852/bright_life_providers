@@ -9,7 +9,7 @@ class ViewOrderBinding extends Bindings {
 
   @override
   void dependencies() {
-    Get.lazyPut(() => ViewOrderCtrl(id: id));
-    Get.lazyPut(() => OrderStatusCtrl());
+    Get.lazyPut(() => ViewOrderCtrl(orderId: id));
+    Get.lazyPut(() => OrderStatusCtrl(orderId: id));
   }
 }

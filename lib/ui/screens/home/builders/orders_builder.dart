@@ -3,6 +3,7 @@ import 'package:bright_life_providers/controllers/filter_ctrl_refactor.dart';
 import 'package:bright_life_providers/models/orders_model.dart';
 import 'package:bright_life_providers/ui/screens/home/widgets/order_bubble.dart';
 import 'package:bright_life_providers/ui/screens/order_details/order_details_screen.dart';
+import 'package:bright_life_providers/utils/shared_prefrences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +21,16 @@ class OrdersBuilder extends StatelessWidget {
           child: FirestoreListView<OrderModel>(
             padding: const EdgeInsets.symmetric(vertical: 20),
             query: controller.filterStatus.value.isEmpty
-                ? FirebaseFirestore.instance.collection('orders').orderBy('created_at', descending: false).withConverter<OrderModel>(
+                ? FirebaseFirestore.instance.collection('orders').where('supplier_id', isEqualTo: MySharedPreferences.id).orderBy('created_at', descending: false).withConverter<OrderModel>(
                       fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
                       toFirestore: (order, _) => order.toJson(),
                     )
-                : FirebaseFirestore.instance.collection('orders').where('status', isEqualTo: controller.selectedStatus.value).orderBy('created_at', descending: false).withConverter<OrderModel>(
+                : FirebaseFirestore.instance
+                    .collection('orders')
+                    .where('status', isEqualTo: controller.selectedStatus.value)
+                    .where('supplier_id', isEqualTo: MySharedPreferences.id)
+                    .orderBy('created_at', descending: false)
+                    .withConverter<OrderModel>(
                       fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
                       toFirestore: (order, _) => order.toJson(),
                     ),
@@ -40,7 +46,7 @@ class OrdersBuilder extends StatelessWidget {
                   );
                 },
                 child: OrderBubble(
-                  title: '#${data.orderId}',
+                  orderNum: '#${data.orderId}',
                   status: data.status,
                 ),
               );

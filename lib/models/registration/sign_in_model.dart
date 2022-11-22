@@ -4,8 +4,7 @@
 
 import 'dart:convert';
 
-SignInModel bestRatedModelFromJson(String str) =>
-    SignInModel.fromJson(json.decode(str));
+SignInModel bestRatedModelFromJson(String str) => SignInModel.fromJson(json.decode(str));
 
 String bestRatedModelToJson(SignInModel data) => json.encode(data.toJson());
 
@@ -26,7 +25,7 @@ class SignInModel {
         status: json["status"],
         code: json["code"],
         msg: json["msg"],
-        data: Data.fromJson(json["data"]),
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -79,10 +78,10 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         name: json["name"],
-        lastName: json["last_name"]??'',
-        phone: json["phone"]??'',
+        lastName: json["last_name"] ?? '',
+        phone: json["phone"] ?? '',
         email: json["email"],
-        image: json["image"]??'',
+        image: json["image"] ?? '',
         address: json["address"] == null ? null : Address.fromJson(json["address"]),
       );
 

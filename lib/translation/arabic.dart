@@ -1,3 +1,5 @@
+import 'package:bright_life_providers/utils/status.dart';
+
 const Map<String, String> ar = {
   "Welcome\nBack": "أهلا\nوسهلا",
   "Forgot Password?": "هل نسيت كلمة المرور؟",
@@ -67,5 +69,19 @@ const Map<String, String> ar = {
   "Total recipient": "الإجمالي",
   "Balance": "الرصيد",
   "min": "دقيقة",
+  "Alert": "تنبيه",
+  "Are you sure you want to change order status ?": "هل أنت متأكد أنك تريد تغيير حالة الطلب؟",
+  "Cancel": "ألغاء",
+  "Approve": "الموافقة",
+  "You cant change order status": "لا يمكنك تغيير حالة الطلب",
+  kPending: "قيد الإنتظار",
+  kReceiving: "جاري الإستلام",
+  kReceived: "تم الإستلام",
+  kInProgress: "جاري العمل",
+  kDelivering: "جاري التوصيل",
+  kCompleted: "مكتمل",
+  kCanceled: "ملغى",
+  kRejected: "مرفوض",
+  "Ok": "حسناً",
   "": "",
 };
