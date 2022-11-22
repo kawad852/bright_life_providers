@@ -1,59 +1,22 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-import '../../models/orders_model.dart';
+class FilterCtrl extends GetxController {
+  static FilterCtrl get find => Get.find();
 
-class FilterController extends GetxController {
-  static FilterController get find => Get.find();
+  final selectedStatus = ''.obs;
+  final filterStatus = ''.obs;
 
-  Rx<Query<OrderModel>> orderQuery = FirebaseFirestore.instance
-      .collection('orders')
-      .orderBy('created_at', descending: false)
-      .withConverter<OrderModel>(
-        fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
-        toFirestore: (order, _) => order.toJson(),
-      )
-      .obs;
-
-  RxString filterDate = ''.obs;
-  RxString filterStatus = ''.obs;
-
-  void changeDateFilter(bool value, String title) {
-    if (value) {
-      filterDate.value = title;
+  void toggle(String value, bool isSelected) {
+    if (isSelected) {
+      selectedStatus.value = value;
     } else {
-      filterDate.value = '';
+      selectedStatus.value = '';
     }
-  }
-
-  void changeStatusFilter(String title, bool value) {
-    if (value) {
-      filterStatus.value = title;
-    } else {
-      filterStatus.value = '';
-    }
+    update();
   }
 
   void filter() {
-    if (filterStatus.value != '') {
-      orderQuery.value = FirebaseFirestore.instance.collection('orders').where('status', isEqualTo: filterStatus.value.toLowerCase()).orderBy('created_at', descending: false).withConverter<OrderModel>(
-            fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
-            toFirestore: (order, _) => order.toJson(),
-          );
-    } else {
-      orderQuery.value = FirebaseFirestore.instance.collection('orders').orderBy('created_at', descending: false).withConverter<OrderModel>(
-            fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
-            toFirestore: (order, _) => order.toJson(),
-          );
-    }
-  }
-
-  @override
-  void onInit() {
-    orderQuery.value = FirebaseFirestore.instance.collection('orders').orderBy('created_at', descending: false).withConverter<OrderModel>(
-          fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
-          toFirestore: (order, _) => order.toJson(),
-        );
-    super.onInit();
+    filterStatus.value = selectedStatus.value;
+    update(['123']);
   }
 }
