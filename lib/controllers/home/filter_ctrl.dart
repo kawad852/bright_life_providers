@@ -6,6 +6,7 @@ class FilterCtrl extends GetxController {
   final selectedStatus = ''.obs;
   final filterStatus = ''.obs;
 
+
   void toggle(String value, bool isSelected) {
     if (isSelected) {
       selectedStatus.value = value;
@@ -18,5 +19,10 @@ class FilterCtrl extends GetxController {
   void filter() {
     filterStatus.value = selectedStatus.value;
     update(['123']);
+  }
+
+  void reset(){
+    selectedStatus.value= filterStatus.value;
+    update();
   }
 }

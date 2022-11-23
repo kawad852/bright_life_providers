@@ -147,9 +147,7 @@ class OrdersFilterWidget extends StatelessWidget {
                   ),
                 ),
               ).then(
-                (value) {
-                  FilterCtrl.find.filter();
-                },
+                (value) => FilterCtrl.find.reset(),
               );
             },
             child: SvgPicture.asset(MyIcons.filter),
