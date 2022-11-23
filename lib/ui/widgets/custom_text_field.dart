@@ -22,6 +22,7 @@ class CustomTextField extends StatelessWidget {
   final Color fillColor;
   final Color borderColor;
   final Function(String)? onChanged;
+  final EdgeInsetsGeometry? padding;
 
   final InputDecoration? decoration;
   final int? maxLength;
@@ -50,70 +51,74 @@ class CustomTextField extends StatelessWidget {
     this.fillColor = Colors.white,
     this.borderColor = MyColors.textFormFieldBorder,
     this.onChanged,
+    this.padding,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      maxLength: maxLength,
-      autovalidateMode: autoValidateMode,
-      onTap: onTap,
-      maxLines: maxLines,
-      readOnly: readOnly,
-      style: textStyle,
-      keyboardType: keyboardType,
-      textDirection: textDirection,
-      obscureText: obscureText,
-      validator: validator,
-      controller: controller,
-      onChanged: onChanged,
-      decoration: InputDecoration(
-        filled: filled,
-        fillColor: fillColor,
-        contentPadding: const EdgeInsets.all(12),
-        isDense: true,
-        label: label == null
-            ? null
-            : Text(
-                label!,
-                style: const TextStyle(
-                  color: MyColors.text,
+    return Padding(
+      padding: padding ?? EdgeInsets.zero,
+      child: TextFormField(
+        maxLength: maxLength,
+        autovalidateMode: autoValidateMode,
+        onTap: onTap,
+        maxLines: maxLines,
+        readOnly: readOnly,
+        style: textStyle,
+        keyboardType: keyboardType,
+        textDirection: textDirection,
+        obscureText: obscureText,
+        validator: validator,
+        controller: controller,
+        onChanged: onChanged,
+        decoration: InputDecoration(
+          filled: filled,
+          fillColor: fillColor,
+          contentPadding: const EdgeInsets.all(12),
+          isDense: true,
+          label: label == null
+              ? null
+              : Text(
+                  label!,
+                  style: const TextStyle(
+                    color: MyColors.text,
+                  ),
                 ),
-              ),
-        hintText: hintText,
-        hintStyle: hintStyle,
-        labelStyle: labelStyle,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-        suffixIconConstraints: const BoxConstraints(
-          maxHeight: 20,
-          minHeight: 20,
-          maxWidth: 50,
-          minWidth: 50,
+          hintText: hintText,
+          hintStyle: hintStyle,
+          labelStyle: labelStyle,
+          prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
+          suffixIconConstraints: const BoxConstraints(
+            maxHeight: 20,
+            minHeight: 20,
+            maxWidth: 50,
+            minWidth: 50,
+          ),
+          prefixIconConstraints: const BoxConstraints(
+            maxHeight: 43,
+            minHeight: 43,
+            maxWidth: 70,
+            minWidth: 70,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: borderColor),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: borderColor),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: MyColors.red868),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: MyColors.red868),
+          ),
+          errorStyle: const TextStyle(color: MyColors.red868),
         ),
-        prefixIconConstraints: const BoxConstraints(
-          maxHeight: 43,
-          minHeight: 43,
-          maxWidth: 70,
-          minWidth: 70,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide:  BorderSide(color: borderColor),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide:  BorderSide(color: borderColor),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: MyColors.red868),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: MyColors.red868),
-        ),
-        errorStyle: const TextStyle(color: MyColors.red868),
       ),
     );
   }

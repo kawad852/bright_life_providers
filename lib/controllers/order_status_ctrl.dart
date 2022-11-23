@@ -64,7 +64,7 @@ class OrderStatusCtrl extends GetxController {
 
   Future<void> updateStats(String? value, String docId) async {
     statusDDV.value = value;
-    await kOrderCollection.doc(docId).update({
+    kOrderCollection.doc(docId).update({
       'status': value,
     });
     update();

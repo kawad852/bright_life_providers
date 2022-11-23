@@ -1,6 +1,7 @@
+import 'package:bright_life_providers/binding/create_order_binding.dart';
 import 'package:bright_life_providers/controllers/registration/sign_out_ctrl.dart';
+import 'package:bright_life_providers/ui/screens/add_product/create_product_screen.dart';
 import 'package:bright_life_providers/ui/screens/profile/widget/custom_listtile.dart';
-import 'package:bright_life_providers/ui/screens/profile/widget/help_button.dart';
 import 'package:bright_life_providers/ui/screens/wallet/wallet.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
 import 'package:bright_life_providers/ui/widgets/custom_network_image.dart';
@@ -10,6 +11,8 @@ import 'package:bright_life_providers/utils/shared_prefrences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+final createProductKey = GlobalKey<CreateProductScreenState>();
 
 enum Languages { english, arabic }
 
@@ -21,38 +24,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
-  static Future<void> _showLanguageDialog(BuildContext context) async {
-    showDialog<Languages>(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-          title: Text('Select Language'.tr),
-          children: <Widget>[
-            SimpleDialogOption(
-              child: Text('English'.tr),
-              onPressed: () {
-                Get.back();
-                if (MySharedPreferences.language == "en") return;
-                MySharedPreferences.language = "en";
-                Get.updateLocale(Locale(MySharedPreferences.language));
-              },
-            ),
-            SimpleDialogOption(
-              child: Text('Arabic'.tr),
-              onPressed: () {
-                Get.back();
-                if (MySharedPreferences.language == "ar") return;
-                MySharedPreferences.language = "ar";
-                Get.updateLocale(Locale(MySharedPreferences.language));
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,20 +77,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     CustomListTile(
                       icon: MyIcons.add,
                       title: 'Add Product / Service'.tr,
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => CreateProductScreen(key: createProductKey), binding: CreateProductBinding());
+                      },
                     ),
                     CustomListTile(
                       icon: MyIcons.wallet,
                       title: 'My Wallet'.tr,
                       onTap: () {
-                        Get.to(()=>const WalletScreen());
+                        Get.to(() => const WalletScreen());
                       },
                     ),
                     ListTile(
                       title: Text(
-                        MySharedPreferences.language == "ar"
-                            ? 'English Language'.tr
-                            : 'Arabic Language'.tr,
+                        MySharedPreferences.language == "ar" ? 'English Language'.tr : 'Arabic Language'.tr,
                         style: const TextStyle(
                           color: MyColors.text,
                           fontWeight: FontWeight.w500,
@@ -130,12 +101,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         setState(() {
                           if (MySharedPreferences.language == "ar") {
                             MySharedPreferences.language = "en";
-                            Get.updateLocale(
-                                Locale(MySharedPreferences.language));
+                            Get.updateLocale(Locale(MySharedPreferences.language));
                           } else {
                             MySharedPreferences.language = "ar";
-                            Get.updateLocale(
-                                Locale(MySharedPreferences.language));
+                            Get.updateLocale(Locale(MySharedPreferences.language));
                           }
                         });
                       },
@@ -152,9 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     CustomListTile(
                       icon: MyIcons.signInOut,
-                      title: MySharedPreferences.isLogIn == true
-                          ? 'Logout'.tr
-                          : 'Login'.tr,
+                      title: MySharedPreferences.isLogIn == true ? 'Logout'.tr : 'Login'.tr,
                       onTap: () {
                         SignOutController.fetchSignOutData(context: context);
                       },

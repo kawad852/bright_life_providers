@@ -57,21 +57,16 @@ class SearchScreen extends StatelessWidget {
                   : SearchCtrl.find.isLoading.value
                       ? const Expanded(
                           child: BaseShimmerLoading(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                            padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
                           ),
                         )
                       : Expanded(
                           child: ListView.separated(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                20, 0, 20, 20),
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(height: 15),
-                            itemCount:
-                                SearchCtrl.find.model.value!.data!.length,
+                            padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                            separatorBuilder: (context, index) => const SizedBox(height: 15),
+                            itemCount: SearchCtrl.find.model.value!.data!.length,
                             itemBuilder: (context, index) {
-                              final data =
-                                  SearchCtrl.find.model.value!.data![index];
+                              final data = SearchCtrl.find.model.value!.data![index];
                               return SearchTile(
                                 image: data.image!,
                                 title: data.name!,

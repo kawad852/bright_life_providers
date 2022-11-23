@@ -1,20 +1,17 @@
-import 'package:bright_life_providers/controllers/add_product/add_extra_ctrl.dart';
-import 'package:bright_life_providers/controllers/add_product/add_order_ctrl.dart';
 import 'package:bright_life_providers/controllers/add_product/add_product_ctrl.dart';
-import 'package:bright_life_providers/ui/screens/add_product/widgets/add_extra_ctrl.dart';
-import 'package:bright_life_providers/ui/screens/add_product/widgets/add_size_widget.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/category_drop_down.dart';
+import 'package:bright_life_providers/ui/screens/add_product/widgets/optional_box.dart';
+import 'package:bright_life_providers/ui/screens/add_product/widgets/required_box.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/titled_field.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
-import 'package:bright_life_providers/ui/widgets/custom_fab_button.dart';
 import 'package:bright_life_providers/ui/widgets/custom_text_field.dart';
 import 'package:bright_life_providers/utils/app_constants.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-final addSizeWidgetStateKeys = <GlobalKey<AddSizeWidgetState>>[GlobalKey()];
-final addExtraWidgetStateKeys = <GlobalKey<AddExtraWidgetState>>[GlobalKey()];
+final addSizeWidgetStateKeys = <GlobalKey<RequiredBoxState>>[GlobalKey()];
+final addExtraWidgetStateKeys = <GlobalKey<OptionalBoxState>>[GlobalKey()];
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({Key? key}) : super(key: key);
@@ -57,53 +54,53 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: showFab
-          ? CustomFABButton(
-              title: "Save Changes".tr,
-              onPressed: () {
-                var sizesValidators = [];
-                // var extrasValidators = [];
-                for (var element in addSizeWidgetStateKeys) {
-                  if (element.currentState!.formKey.currentState!.validate()) {
-                    sizesValidators.add(true);
-                    ProviderOrderCtrl.find.addSize(
-                      name: element.currentState!.nameCtrl.text,
-                      price: double.parse(element.currentState!.priceCtrl.text),
-                    );
-                  } else {
-                    sizesValidators.add(false);
-                  }
-                }
-                for (var element in addExtraWidgetStateKeys) {
-                  ProviderOrderCtrl.find.addExtra(
-                    name: element.currentState!.nameCtrl.text,
-                    price: double.parse(element.currentState!.priceCtrl.text.isEmpty ? '0.0' : element.currentState!.priceCtrl.text),
-                  );
-                }
-                // for (var element in addExtraWidgetStateKeys) {
-                //   if (element.currentState!.formKey.currentState!.validate()) {
-                //     extrasValidators.add(true);
-                //     ProviderOrderCtrl.find.addExtra(
-                //       name: element.currentState!.nameCtrl.text,
-                //       price: double.parse(element.currentState!.priceCtrl.text),
-                //     );
-                //   } else {
-                //     extrasValidators.add(false);
-                //   }
-                // }
-                if (_formKey.currentState!.validate() && !sizesValidators.contains(false)) {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  ProviderOrderCtrl.find.fetchOrder(
-                    name: nameCtrl.text,
-                    price: double.parse(priceCtrl.text),
-                    content: descriptionCtrl.text,
-                    type: ProviderOrderCtrl.find.type.value,
-                    context: context,
-                  );
-                }
-              },
-            )
-          : null,
+      // floatingActionButton: showFab
+      // ? CustomFABButton(
+      //     title: "Save Changes".tr,
+      //     onPressed: () {
+      //       var sizesValidators = [];
+      //       // var extrasValidators = [];
+      //       for (var element in addSizeWidgetStateKeys) {
+      //         if (element.currentState!.formKey.currentState!.validate()) {
+      //           sizesValidators.add(true);
+      //           ProviderOrderCtrl.find.addSize(
+      //             name: element.currentState!.nameCtrl.text,
+      //             price: double.parse(element.currentState!.priceCtrl.text),
+      //           );
+      //         } else {
+      //           sizesValidators.add(false);
+      //         }
+      //       }
+      //       for (var element in addExtraWidgetStateKeys) {
+      //         ProviderOrderCtrl.find.addExtra(
+      //           name: element.currentState!.nameCtrl.text,
+      //           price: double.parse(element.currentState!.priceCtrl.text.isEmpty ? '0.0' : element.currentState!.priceCtrl.text),
+      //         );
+      //       }
+      //       // for (var element in addExtraWidgetStateKeys) {
+      //       //   if (element.currentState!.formKey.currentState!.validate()) {
+      //       //     extrasValidators.add(true);
+      //       //     ProviderOrderCtrl.find.addExtra(
+      //       //       name: element.currentState!.nameCtrl.text,
+      //       //       price: double.parse(element.currentState!.priceCtrl.text),
+      //       //     );
+      //       //   } else {
+      //       //     extrasValidators.add(false);
+      //       //   }
+      //       // }
+      //       if (_formKey.currentState!.validate() && !sizesValidators.contains(false)) {
+      //         FocusManager.instance.primaryFocus?.unfocus();
+      //         ProviderOrderCtrl.find.fetchOrder(
+      //           name: nameCtrl.text,
+      //           price: double.parse(priceCtrl.text),
+      //           content: descriptionCtrl.text,
+      //           type: ProviderOrderCtrl.find.type.value,
+      //           context: context,
+      //         );
+      //       }
+      //     },
+      //   )
+      // : null,
       appBar: BaseAppBar(title: 'Add New Order'.tr),
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 40, 20, 100),
@@ -150,34 +147,34 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                   ),
                 ),
-                GetBuilder<AddSizeCtrl>(
-                  //TODO: move to binding later
-                  init: AddSizeCtrl(),
-                  builder: (controller) {
-                    return ListBody(
-                      children: controller.fields.map((element) {
-                        return AddSizeWidget(
-                          key: addSizeWidgetStateKeys[element],
-                          index: element,
-                        );
-                      }).toList(),
-                    );
-                  },
-                ),
-                GetBuilder<AddExtraCtrl>(
-                  //TODO: move to binding later
-                  init: AddExtraCtrl(),
-                  builder: (controller) {
-                    return ListBody(
-                      children: controller.fields.map((element) {
-                        return AddExtraWidget(
-                          key: addExtraWidgetStateKeys[element],
-                          index: element,
-                        );
-                      }).toList(),
-                    );
-                  },
-                ),
+                // GetBuilder<AddSizeCtrl>(
+                //   //TODO: move to binding later
+                //   init: AddSizeCtrl(),
+                //   builder: (controller) {
+                //     return ListBody(
+                //       children: controller.fields.map((element) {
+                //         return RequiredBox(
+                //           key: addSizeWidgetStateKeys[element],
+                //           index: element,
+                //         );
+                //       }).toList(),
+                //     );
+                //   },
+                // ),
+                // GetBuilder<AddExtraCtrl>(
+                //   //TODO: move to binding later
+                //   init: AddExtraCtrl(),
+                //   builder: (controller) {
+                //     return ListBody(
+                //       children: controller.fields.map((element) {
+                //         return OptionalBox(
+                //           key: addExtraWidgetStateKeys[element],
+                //           index: element,
+                //         );
+                //       }).toList(),
+                //     );
+                //   },
+                // ),
                 const CategoryDropDown(),
               ],
             ),

@@ -1,6 +1,7 @@
 import 'package:bright_life_providers/controllers/home/view_order_ctrl.dart';
 import 'package:bright_life_providers/controllers/order_status_ctrl.dart';
 import 'package:bright_life_providers/models/orders/view_order_model.dart';
+import 'package:bright_life_providers/models/orders_model.dart';
 import 'package:bright_life_providers/ui/screens/order_details/widgets/order_item.dart';
 import 'package:bright_life_providers/ui/screens/order_details/widgets/price_item.dart';
 import 'package:bright_life_providers/ui/screens/order_details/widgets/stopwatch.dart';
@@ -11,13 +12,17 @@ import 'package:bright_life_providers/ui/widgets/order_status_drop_down.dart';
 import 'package:bright_life_providers/ui/widgets/order_time_box.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:bright_life_providers/utils/status.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
   final int id;
-  const OrderDetailsScreen({Key? key, required this.id}) : super(key: key);
+  const OrderDetailsScreen({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -195,10 +200,48 @@ class OrderDetailsScreen extends StatelessWidget {
                       GetBuilder<OrderStatusCtrl>(
                         builder: (controller) {
                           if (controller.statusDDV.value == kInProgress) {
-                            return CustomStopwatch(
-                              orderId: snapshot.data!.order!.id!,
-                              docId: ViewOrderCtrl.find.docId,
-                              initialTime: ViewOrderCtrl.find.time,
+                            return Container(
+                              margin: const EdgeInsets.symmetric(vertical: 15),
+                              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                              decoration: BoxDecoration(
+                                color: MyColors.greenFAA.withOpacity(0.4),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              child: FutureBuilder<DocumentSnapshot<OrderModel>>(
+                                future: kOrderCollection
+                                    .doc(ViewOrderCtrl.find.docId)
+                                    .withConverter<OrderModel>(
+                                      fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
+                                      toFirestore: (order, _) => order.toJson(),
+                                    )
+                                    .get(),
+                                builder: (context, snapshot) {
+                                  switch (snapshot.connectionState) {
+                                    case ConnectionState.waiting:
+                                      return const Center(
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(vertical: 10.0),
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                      );
+                                    case ConnectionState.done:
+                                    default:
+                                      if (snapshot.hasData) {
+                                        final data = snapshot.data!.data();
+                                        return CustomStopwatch(
+                                          docId: snapshot.data!.id,
+                                          initialTime: data!.workTime,
+                                        );
+                                      } else if (snapshot.hasError) {
+                                        return const FailedWidget();
+                                      } else {
+                                        return const FailedWidget();
+                                      }
+                                  }
+                                },
+                              ),
                             );
                           } else if (controller.statusDDV.value == kDelivering ||
                               controller.statusDDV.value == kCompleted ||
@@ -209,7 +252,8 @@ class OrderDetailsScreen extends StatelessWidget {
                             return const SizedBox.shrink();
                           }
                         },
-                      ),
+                      )
+
                     // const SizedBox(height: 30),
                     // SizedBox(
                     //   width: double.infinity,
