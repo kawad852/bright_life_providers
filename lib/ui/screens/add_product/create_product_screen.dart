@@ -1,4 +1,5 @@
 import 'package:bright_life_providers/controllers/create_product_ctrl.dart';
+import 'package:bright_life_providers/ui/screens/add_product/required_group_screen.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/category_drop_down.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/optional_box.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/required_box.dart';
@@ -206,12 +207,13 @@ class CreateProductScreenState extends State<CreateProductScreen> {
                   ),
                   OutlinedButton(
                     onPressed: () {
-                      setState(() {
-                        controller.showRequiredFields(true);
-                        if (controller.requiredStateKeys.isEmpty) {
-                          controller.addRequireBox();
-                        }
-                      });
+                      Get.to(() => const RequiredGroupsScreen());
+                      // setState(() {
+                      //   controller.showRequiredFields(true);
+                      //   if (controller.requiredStateKeys.isEmpty) {
+                      //     controller.addRequireBox();
+                      //   }
+                      // });
                     },
                     child: Text("Add required group items".tr),
                   ),

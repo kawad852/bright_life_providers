@@ -67,7 +67,7 @@ class RequiredBoxState extends State<RequiredBox> {
         ),
         GestureDetector(
           onTap: () {
-            CreateProductCtrl.find.removeRequiredBox(widget.index);
+            // CreateProductCtrl.find.removeRequiredBox(widget.index);
           },
           child: const Padding(
             padding: EdgeInsetsDirectional.fromSTEB(6, 7, 0, 0),
