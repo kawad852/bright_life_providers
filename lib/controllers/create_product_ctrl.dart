@@ -1,3 +1,4 @@
+import 'package:bright_life_providers/ui/screens/add_product/widgets/optional_box.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/required_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,65 +6,63 @@ import 'package:get/get.dart';
 class CreateProductCtrl extends GetxController {
   static CreateProductCtrl get find => Get.find();
 
-  final nameCtrl = TextEditingController().obs;
-  final descriptionCtrl = TextEditingController().obs;
-  final priceCtrl = TextEditingController().obs;
-  final requiredCtrl = TextEditingController().obs;
-  final optionalCtrl = TextEditingController().obs;
+  final isRequiredFieldsShown = false.obs;
+  final requiredFields = [];
+  final isOptionalFieldsShown = false.obs;
 
-  final requiredStateKeys = <GlobalKey<RequiredBoxState>>[GlobalKey(debugLabel: '0')].obs;
-  // final optionalStateKeys = <GlobalKey<OptionalBoxState>>[GlobalKey()].obs;
+  final requiredStateKeys = <GlobalKey<RequiredBoxState>>[].obs;
+  final optionalStateKeys = <GlobalKey<OptionalBoxState>>[].obs;
 
-  final chosenType = Rxn<String>();
+  void showRequiredFields(bool status) {
+    isRequiredFieldsShown.value = status;
+    update();
+  }
 
-  final required = ['0'].obs;
-  final optional = ['0'].obs;
+  void showOptionalFields(bool status) {
+    isOptionalFieldsShown.value = status;
+    update();
+  }
 
-  final req = [
-    {
-      "name": null,
-      "type": "required",
-      "items": [
-        {
-          "price": null,
-          "name": null,
-        },
-        {
-          "price": null,
-          "name": null,
-        }
-      ],
-    },
-  ];
+  void addRequireBox() {
+    requiredStateKeys.add(GlobalKey());
+    update();
+  }
 
-  final types = [
-    'Maintenance',
-    'Home finishing',
-    'Others',
-  ];
-
-  void addRequireBox(int index) {
-    requiredStateKeys.add(GlobalKey(debugLabel: '$index'));
+  void addOptionalBox() {
+    optionalStateKeys.add(GlobalKey());
     update();
   }
 
   void removeRequiredBox(int index) {
     requiredStateKeys.removeAt(index);
+    if (requiredStateKeys.isEmpty) {
+      showRequiredFields(false);
+    }
     update();
   }
 
-  void toggleType(String? value) {
-    chosenType.value = value;
+  void removeOptionalBox(int index) {
+    optionalStateKeys.removeAt(index);
+    if (optionalStateKeys.isEmpty) {
+      showOptionalFields(false);
+    }
     update();
-  }
-
-  @override
-  void onClose() {
-    nameCtrl.value.dispose();
-    descriptionCtrl.value.dispose();
-    priceCtrl.value.dispose();
-    requiredCtrl.value.dispose();
-    optionalCtrl.value.dispose();
-    super.onClose();
   }
 }
+
+final group = [
+  {
+    "name": null,
+    "type": "required",
+    "items": [
+      {
+        "price": null,
+        "name": null,
+      },
+      {
+        "price": null,
+        "name": null,
+      }
+    ],
+  },
+];

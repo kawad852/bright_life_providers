@@ -83,5 +83,6 @@ const Map<String, String> ar = {
   kCanceled: "ملغى",
   kRejected: "مرفوض",
   "Ok": "حسناً",
+  "Add required group items": "أضف أصناف مجموعة مطلوبة",
   "": "",
 };

@@ -20,6 +20,14 @@ class CreateProductScreen extends StatefulWidget {
 
 class CreateProductScreenState extends State<CreateProductScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late TextEditingController nameCtrl;
+  late TextEditingController descriptionCtrl;
+  late TextEditingController priceCtrl;
+  late TextEditingController requiredCtrl;
+  late TextEditingController optionalCtrl;
+  List<Map<String, dynamic>> groups = [];
+
+  final categoryDropDownState = GlobalKey<CategoryDropDownState>();
 
   String? validator(value) {
     if (value!.isEmpty) {
@@ -28,16 +36,36 @@ class CreateProductScreenState extends State<CreateProductScreen> {
     return null;
   }
 
-  bool _validateRequiredBoxes() {
-    bool isValid = false;
-    for (var element in CreateProductCtrl.find.requiredStateKeys) {
-      if (element.currentState!.formKey.currentState!.validate()) {
-      } else {
-        isValid = false;
-      }
-    }
-    return isValid;
+  @override
+  void initState() {
+    nameCtrl = TextEditingController();
+    descriptionCtrl = TextEditingController();
+    priceCtrl = TextEditingController();
+    requiredCtrl = TextEditingController();
+    optionalCtrl = TextEditingController();
+    super.initState();
   }
+
+  @override
+  void dispose() {
+    nameCtrl.dispose();
+    descriptionCtrl.dispose();
+    priceCtrl.dispose();
+    requiredCtrl.dispose();
+    optionalCtrl.dispose();
+    super.dispose();
+  }
+
+  // bool _validateRequiredBoxes() {
+  //   bool isValid = false;
+  //   for (var element in CreateProductCtrl.find.requiredStateKeys) {
+  //     if (element.currentState!.formKey.currentState!.validate()) {
+  //     } else {
+  //       isValid = false;
+  //     }
+  //   }
+  //   return isValid;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +77,24 @@ class CreateProductScreenState extends State<CreateProductScreen> {
               title: "Save Changes".tr,
               onPressed: () {
                 if (formKey.currentState!.validate()) {
+                  groups.clear();
+                  var items = [];
+                  for (var element in CreateProductCtrl.find.requiredStateKeys) {
+                    items.add(
+                      {
+                        "price": element.currentState!.priceCtrl.text,
+                        "name": element.currentState!.nameCtrl.text,
+                      },
+                    );
+                  }
+                  groups.add(
+                    {
+                      "name": requiredCtrl.text,
+                      "type": "required",
+                      "items": items,
+                    },
+                  );
+                  print("myList:: $groups");
                 } else {}
                 // if (_formKey.currentState!.validate() && !sizesValidators.contains(false)) {
                 //   FocusManager.instance.primaryFocus?.unfocus();
@@ -76,12 +122,13 @@ class CreateProductScreenState extends State<CreateProductScreen> {
             key: formKey,
             child: GetBuilder<CreateProductCtrl>(builder: (controller) {
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   TitledField(
                     title: 'Name'.tr,
                     textField: CustomTextField(
                       filled: true,
-                      controller: controller.nameCtrl.value,
+                      controller: nameCtrl,
                       validator: validator,
                     ),
                   ),
@@ -90,7 +137,7 @@ class CreateProductScreenState extends State<CreateProductScreen> {
                     textField: CustomTextField(
                       maxLines: 3,
                       filled: true,
-                      controller: controller.descriptionCtrl.value,
+                      controller: descriptionCtrl,
                       validator: validator,
                     ),
                   ),
@@ -99,7 +146,7 @@ class CreateProductScreenState extends State<CreateProductScreen> {
                     textField: CustomTextField(
                       filled: true,
                       keyboardType: TextInputType.number,
-                      controller: controller.priceCtrl.value,
+                      controller: priceCtrl,
                       validator: validator,
                       suffixIcon: const Text(
                         "JOD",
@@ -119,26 +166,130 @@ class CreateProductScreenState extends State<CreateProductScreen> {
                         filled: true,
                         hintText: 'Required group title',
                         hintStyle: const TextStyle(color: MyColors.grey397, fontSize: 16),
-                        controller: controller.requiredCtrl.value,
+                        controller: requiredCtrl,
                         validator: validator,
                       ),
                       const SizedBox(height: 8.0),
-                      ...controller.requiredStateKeys.map((element) {
-                        final index = controller.requiredStateKeys.indexOf(element);
-                        return RequiredBox(
-                          key: element,
-                          index: index,
-                        );
-                      }).toList(),
+                      ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          separatorBuilder: (context, index) => const SizedBox(height: 6.0),
+                          shrinkWrap: true,
+                          itemCount: controller.requiredStateKeys.length,
+                          itemBuilder: (context, index) {
+                            final data = controller.requiredStateKeys[index];
+                            return RequiredBox(
+                              key: data,
+                              index: index,
+                            );
+                          }),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                          onPressed: () {
+                            controller.addRequireBox();
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: const [
+                              Icon(
+                                Icons.add_circle_outline,
+                                color: MyColors.primary,
+                                size: 20,
+                              ),
+                              SizedBox(width: 5),
+                              Text("Add"),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
+                  ),
+                  OutlinedButton(
+                    onPressed: () {
+                      setState(() {
+                        controller.showRequiredFields(true);
+                        if (controller.requiredStateKeys.isEmpty) {
+                          controller.addRequireBox();
+                        }
+                      });
+                    },
+                    child: Text("Add required group items".tr),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {
+                      setState(() {
+                        controller.showOptionalFields(true);
+                        if (controller.optionalStateKeys.isEmpty) {
+                          controller.addOptionalBox();
+                        }
+                      });
+                    },
+                    child: Text("Add Optional group items".tr),
                   ),
                   const Divider(
                     height: 40.0,
                   ),
-                  ...controller.optional.map((element) {
-                    return const OptionalBox();
-                  }).toList(),
-                  const CategoryDropDown(),
+                  if (controller.isOptionalFieldsShown.value)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomTextField(
+                          padding: const EdgeInsetsDirectional.only(end: 30),
+                          filled: true,
+                          hintText: 'Optional group title',
+                          hintStyle: const TextStyle(color: MyColors.grey397, fontSize: 16),
+                          controller: requiredCtrl,
+                          validator: validator,
+                        ),
+                        const SizedBox(height: 8.0),
+                        ListView.separated(
+                            physics: const NeverScrollableScrollPhysics(),
+                            separatorBuilder: (context, index) => const SizedBox(height: 6.0),
+                            shrinkWrap: true,
+                            itemCount: controller.optionalStateKeys.length,
+                            itemBuilder: (context, index) {
+                              final data = controller.optionalStateKeys[index];
+                              return OptionalBox(
+                                key: data,
+                                index: index,
+                              );
+                            }),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: TextButton(
+                            onPressed: () {
+                              controller.addOptionalBox();
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: const [
+                                Icon(
+                                  Icons.add_circle_outline,
+                                  color: MyColors.primary,
+                                  size: 20,
+                                ),
+                                SizedBox(width: 5),
+                                Text("Add"),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  else
+                    OutlinedButton(
+                      onPressed: () {
+                        setState(() {
+                          controller.showOptionalFields(true);
+                          if (controller.optionalStateKeys.isEmpty) {
+                            controller.addOptionalBox();
+                          }
+                        });
+                      },
+                      child: Text("Add Optional group items".tr),
+                    ),
+                  const SizedBox(height: 20),
+                  CategoryDropDown(key: categoryDropDownState),
                 ],
               );
             }),

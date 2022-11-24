@@ -1,5 +1,4 @@
 import 'package:bright_life_providers/controllers/create_product_ctrl.dart';
-import 'package:bright_life_providers/ui/screens/add_product/widgets/titled_field.dart';
 import 'package:bright_life_providers/ui/widgets/custom_text_field.dart';
 import 'package:bright_life_providers/utils/app_constants.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
@@ -7,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OptionalBox extends StatefulWidget {
+  final int index;
+
   const OptionalBox({
     Key? key,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -44,42 +46,34 @@ class OptionalBoxState extends State<OptionalBox> {
     return Row(
       children: [
         Expanded(
-          child: TitledField(
-            title: 'Optional'.tr,
-            textField: CustomTextField(
-              filled: true,
-              controller: nameCtrl,
-              validator: validator,
-            ),
+          child: CustomTextField(
+            filled: true,
+            hintText: 'Name'.tr,
+            controller: nameCtrl,
+            validator: validator,
           ),
         ),
         const SizedBox(width: 7),
         Expanded(
-          child: TitledField(
-            title: 'Price'.tr,
-            textField: CustomTextField(
-              keyboardType: TextInputType.number,
-              filled: true,
-              controller: priceCtrl,
-              validator: validator,
-            ),
+          child: CustomTextField(
+            keyboardType: TextInputType.number,
+            filled: true,
+            hintText: 'Price'.tr,
+            controller: priceCtrl,
+            validator: validator,
           ),
         ),
         GetBuilder<CreateProductCtrl>(
           builder: (controller) {
             return GestureDetector(
               onTap: () {
-                // if (formKey.currentState!.validate()) {
-                //   FocusManager.instance.primaryFocus?.unfocus();
-                //   controller.add(widget.index + 1);
-                //   addExtraWidgetStateKeys.add(GlobalKey());
-                // }
+                CreateProductCtrl.find.removeOptionalBox(widget.index);
               },
               child: const Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(6, 7, 0, 0),
                 child: Icon(
-                  Icons.add_circle_outline,
-                  color: MyColors.primary,
+                  Icons.remove_circle_outline,
+                  color: MyColors.red303,
                 ),
               ),
             );

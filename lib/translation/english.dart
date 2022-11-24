@@ -84,4 +84,5 @@ const Map<String, String> en = {
   kCanceled: "Canceled",
   kRejected: "Rejected",
   "Ok": "Ok",
+  "Add required group items": "Add required group items",
 };

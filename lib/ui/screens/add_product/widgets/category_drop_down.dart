@@ -1,12 +1,24 @@
-import 'package:bright_life_providers/controllers/create_product_ctrl.dart';
 import 'package:bright_life_providers/utils/app_constants.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:bright_life_providers/utils/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CategoryDropDown extends StatelessWidget {
+class CategoryDropDown extends StatefulWidget {
   const CategoryDropDown({Key? key}) : super(key: key);
+
+  @override
+  State<CategoryDropDown> createState() => CategoryDropDownState();
+}
+
+class CategoryDropDownState extends State<CategoryDropDown> {
+  String? chosenType;
+
+  final types = [
+    'Maintenance',
+    'Home finishing',
+    'Others',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +31,12 @@ class CategoryDropDown extends StatelessWidget {
         ),
         DropdownButtonFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          value: CreateProductCtrl.find.chosenType.value,
-          onChanged: CreateProductCtrl.find.toggleType,
+          value: chosenType,
+          onChanged: (value) {
+            setState(() {
+              chosenType = value!;
+            });
+          },
           validator: (value) {
             if (value == null) {
               return AppConstants.requiredField;
@@ -30,7 +46,7 @@ class CategoryDropDown extends StatelessWidget {
             return null;
           },
           decoration: kTypeDropDownDecoration,
-          items: CreateProductCtrl.find.types.map<DropdownMenuItem<String>>((String value) {
+          items: types.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(value),
