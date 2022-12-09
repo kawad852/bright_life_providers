@@ -180,7 +180,11 @@ class CreateProductScreenState extends State<CreateProductScreen> {
                             final data = controller.requiredStateKeys[index];
                             return RequiredBox(
                               key: data,
-                              index: index,
+                              number: index,
+                              length: 1,
+                              index: 0,
+                              title: '',
+                              price: 22.0,
                             );
                           }),
                       Align(
