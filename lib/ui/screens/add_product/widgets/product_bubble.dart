@@ -7,13 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductBubble extends StatefulWidget {
-  final int index;
+  final int index, length;
   final String? title;
 
   const ProductBubble({
     Key? key,
     required this.index,
     required this.title,
+    required this.length,
   }) : super(key: key);
 
   @override
@@ -23,6 +24,7 @@ class ProductBubble extends StatefulWidget {
 class ProductBubbleState extends State<ProductBubble> {
   late TextEditingController titleCtrl;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<RequiredBoxState> boxStateKeys = GlobalKey();
 
   String? validator(value) {
     if (value!.isEmpty) {
@@ -78,13 +80,13 @@ class ProductBubbleState extends State<ProductBubble> {
                       physics: const NeverScrollableScrollPhysics(),
                       separatorBuilder: (context, number) => const SizedBox(height: 6.0),
                       shrinkWrap: true,
-                      itemCount: controller.myList[widget.index].items!.length,
+                      itemCount: controller.groups[widget.index].items!.length,
                       itemBuilder: (context, number) {
-                        controller.boxStateKeys.add(GlobalKey());
-                        final data = controller.myList[widget.index].items![number];
+                        // controller.boxStateKeys.add(GlobalKey());
+                        final data = controller.groups[widget.index].items![number];
                         return RequiredBox(
-                          key: controller.boxStateKeys[number],
-                          length: controller.myList[widget.index].items!.length,
+                          key: boxStateKeys,
+                          length: controller.groups[widget.index].items!.length,
                           index: widget.index,
                           number: number,
                           title: data.name,
@@ -96,8 +98,8 @@ class ProductBubbleState extends State<ProductBubble> {
                       alignment: Alignment.centerLeft,
                       child: TextButton(
                         onPressed: () {
-                          if (controller.boxStateKeys.any((element) => !element.currentState!.formKey.currentState!.validate())) return;
-                          controller.addItem(widget.index);
+                          // if (controller.boxStateKeys.any((element) => !element.currentState!.formKey.currentState!.validate())) return;
+                          // controller.addItem(widget.index);
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -121,7 +123,7 @@ class ProductBubbleState extends State<ProductBubble> {
                 start: 0,
                 child: ElevatedButton(
                   onPressed: () {
-                    controller.removeList(widget.index);
+                    controller.removeGroup(widget.index);
                   },
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),

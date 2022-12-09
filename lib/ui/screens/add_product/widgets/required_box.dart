@@ -75,9 +75,9 @@ class RequiredBoxState extends State<RequiredBox> {
             ),
           ),
           Opacity(
-            opacity: widget.length == 1 ? 0 : 1,
+            opacity: widget.length > 1 ? 1 : 0.0,
             child: GestureDetector(
-              onTap: widget.length != 1
+              onTap: widget.length > 1
                   ? () {
                       RequiredGroupsCtrl.find.removeItem(widget.index, widget.number);
                     }

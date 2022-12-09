@@ -1,8 +1,6 @@
 import 'package:bright_life_providers/controllers/create_product_ctrl.dart';
-import 'package:bright_life_providers/ui/screens/add_product/required_group_screen.dart';
+import 'package:bright_life_providers/ui/screens/add_product/groups_screen.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/category_drop_down.dart';
-import 'package:bright_life_providers/ui/screens/add_product/widgets/optional_box.dart';
-import 'package:bright_life_providers/ui/screens/add_product/widgets/required_box.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/titled_field.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
 import 'package:bright_life_providers/ui/widgets/custom_fab_button.dart';
@@ -159,142 +157,21 @@ class CreateProductScreenState extends State<CreateProductScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomTextField(
-                        padding: const EdgeInsetsDirectional.only(end: 30),
-                        filled: true,
-                        hintText: 'Required group title',
-                        hintStyle: const TextStyle(color: MyColors.grey397, fontSize: 16),
-                        controller: requiredCtrl,
-                        validator: validator,
-                      ),
-                      const SizedBox(height: 8.0),
-                      ListView.separated(
-                          physics: const NeverScrollableScrollPhysics(),
-                          separatorBuilder: (context, index) => const SizedBox(height: 6.0),
-                          shrinkWrap: true,
-                          itemCount: controller.requiredStateKeys.length,
-                          itemBuilder: (context, index) {
-                            final data = controller.requiredStateKeys[index];
-                            return RequiredBox(
-                              key: data,
-                              number: index,
-                              length: 1,
-                              index: 0,
-                              title: '',
-                              price: 22.0,
-                            );
-                          }),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: TextButton(
-                          onPressed: () {
-                            controller.addRequireBox();
-                          },
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              Icon(
-                                Icons.add_circle_outline,
-                                color: MyColors.primary,
-                                size: 20,
-                              ),
-                              SizedBox(width: 5),
-                              Text("Add"),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                   OutlinedButton(
                     onPressed: () {
-                      Get.to(() => const RequiredGroupsScreen());
-                      // setState(() {
-                      //   controller.showRequiredFields(true);
-                      //   if (controller.requiredStateKeys.isEmpty) {
-                      //     controller.addRequireBox();
-                      //   }
-                      // });
+                      Get.to(() => const RequiredGroupsScreen(type: kRequired));
                     },
                     child: Text("Add required group items".tr),
                   ),
                   OutlinedButton(
                     onPressed: () {
-                      setState(() {
-                        controller.showOptionalFields(true);
-                        if (controller.optionalStateKeys.isEmpty) {
-                          controller.addOptionalBox();
-                        }
-                      });
+                      Get.to(() => const RequiredGroupsScreen(type: kOptional));
                     },
                     child: Text("Add Optional group items".tr),
                   ),
                   const Divider(
                     height: 40.0,
                   ),
-                  if (controller.isOptionalFieldsShown.value)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomTextField(
-                          padding: const EdgeInsetsDirectional.only(end: 30),
-                          filled: true,
-                          hintText: 'Optional group title',
-                          hintStyle: const TextStyle(color: MyColors.grey397, fontSize: 16),
-                          controller: requiredCtrl,
-                          validator: validator,
-                        ),
-                        const SizedBox(height: 8.0),
-                        ListView.separated(
-                            physics: const NeverScrollableScrollPhysics(),
-                            separatorBuilder: (context, index) => const SizedBox(height: 6.0),
-                            shrinkWrap: true,
-                            itemCount: controller.optionalStateKeys.length,
-                            itemBuilder: (context, index) {
-                              final data = controller.optionalStateKeys[index];
-                              return OptionalBox(
-                                key: data,
-                                index: index,
-                              );
-                            }),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                            onPressed: () {
-                              controller.addOptionalBox();
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: const [
-                                Icon(
-                                  Icons.add_circle_outline,
-                                  color: MyColors.primary,
-                                  size: 20,
-                                ),
-                                SizedBox(width: 5),
-                                Text("Add"),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  else
-                    OutlinedButton(
-                      onPressed: () {
-                        setState(() {
-                          controller.showOptionalFields(true);
-                          if (controller.optionalStateKeys.isEmpty) {
-                            controller.addOptionalBox();
-                          }
-                        });
-                      },
-                      child: Text("Add Optional group items".tr),
-                    ),
-                  const SizedBox(height: 20),
                   CategoryDropDown(key: categoryDropDownState),
                 ],
               );

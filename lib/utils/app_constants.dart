@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 
+const String kRequired = 'Required';
+const String kOptional = 'Optional';
+
 class AppConstants {
   static const googleApiKey = 'AIzaSyDSPeDTWmjTol4rLhHw0fT9Nzrb7bAqs2M';
 

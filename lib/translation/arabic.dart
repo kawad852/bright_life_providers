@@ -16,7 +16,7 @@ const Map<String, String> ar = {
   "Price": "السعر",
   "Required": "مطلوب",
   "Optional": "اختياري",
-  "Select Category": "اختر الفئة",
+  "Select Category": "إختر الفئة",
   "Category": "الفئة",
   "Save Changes": "حفظ التغييرات",
   // home
@@ -84,5 +84,6 @@ const Map<String, String> ar = {
   kRejected: "مرفوض",
   "Ok": "حسناً",
   "Add required group items": "أضف أصناف مجموعة مطلوبة",
-  "": "",
+  "Changes saved": "تم حفظ التغييرات",
+  "Save": "حفظ",
 };

@@ -6,6 +6,6 @@ class CreateProductBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => CreateProductCtrl());
-    Get.lazyPut(() => RequiredGroupsCtrl());
+    Get.put(RequiredGroupsCtrl());
   }
 }
