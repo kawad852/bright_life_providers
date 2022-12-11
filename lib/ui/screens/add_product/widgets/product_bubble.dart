@@ -82,7 +82,6 @@ class ProductBubbleState extends State<ProductBubble> {
                       shrinkWrap: true,
                       itemCount: controller.groups[widget.index].items!.length,
                       itemBuilder: (context, number) {
-                        // controller.boxStateKeys.add(GlobalKey());
                         final data = controller.groups[widget.index].items![number];
                         return RequiredBox(
                           key: boxStateKeys,

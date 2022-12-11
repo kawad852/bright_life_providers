@@ -7,12 +7,14 @@ class RequiredGroupsCtrl extends GetxController {
   static RequiredGroupsCtrl get find => Get.find();
 
   final bubbleKeys = <GlobalKey<ProductBubbleState>>[];
+  final titleControllers = <TextEditingController>[];
 
   final groups = <ItemsModel>[].obs;
   List<int> indexes = [];
 
   void addGroup() {
     bubbleKeys.add(GlobalKey());
+    titleControllers.add(TextEditingController());
     groups.add(
       ItemsModel(
         name: null,
@@ -25,6 +27,7 @@ class RequiredGroupsCtrl extends GetxController {
 
   void removeGroup(int index) {
     bubbleKeys.removeAt(index);
+    titleControllers.removeAt(index);
     groups.removeAt(index);
     update();
   }
@@ -32,6 +35,7 @@ class RequiredGroupsCtrl extends GetxController {
   void removeNonValidGroup() {
     for (var index in indexes) {
       bubbleKeys.removeAt(index);
+      titleControllers.removeAt(index);
       groups.removeAt(index);
     }
     // groups.removeWhere((element) => element.name == null || element.items!.any((element) => element.name == null || element.price == null));
