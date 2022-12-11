@@ -1,20 +1,19 @@
 import 'package:bright_life_providers/models/items_model.dart';
-import 'package:bright_life_providers/ui/screens/add_product/widgets/product_bubble.dart';
+import 'package:bright_life_providers/ui/screens/add_product/widgets/required_product_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RequiredGroupsCtrl extends GetxController {
   static RequiredGroupsCtrl get find => Get.find();
 
-  final bubbleKeys = <GlobalKey<ProductBubbleState>>[];
-  final titleControllers = <TextEditingController>[];
+  final bubbleKeys = <GlobalKey<RequiredProductBubbleState>>[];
 
   final groups = <ItemsModel>[].obs;
   List<int> indexes = [];
+  List<int> numbers = [];
 
   void addGroup() {
     bubbleKeys.add(GlobalKey());
-    titleControllers.add(TextEditingController());
     groups.add(
       ItemsModel(
         name: null,
@@ -27,7 +26,6 @@ class RequiredGroupsCtrl extends GetxController {
 
   void removeGroup(int index) {
     bubbleKeys.removeAt(index);
-    titleControllers.removeAt(index);
     groups.removeAt(index);
     update();
   }
@@ -35,7 +33,6 @@ class RequiredGroupsCtrl extends GetxController {
   void removeNonValidGroup() {
     for (var index in indexes) {
       bubbleKeys.removeAt(index);
-      titleControllers.removeAt(index);
       groups.removeAt(index);
     }
     // groups.removeWhere((element) => element.name == null || element.items!.any((element) => element.name == null || element.price == null));
@@ -59,14 +56,23 @@ class RequiredGroupsCtrl extends GetxController {
 
   void validate({
     required Function validAction,
-    required Function nonValidAction,
+    required Function? nonValidAction,
   }) {
     indexes = [];
     bool isValid = true;
+    bool boxValidation = true;
     for (var element in bubbleKeys) {
       final index = bubbleKeys.indexOf(element);
       var bubbleValidation = element.currentState!.formKey.currentState!.validate();
-      var boxValidation = element.currentState!.boxStateKeys.currentState!.formKey.currentState!.validate();
+      for (var data in element.currentState!.requiredBoxState) {
+        final number = element.currentState!.requiredBoxState.indexOf(data);
+        var valid = data.currentState!.formKey.currentState!.validate();
+        if (!valid) {
+          boxValidation = false;
+          numbers.add(number);
+        }
+      }
+      // var boxValidation = element.currentState!.requiredBoxState.currentState!.formKey.currentState!.validate();
       if (!bubbleValidation || !boxValidation) {
         isValid = false;
         indexes.add(index);
@@ -75,6 +81,7 @@ class RequiredGroupsCtrl extends GetxController {
     if (isValid) {
       validAction();
     } else {
+      if (nonValidAction == null) return;
       nonValidAction();
     }
   }

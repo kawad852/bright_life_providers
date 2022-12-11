@@ -9,6 +9,7 @@ class RequiredBox extends StatefulWidget {
   final int number, length, index;
   final String? title;
   final double? price;
+  final GlobalKey<RequiredBoxState> myKey;
 
   const RequiredBox({
     Key? key,
@@ -17,6 +18,7 @@ class RequiredBox extends StatefulWidget {
     required this.index,
     required this.title,
     required this.price,
+    required this.myKey,
   }) : super(key: key);
 
   @override
@@ -79,6 +81,7 @@ class RequiredBoxState extends State<RequiredBox> {
             child: GestureDetector(
               onTap: widget.length > 1
                   ? () {
+                      RequiredGroupsCtrl.find.bubbleKeys[widget.index].currentState!.requiredBoxState.removeAt(widget.number);
                       RequiredGroupsCtrl.find.removeItem(widget.index, widget.number);
                     }
                   : null,

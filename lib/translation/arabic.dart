@@ -86,4 +86,5 @@ const Map<String, String> ar = {
   "Add required group items": "أضف أصناف مجموعة مطلوبة",
   "Changes saved": "تم حفظ التغييرات",
   "Save": "حفظ",
+  "Add": "إضافة",
 };

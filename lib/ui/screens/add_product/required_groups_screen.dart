@@ -1,5 +1,5 @@
 import 'package:bright_life_providers/controllers/required_groups_ctrl.dart';
-import 'package:bright_life_providers/ui/screens/add_product/widgets/product_bubble.dart';
+import 'package:bright_life_providers/ui/screens/add_product/widgets/required_product_bubble.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -105,7 +105,7 @@ class _RequiredGroupsScreenState extends State<RequiredGroupsScreen> {
               itemCount: controller.groups.length,
               itemBuilder: (context, index) {
                 final data = controller.groups[index];
-                return ProductBubble(
+                return RequiredProductBubble(
                   key: controller.bubbleKeys[index],
                   index: index,
                   title: data.name,

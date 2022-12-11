@@ -1,5 +1,5 @@
 import 'package:bright_life_providers/controllers/create_product_ctrl.dart';
-import 'package:bright_life_providers/ui/screens/add_product/groups_screen.dart';
+import 'package:bright_life_providers/ui/screens/add_product/required_groups_screen.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/category_drop_down.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/titled_field.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
