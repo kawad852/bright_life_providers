@@ -101,4 +101,5 @@ const Map<String, String> en = {
   'Select': 'Select',
   'Gallery': 'Gallery',
   'Camera': 'Camera',
+  'Product added successfully': 'Product added successfully',
 };

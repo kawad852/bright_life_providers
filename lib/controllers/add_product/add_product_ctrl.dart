@@ -39,7 +39,7 @@ class AddProductsCtrl extends GetxController {
     }
     if (addProductModel!.code == 200) {
       Get.back();
-      Fluttertoast.showToast(msg: 'Profile Updated successfully');
+      Fluttertoast.showToast(msg: 'Product added successfully'.tr);
     } else {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);
     }

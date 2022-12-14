@@ -100,4 +100,5 @@ const Map<String, String> ar = {
   'Select': 'إختيار',
   'Gallery': 'الأستوديو',
   'Camera': 'الكاميرا',
+  'Product added successfully': 'تم إضافة المنتج بنجاح',
 };
