@@ -1,5 +1,6 @@
 import 'package:bright_life_providers/models/items_model.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/group_bubble.dart';
+import 'package:bright_life_providers/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -51,6 +52,12 @@ class RequiredGroupsCtrl extends GetxController {
   }
 
   void editType(String value, int index) {
+    if (value == kRequired.tr) {
+      value = kRequired;
+    } else if (value == kOptional.tr) {
+      value = kOptional;
+    }
+    print("value:: $value");
     groups[index].type = value;
   }
 

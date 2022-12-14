@@ -96,4 +96,8 @@ const Map<String, String> ar = {
   'All fields must be filled before saving': 'يجب ملء جميع الحقول قبل الحفظ',
   'Add groups': 'إضافة مجموعات',
   'Title': 'العنوان',
+  'Products have been added': 'تم إضافة المنتجات',
+  'Select': 'إختيار',
+  'Gallery': 'الأستوديو',
+  'Camera': 'الكاميرا',
 };

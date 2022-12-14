@@ -1,4 +1,3 @@
-import 'package:bright_life_providers/controllers/add_product/add_product_ctrl.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/category_drop_down.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/group_item_box.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/optional_box.dart';
@@ -23,7 +22,6 @@ class AddProductScreen extends StatefulWidget {
 class _AddProductScreenState extends State<AddProductScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late TextEditingController nameCtrl, descriptionCtrl, priceCtrl;
-  final ctrl = Get.lazyPut(() => ProviderOrderCtrl());
 
   String? validator(value) {
     if (value!.isEmpty) {

@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:bright_life_providers/controllers/add_product/add_product_ctrl.dart';
 import 'package:bright_life_providers/controllers/create_product_ctrl.dart';
+import 'package:bright_life_providers/controllers/required_groups_ctrl.dart';
 import 'package:bright_life_providers/ui/screens/add_product/groups_screen.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/category_drop_down.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/titled_field.dart';
@@ -9,6 +13,7 @@ import 'package:bright_life_providers/utils/app_constants.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CreateProductScreen extends StatefulWidget {
   const CreateProductScreen({Key? key}) : super(key: key);
@@ -22,11 +27,46 @@ class CreateProductScreenState extends State<CreateProductScreen> {
   late TextEditingController nameCtrl;
   late TextEditingController descriptionCtrl;
   late TextEditingController priceCtrl;
-  late TextEditingController requiredCtrl;
-  late TextEditingController optionalCtrl;
-  List<Map<String, dynamic>> groups = [];
-
+  XFile? image;
+  bool showImageError = false;
   final categoryDropDownState = GlobalKey<CategoryDropDownState>();
+
+  Future<void> pickImage(ImageSource source) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? file = await picker.pickImage(source: source);
+    if (file == null) return;
+    setState(() {
+      image = file;
+      showImageError = false;
+    });
+  }
+
+  Future<void> _showDialog(BuildContext context) async {
+    await showDialog<dynamic>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: Text('Select'.tr),
+          children: <Widget>[
+            SimpleDialogOption(
+              onPressed: () {
+                Get.back();
+                pickImage(ImageSource.gallery);
+              },
+              child: Text('Gallery'.tr),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Get.back();
+                pickImage(ImageSource.camera);
+              },
+              child: Text('Camera'.tr),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   String? validator(value) {
     if (value!.isEmpty) {
@@ -40,8 +80,6 @@ class CreateProductScreenState extends State<CreateProductScreen> {
     nameCtrl = TextEditingController();
     descriptionCtrl = TextEditingController();
     priceCtrl = TextEditingController();
-    requiredCtrl = TextEditingController();
-    optionalCtrl = TextEditingController();
     super.initState();
   }
 
@@ -50,8 +88,6 @@ class CreateProductScreenState extends State<CreateProductScreen> {
     nameCtrl.dispose();
     descriptionCtrl.dispose();
     priceCtrl.dispose();
-    requiredCtrl.dispose();
-    optionalCtrl.dispose();
     super.dispose();
   }
 
@@ -75,36 +111,25 @@ class CreateProductScreenState extends State<CreateProductScreen> {
           ? CustomFABButton(
               title: "Save Changes".tr,
               onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  groups.clear();
-                  var items = [];
-                  for (var element in CreateProductCtrl.find.requiredStateKeys) {
-                    items.add(
-                      {
-                        "price": element.currentState!.priceCtrl.text,
-                        "name": element.currentState!.nameCtrl.text,
-                      },
-                    );
-                  }
-                  groups.add(
-                    {
-                      "name": requiredCtrl.text,
-                      "type": "required",
-                      "items": items,
-                    },
+                if (image == null) {
+                  setState(() {
+                    showImageError = true;
+                  });
+                }
+                if (formKey.currentState!.validate() && image != null) {
+                  setState(() {
+                    showImageError = false;
+                  });
+                  AddProductsCtrl.find.fetchAddProductsData(
+                    groups: RequiredGroupsCtrl.find.groups,
+                    title: nameCtrl.text,
+                    description: descriptionCtrl.text,
+                    price: priceCtrl.text,
+                    type: categoryDropDownState.currentState!.chosenType!,
+                    image: File(image!.path),
+                    context: context,
                   );
-                  print("myList:: $groups");
-                } else {}
-                // if (_formKey.currentState!.validate() && !sizesValidators.contains(false)) {
-                //   FocusManager.instance.primaryFocus?.unfocus();
-                //   ProviderOrderCtrl.find.fetchOrder(
-                //     name: nameCtrl.text,
-                //     price: double.parse(priceCtrl.text),
-                //     content: descriptionCtrl.text,
-                //     type: ProviderOrderCtrl.find.type.value,
-                //     context: context,
-                //   );
-                // }
+                }
               },
             )
           : null,
@@ -123,6 +148,36 @@ class CreateProductScreenState extends State<CreateProductScreen> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  GestureDetector(
+                    onTap: () {
+                      _showDialog(context);
+                    },
+                    child: Container(
+                      height: 150,
+                      margin: const EdgeInsets.only(bottom: 5),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: image == null
+                          ? const Icon(
+                              Icons.image,
+                              size: 40,
+                              color: MyColors.primary,
+                            )
+                          : Image.file(
+                              File(image!.path),
+                              fit: BoxFit.cover,
+                            ),
+                    ),
+                  ),
+                  if (showImageError)
+                    Text(
+                      AppConstants.requiredField,
+                      style: const TextStyle(color: MyColors.red868, fontSize: 13),
+                    ),
+                  const SizedBox(height: 15),
                   TitledField(
                     title: 'Name'.tr,
                     textField: CustomTextField(
@@ -157,14 +212,29 @@ class CreateProductScreenState extends State<CreateProductScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  OutlinedButton(
-                    onPressed: () {
+                  GestureDetector(
+                    onTap: () {
                       Get.to(() => const GroupsScreen(type: kRequired));
                     },
-                    child: Text("Add groups".tr),
-                  ),
-                  const Divider(
-                    height: 40.0,
+                    child: Container(
+                      height: 50.0,
+                      margin: const EdgeInsets.only(bottom: 15),
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Add groups".tr,
+                            style: const TextStyle(color: MyColors.grey397, fontSize: 16),
+                          ),
+                          const Icon(
+                            Icons.arrow_forward_ios,
+                            color: MyColors.primary,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   CategoryDropDown(key: categoryDropDownState),
                 ],

@@ -91,7 +91,9 @@ class _GroupsScreenState extends State<GroupsScreen> {
                   RequiredGroupsCtrl.find.validate(
                     validAction: () {
                       Get.back();
-                      Fluttertoast.showToast(msg: 'Changes saved'.tr);
+                      if (RequiredGroupsCtrl.find.groups.isNotEmpty) {
+                        Fluttertoast.showToast(msg: 'Changes saved'.tr);
+                      }
                     },
                     nonValidAction: () {
                       _showDialog(AppConstants.groupsAlertMessageSave);

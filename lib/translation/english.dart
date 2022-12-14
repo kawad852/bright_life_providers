@@ -97,4 +97,8 @@ const Map<String, String> en = {
   'All fields must be filled before saving': 'All fields must be filled before saving',
   'Add groups': 'Add groups',
   'Title': 'Title',
+  'Products have been added': 'Products have been added',
+  'Select': 'Select',
+  'Gallery': 'Gallery',
+  'Camera': 'Camera',
 };
