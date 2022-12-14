@@ -1,3 +1,4 @@
+import 'package:bright_life_providers/utils/app_constants.dart';
 import 'package:bright_life_providers/utils/status.dart';
 
 const Map<String, String> ar = {
@@ -87,4 +88,12 @@ const Map<String, String> ar = {
   "Changes saved": "تم حفظ التغييرات",
   "Save": "حفظ",
   "Add": "إضافة",
+  "Click on the + button to add a group": "انقر على زر + لإضافة مجموعة",
+  kOptional: "إختاري",
+  kRequired: "مطلوب",
+  'You must fill in all fields or delete unwanted ones before leaving the page': 'يجب ملئ جميع الحقول او حذف غير المرغوب فيه قبل مغادرة الصفحة',
+  'You must fill in all fields or delete unwanted ones before adding a new group': 'يجب ملئ جميع الحقول او حذف غير المرغوب فيه قبل إضافة مجموعة جديدة',
+  'All fields must be filled before saving': 'يجب ملء جميع الحقول قبل الحفظ',
+  'Add groups': 'إضافة مجموعات',
+  'Title': 'العنوان',
 };

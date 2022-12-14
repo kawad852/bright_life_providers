@@ -5,13 +5,13 @@ import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RequiredBox extends StatefulWidget {
+class GroupItemBox extends StatefulWidget {
   final int number, length, index;
   final String? title;
   final double? price;
-  final GlobalKey<RequiredBoxState> myKey;
+  final GlobalKey<GroupItemBoxState> myKey;
 
-  const RequiredBox({
+  const GroupItemBox({
     Key? key,
     required this.number,
     required this.length,
@@ -22,10 +22,10 @@ class RequiredBox extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<RequiredBox> createState() => RequiredBoxState();
+  State<GroupItemBox> createState() => GroupItemBoxState();
 }
 
-class RequiredBoxState extends State<RequiredBox> {
+class GroupItemBoxState extends State<GroupItemBox> {
   late TextEditingController nameCtrl, priceCtrl;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -63,6 +63,9 @@ class RequiredBoxState extends State<RequiredBox> {
               filled: true,
               controller: nameCtrl,
               validator: validator,
+              onChanged: (value) {
+                RequiredGroupsCtrl.find.editItem(widget.index, widget.number, name: nameCtrl.text, price: priceCtrl.text);
+              },
             ),
           ),
           const SizedBox(width: 7),
@@ -74,6 +77,9 @@ class RequiredBoxState extends State<RequiredBox> {
               filled: true,
               controller: priceCtrl,
               validator: validator,
+              onChanged: (value) {
+                RequiredGroupsCtrl.find.editItem(widget.index, widget.number, name: nameCtrl.text, price: priceCtrl.text);
+              },
             ),
           ),
           Opacity(
@@ -81,7 +87,7 @@ class RequiredBoxState extends State<RequiredBox> {
             child: GestureDetector(
               onTap: widget.length > 1
                   ? () {
-                      RequiredGroupsCtrl.find.bubbleKeys[widget.index].currentState!.requiredBoxState.removeAt(widget.number);
+                      RequiredGroupsCtrl.find.bubbleKeys[widget.index].currentState!.requiredBoxStates.removeAt(widget.number);
                       RequiredGroupsCtrl.find.removeItem(widget.index, widget.number);
                     }
                   : null,

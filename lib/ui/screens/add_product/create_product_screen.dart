@@ -1,5 +1,5 @@
 import 'package:bright_life_providers/controllers/create_product_ctrl.dart';
-import 'package:bright_life_providers/ui/screens/add_product/required_groups_screen.dart';
+import 'package:bright_life_providers/ui/screens/add_product/groups_screen.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/category_drop_down.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/titled_field.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
@@ -159,15 +159,9 @@ class CreateProductScreenState extends State<CreateProductScreen> {
                   const SizedBox(height: 20),
                   OutlinedButton(
                     onPressed: () {
-                      Get.to(() => const RequiredGroupsScreen(type: kRequired));
+                      Get.to(() => const GroupsScreen(type: kRequired));
                     },
-                    child: Text("Add required group items".tr),
-                  ),
-                  OutlinedButton(
-                    onPressed: () {
-                      Get.to(() => const RequiredGroupsScreen(type: kOptional));
-                    },
-                    child: Text("Add Optional group items".tr),
+                    child: Text("Add groups".tr),
                   ),
                   const Divider(
                     height: 40.0,

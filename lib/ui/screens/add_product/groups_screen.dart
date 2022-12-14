@@ -1,37 +1,31 @@
 import 'package:bright_life_providers/controllers/required_groups_ctrl.dart';
-import 'package:bright_life_providers/ui/screens/add_product/widgets/required_product_bubble.dart';
+import 'package:bright_life_providers/ui/screens/add_product/widgets/group_bubble.dart';
+import 'package:bright_life_providers/utils/app_constants.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-class RequiredGroupsScreen extends StatefulWidget {
+class GroupsScreen extends StatefulWidget {
   final String type;
-  const RequiredGroupsScreen({Key? key, required this.type}) : super(key: key);
+  const GroupsScreen({Key? key, required this.type}) : super(key: key);
 
   @override
-  State<RequiredGroupsScreen> createState() => _RequiredGroupsScreenState();
+  State<GroupsScreen> createState() => _GroupsScreenState();
 }
 
-class _RequiredGroupsScreenState extends State<RequiredGroupsScreen> {
-  Future<void> _saveChanges() async {
+class _GroupsScreenState extends State<GroupsScreen> {
+  Future<void> _showDialog(String message) async {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: const Text('Would you like to approve of this message?'),
+          title: Text('Alert'.tr),
+          content: Text(message),
           actions: <Widget>[
             TextButton(
-              child: const Text('Cancel'),
+              child: Text('Ok'.tr),
               onPressed: () {
-                Get.back();
-              },
-            ),
-            TextButton(
-              child: const Text('Approve'),
-              onPressed: () {
-                RequiredGroupsCtrl.find.removeNonValidGroup();
                 Get.back();
               },
             ),
@@ -51,6 +45,7 @@ class _RequiredGroupsScreenState extends State<RequiredGroupsScreen> {
             willPop = true;
           },
           nonValidAction: () {
+            _showDialog(AppConstants.groupsAlertMessageLeavingPage);
             willPop = false;
           },
         );
@@ -65,15 +60,29 @@ class _RequiredGroupsScreenState extends State<RequiredGroupsScreen> {
                 RequiredGroupsCtrl.find.addGroup();
               },
               nonValidAction: () {
-                return;
+                _showDialog(AppConstants.groupsAlertMessageAddGroup);
               },
             );
           },
           child: const Icon(Icons.add),
         ),
         appBar: AppBar(
-          leading: const BackButton(),
-          title: Text("required"),
+          leading: BackButton(
+            onPressed: () {
+              RequiredGroupsCtrl.find.validate(
+                validAction: () {
+                  Get.back();
+                  if (RequiredGroupsCtrl.find.groups.isNotEmpty) {
+                    Fluttertoast.showToast(msg: 'Changes saved'.tr);
+                  }
+                },
+                nonValidAction: () {
+                  _showDialog(AppConstants.groupsAlertMessageLeavingPage);
+                },
+              );
+            },
+          ),
+          title: Text("Add groups".tr),
           actions: [
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -85,7 +94,7 @@ class _RequiredGroupsScreenState extends State<RequiredGroupsScreen> {
                       Fluttertoast.showToast(msg: 'Changes saved'.tr);
                     },
                     nonValidAction: () {
-                      _saveChanges();
+                      _showDialog(AppConstants.groupsAlertMessageSave);
                     },
                   );
                 },
@@ -99,16 +108,28 @@ class _RequiredGroupsScreenState extends State<RequiredGroupsScreen> {
         ),
         body: GetBuilder<RequiredGroupsCtrl>(
           builder: (controller) {
+            if (controller.groups.isEmpty) {
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Click on the + button to add a group".tr,
+                    style: const TextStyle(fontSize: 24),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              );
+            }
             return ListView.builder(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 50),
-              physics: const NeverScrollableScrollPhysics(),
               itemCount: controller.groups.length,
               itemBuilder: (context, index) {
                 final data = controller.groups[index];
-                return RequiredProductBubble(
+                return GroupBubble(
                   key: controller.bubbleKeys[index],
                   index: index,
                   title: data.name,
+                  type: data.type,
                   length: controller.groups.length,
                 );
               },

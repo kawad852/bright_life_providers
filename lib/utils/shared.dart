@@ -25,3 +25,28 @@ final kTypeDropDownDecoration = InputDecoration(
   ),
   errorStyle: const TextStyle(color: MyColors.red868),
 );
+
+final kBubbleDropDownDecoration = InputDecoration(
+  contentPadding: const EdgeInsets.all(8.0),
+  hintText: 'Category'.tr,
+  isDense: true,
+  filled: true,
+  fillColor: Colors.white,
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: const BorderSide(color: MyColors.textFormFieldBorder),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: const BorderSide(color: MyColors.textFormFieldBorder),
+  ),
+  errorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: const BorderSide(color: MyColors.red868),
+  ),
+  focusedErrorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: const BorderSide(color: MyColors.red868),
+  ),
+  errorStyle: const TextStyle(color: MyColors.red868),
+);

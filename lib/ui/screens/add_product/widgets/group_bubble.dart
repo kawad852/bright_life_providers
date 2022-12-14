@@ -1,32 +1,33 @@
 import 'package:bright_life_providers/controllers/required_groups_ctrl.dart';
-import 'package:bright_life_providers/ui/screens/add_product/widgets/required_box.dart';
+import 'package:bright_life_providers/ui/screens/add_product/widgets/group_item_box.dart';
 import 'package:bright_life_providers/ui/widgets/custom_text_field.dart';
 import 'package:bright_life_providers/utils/app_constants.dart';
 import 'package:bright_life_providers/utils/base/colors.dart';
+import 'package:bright_life_providers/utils/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RequiredProductBubble extends StatefulWidget {
+class GroupBubble extends StatefulWidget {
   final int index, length;
-  final String? title;
+  final String? title, type;
 
-  const RequiredProductBubble({
+  const GroupBubble({
     Key? key,
     required this.index,
     required this.title,
     required this.length,
+    this.type,
   }) : super(key: key);
 
   @override
-  State<RequiredProductBubble> createState() => RequiredProductBubbleState();
+  State<GroupBubble> createState() => GroupBubbleState();
 }
 
-class RequiredProductBubbleState extends State<RequiredProductBubble> {
+class GroupBubbleState extends State<GroupBubble> {
   late TextEditingController titleCtrl;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  // GlobalKey<RequiredBoxState> boxStateKeys = GlobalKey();
-  final requiredBoxState = <GlobalKey<RequiredBoxState>>[GlobalKey()];
-  List<String> options = <String>['One', 'Two'];
+  final requiredBoxStates = <GlobalKey<GroupItemBoxState>>[GlobalKey()];
+  List<String> options = <String>[kRequired, kOptional];
   String? dropdownValue;
 
   String? validator(value) {
@@ -39,6 +40,7 @@ class RequiredProductBubbleState extends State<RequiredProductBubble> {
   @override
   void initState() {
     titleCtrl = TextEditingController(text: widget.title);
+    dropdownValue = widget.type;
     super.initState();
   }
 
@@ -85,6 +87,7 @@ class RequiredProductBubbleState extends State<RequiredProductBubble> {
                       width: 150,
                       margin: const EdgeInsetsDirectional.only(end: 10, top: 20),
                       child: DropdownButtonFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value == null) {
                             return AppConstants.requiredField;
@@ -95,38 +98,16 @@ class RequiredProductBubbleState extends State<RequiredProductBubble> {
                         items: options.map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value),
+                            child: Text(value.tr),
                           );
                         }).toList(),
                         onChanged: (String? value) {
                           setState(() {
                             dropdownValue = value!;
                           });
+                          controller.editType(value!, widget.index);
                         },
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(8.0),
-                          hintText: 'Category'.tr,
-                          isDense: true,
-                          filled: true,
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: MyColors.textFormFieldBorder),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: MyColors.textFormFieldBorder),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: MyColors.red868),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: MyColors.red868),
-                          ),
-                          errorStyle: const TextStyle(color: MyColors.red868),
-                        ),
+                        decoration: kBubbleDropDownDecoration,
                       ),
                     ),
                   ],
@@ -136,10 +117,10 @@ class RequiredProductBubbleState extends State<RequiredProductBubble> {
                   controller: titleCtrl,
                   padding: const EdgeInsetsDirectional.only(start: 10, end: 40),
                   filled: true,
-                  hintText: 'Required group title',
+                  hintText: 'Title'.tr,
                   hintStyle: const TextStyle(color: MyColors.grey397, fontSize: 16),
                   onChanged: (value) {
-                    controller.addTitle(value, widget.index);
+                    controller.editTitle(value, widget.index);
                   },
                   validator: validator,
                 ),
@@ -152,14 +133,14 @@ class RequiredProductBubbleState extends State<RequiredProductBubble> {
                   itemCount: controller.groups[widget.index].items!.length,
                   itemBuilder: (context, number) {
                     final data = controller.groups[widget.index].items![number];
-                    return RequiredBox(
-                      key: requiredBoxState[number],
+                    return GroupItemBox(
+                      key: requiredBoxStates[number],
                       length: controller.groups[widget.index].items!.length,
                       index: widget.index,
                       number: number,
                       title: data.name,
                       price: data.price,
-                      myKey: requiredBoxState[number],
+                      myKey: requiredBoxStates[number],
                     );
                   },
                 ),
@@ -169,8 +150,20 @@ class RequiredProductBubbleState extends State<RequiredProductBubble> {
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                     ),
-                    onPressed: () {},
-                    child: Icon(
+                    onPressed: () {
+                      var isBubbleValid = controller.bubbleKeys[widget.index].currentState!.formKey.currentState!.validate();
+                      var isBoxValid = true;
+                      for (var element in controller.bubbleKeys[widget.index].currentState!.requiredBoxStates) {
+                        if (!element.currentState!.formKey.currentState!.validate()) {
+                          isBoxValid = false;
+                        }
+                      }
+                      if (isBubbleValid && isBoxValid) {
+                        requiredBoxStates.add(GlobalKey());
+                        controller.addItem(widget.index);
+                      }
+                    },
+                    child: const Icon(
                       Icons.add,
                     ),
                   ),

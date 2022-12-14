@@ -1,7 +1,7 @@
 import 'package:bright_life_providers/controllers/add_product/add_product_ctrl.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/category_drop_down.dart';
+import 'package:bright_life_providers/ui/screens/add_product/widgets/group_item_box.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/optional_box.dart';
-import 'package:bright_life_providers/ui/screens/add_product/widgets/required_box.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/titled_field.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
 import 'package:bright_life_providers/ui/widgets/custom_text_field.dart';
@@ -10,7 +10,7 @@ import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-final addSizeWidgetStateKeys = <GlobalKey<RequiredBoxState>>[GlobalKey()];
+final addSizeWidgetStateKeys = <GlobalKey<GroupItemBoxState>>[GlobalKey()];
 final addExtraWidgetStateKeys = <GlobalKey<OptionalBoxState>>[GlobalKey()];
 
 class AddProductScreen extends StatefulWidget {

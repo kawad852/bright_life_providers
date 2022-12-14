@@ -1,5 +1,5 @@
+import 'package:bright_life_providers/ui/screens/add_product/widgets/group_item_box.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/optional_box.dart';
-import 'package:bright_life_providers/ui/screens/add_product/widgets/required_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,7 +10,7 @@ class CreateProductCtrl extends GetxController {
   final requiredFields = [];
   final isOptionalFieldsShown = false.obs;
 
-  final requiredStateKeys = <GlobalKey<RequiredBoxState>>[].obs;
+  final requiredStateKeys = <GlobalKey<GroupItemBoxState>>[].obs;
   final optionalStateKeys = <GlobalKey<OptionalBoxState>>[].obs;
 
   void showRequiredFields(bool status) {

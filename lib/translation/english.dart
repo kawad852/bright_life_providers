@@ -1,3 +1,4 @@
+import 'package:bright_life_providers/utils/app_constants.dart';
 import 'package:bright_life_providers/utils/status.dart';
 
 const Map<String, String> en = {
@@ -88,4 +89,12 @@ const Map<String, String> en = {
   "Changes saved": "Changes saved",
   "Save": "Save",
   "Add": "Add",
+  "Click on the + button to add a group": "Click on the + button to add a group",
+  kOptional: "Optional",
+  kRequired: "Required",
+  'You must fill in all fields or delete unwanted ones before leaving the page': 'You must fill in all fields or delete unwanted ones before leaving the page',
+  'You must fill in all fields or delete unwanted ones before adding a new group': 'You must fill in all fields or delete unwanted ones before adding a new group',
+  'All fields must be filled before saving': 'All fields must be filled before saving',
+  'Add groups': 'Add groups',
+  'Title': 'Title',
 };
