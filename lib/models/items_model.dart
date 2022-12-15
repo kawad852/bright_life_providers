@@ -8,6 +8,12 @@ class ItemsModel {
   String? name;
   String? type;
   List<Item>? items;
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'type': type,
+        'items': items,
+      };
 }
 
 class Item {
@@ -18,4 +24,9 @@ class Item {
 
   double? price;
   String? name;
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'price': price,
+      };
 }

@@ -28,7 +28,6 @@ class AddProductsCtrl extends GetxController {
       title: title,
       price: price,
       type: type,
-      image: image,
       description: description,
       groups: groups,
     );
