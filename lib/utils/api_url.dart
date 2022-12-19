@@ -15,4 +15,6 @@ class ApiUrl {
   //search
   static const String search = "/api/v1/users/search";
 
+  //image
+  static const String uploadImage = "/api/v1/products/";
 }

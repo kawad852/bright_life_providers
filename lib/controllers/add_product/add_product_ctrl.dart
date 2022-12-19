@@ -31,6 +31,7 @@ class AddProductsCtrl extends GetxController {
       description: description,
       groups: groups,
     );
+    await AddProductApi().uploadImage(image, addProductModel!.data!.id!);
     if (addProductModel == null) {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);
       Loader.hide();
