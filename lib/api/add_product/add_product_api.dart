@@ -70,13 +70,35 @@ class AddProductApi {
         // var jsonData = jsonDecode(responseString);
         // UpdateProfileModel updateProfileModel = UpdateProfileModel.fromJson(jsonData);
         // return updateProfileModel;
-        log("Success!!");
+        log("Image uploaded Successfully!!");
       } else {
         throw "UpdateProfile Error";
       }
     } catch (e) {
       log("UpdateProfile Error $e");
       // return null;
+    }
+  }
+
+  Future fetchAddCategoryToProduct({
+    required int productId,
+    required int categoryId,
+  }) async {
+    String url = '${ApiUrl.mainUrl}${ApiUrl.addCategoryToProduct}';
+    Uri uri = Uri.parse(url);
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': MySharedPreferences.accessToken,
+    };
+    var body = jsonEncode({
+      "product_id": productId,
+      "category_id": categoryId,
+    });
+    log("Response:: addProductModelResponse\nUrl:: $url\nheaders:: $headers\nbody:: $body");
+    http.Response response = await http.post(uri, body: body, headers: headers);
+    if (response.statusCode == 200) {
+    } else {
+      throw Exception('Failed to load album');
     }
   }
 }

@@ -9,6 +9,12 @@ class ApiUrl {
   //add product
   static const String addProduct = "/api/v1/products-create";
 
+  //add category to product
+  static const String addCategoryToProduct = "/api/v1/products/category";
+
+  //categories
+  static const String categories = "/api/v1/categories";
+
   //view order
   static const String viewOrder = "/api/v1/view-order/";
 

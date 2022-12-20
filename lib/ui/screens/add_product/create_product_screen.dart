@@ -1,10 +1,9 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:bright_life_providers/controllers/add_product/add_product_ctrl.dart';
+import 'package:bright_life_providers/controllers/add_product/categories_api.dart';
 import 'package:bright_life_providers/controllers/create_product_ctrl.dart';
 import 'package:bright_life_providers/controllers/required_groups_ctrl.dart';
-import 'package:bright_life_providers/models/items_model.dart';
 import 'package:bright_life_providers/ui/screens/add_product/groups_screen.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/category_drop_down.dart';
 import 'package:bright_life_providers/ui/screens/add_product/widgets/titled_field.dart';
@@ -113,6 +112,7 @@ class CreateProductScreenState extends State<CreateProductScreen> {
           ? CustomFABButton(
               title: "Save Changes".tr,
               onPressed: () {
+                CategoriesCtrl.find.fetchData();
                 // print("list:: ${RequiredGroupsCtrl.find.groups}");
                 // var json = RequiredGroupsCtrl.find.groups.map((e) => e.toJson()).toList();
                 // print("list:: 2 $json");

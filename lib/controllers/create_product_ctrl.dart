@@ -49,20 +49,3 @@ class CreateProductCtrl extends GetxController {
     update();
   }
 }
-
-final group = [
-  {
-    "name": null,
-    "type": "required",
-    "items": [
-      {
-        "price": null,
-        "name": null,
-      },
-      {
-        "price": null,
-        "name": null,
-      }
-    ],
-  },
-];
