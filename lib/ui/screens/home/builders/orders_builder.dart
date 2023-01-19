@@ -14,16 +14,25 @@ class OrdersBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("id::: ${MySharedPreferences.id}");
     return GetBuilder<FilterCtrl>(
       id: '123',
       builder: (controller) {
         return Expanded(
           child: FirestoreListView<OrderModel>(
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.symmetric(
+              vertical: 20,
+            ),
             query: controller.filterStatus.value.isEmpty
-                ? FirebaseFirestore.instance.collection('orders').where('supplier_id', isEqualTo: MySharedPreferences.id).orderBy('created_at', descending: false).withConverter<OrderModel>(
-                      fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
+                ? FirebaseFirestore.instance
+                    .collection('orders')
+                    .where(
+                      'supplier_id',
+                      isEqualTo: MySharedPreferences.id,
+                    )
+                    .orderBy('created_at', descending: false)
+                    .withConverter<OrderModel>(
+                      fromFirestore: (snapshot, _) =>
+                          OrderModel.fromJson(snapshot.data()!),
                       toFirestore: (order, _) => order.toJson(),
                     )
                 : FirebaseFirestore.instance
@@ -32,7 +41,8 @@ class OrdersBuilder extends StatelessWidget {
                     .where('supplier_id', isEqualTo: MySharedPreferences.id)
                     .orderBy('created_at', descending: false)
                     .withConverter<OrderModel>(
-                      fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
+                      fromFirestore: (snapshot, _) =>
+                          OrderModel.fromJson(snapshot.data()!),
                       toFirestore: (order, _) => order.toJson(),
                     ),
             itemBuilder: (context, snapshot) {

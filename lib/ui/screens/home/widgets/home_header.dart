@@ -34,14 +34,23 @@ class HomeHeader extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            Get.to(() => const NotificationScreen());
+            Get.to(
+              () => const NotificationScreen(),
+            );
           },
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            fixedSize: const Size(66.0, 66.0),
-            backgroundColor: MyColors.primary.withOpacity(0.15),
+            fixedSize: const Size(
+              66.0,
+              66.0,
+            ),
+            backgroundColor: MyColors.primary.withOpacity(
+              0.15,
+            ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
+              borderRadius: BorderRadius.circular(
+                20.0,
+              ),
             ),
           ),
           child: SvgPicture.asset(

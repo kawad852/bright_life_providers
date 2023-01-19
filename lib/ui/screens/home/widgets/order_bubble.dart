@@ -14,12 +14,19 @@ class OrderBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5),
-      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+      margin: const EdgeInsets.symmetric(
+        vertical: 5,
+      ),
+      padding: const EdgeInsets.symmetric(
+        vertical: 14,
+        horizontal: 20,
+      ),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: MyColors.primary,
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(
+          10.0,
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,11 +34,17 @@ class OrderBubble extends StatelessWidget {
           Text(
             status.tr,
             //TODO: color based on status for next version
-            style: const TextStyle(fontSize: 16),
+            style: const TextStyle(
+              fontSize: 16,
+              color: MyColors.primary,
+            ),
           ),
           Text(
             orderNum,
-            style: const TextStyle(fontSize: 16, color: MyColors.textBlack),
+            style: const TextStyle(
+              fontSize: 16,
+              color: MyColors.textBlack,
+            ),
           ),
         ],
       ),

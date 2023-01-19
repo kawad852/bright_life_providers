@@ -37,11 +37,16 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: const EdgeInsets.only(bottom: 20),
+        padding: const EdgeInsets.only(
+          bottom: 20,
+        ),
         children: [
           const BlurImage(),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 30),
+            padding: const EdgeInsets.symmetric(
+              vertical: 0,
+              horizontal: 30,
+            ),
             child: Form(
               key: _formKey,
               child: Column(
@@ -55,7 +60,10 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20.0, bottom: 10),
+                    padding: const EdgeInsets.only(
+                      top: 20.0,
+                      bottom: 10,
+                    ),
                     child: CustomTextField(
                       controller: signInCtrl,
                       hintText: 'Email address or phone Number'.tr,
@@ -85,11 +93,15 @@ class _SignInScreenState extends State<SignInScreen> {
                       onPressed: () {},
                       child: Text(
                         "Forgot Password?".tr,
-                        style: const TextStyle(color: MyColors.text),
+                        style: const TextStyle(
+                          color: MyColors.text,
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 50),
+                  const SizedBox(
+                    height: 50,
+                  ),
                   CustomTextCircleButton(
                     title: "Sign in".tr,
                     onPressed: () {

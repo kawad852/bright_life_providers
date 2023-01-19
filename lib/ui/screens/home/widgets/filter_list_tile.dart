@@ -24,15 +24,23 @@ class StatusListTile extends StatelessWidget {
             onChanged: onChanged,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(5),
+                Radius.circular(
+                  5,
+                ),
               ),
-              side: BorderSide(color: MyColors.grey070),
+              side: BorderSide(
+                color: MyColors.grey070,
+              ),
             ),
-            fillColor: MaterialStateProperty.all(MyColors.grey070),
+            fillColor: MaterialStateProperty.all(
+              MyColors.grey070,
+            ),
           ),
           Text(
             title,
-            style: const TextStyle(fontSize: 18),
+            style: const TextStyle(
+              fontSize: 18,
+            ),
           ),
         ],
       ),

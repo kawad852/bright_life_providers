@@ -9,8 +9,12 @@ import 'package:get/get.dart';
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({Key? key}) : super(key: key);
 
-  static final Query<NotificationModel> query = FirebaseFirestore.instance.collection('notification').orderBy('created_at', descending: true).withConverter<NotificationModel>(
-        fromFirestore: (snapshot, _) => NotificationModel.fromJson(snapshot.data()!),
+  static final Query<NotificationModel> query = FirebaseFirestore.instance
+      .collection('notification')
+      .orderBy('created_at', descending: true)
+      .withConverter<NotificationModel>(
+        fromFirestore: (snapshot, _) =>
+            NotificationModel.fromJson(snapshot.data()!),
         toFirestore: (notification, _) => notification.toJson(),
       );
 
@@ -22,7 +26,11 @@ class NotificationScreen extends StatelessWidget {
       ),
       body: FirestoreListView<NotificationModel>(
         query: query,
-        padding: const EdgeInsets.only(top: 18, right: 18, left: 18),
+        padding: const EdgeInsets.only(
+          top: 18,
+          right: 18,
+          left: 18,
+        ),
         itemBuilder: (context, snapshot) {
           final data = snapshot.data();
           return NotificationItem(
