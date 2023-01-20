@@ -11,7 +11,6 @@ class OrderStatusCtrl extends GetxController {
 
   final statusDDV = Rxn<String>();
 
-  //TODO: translate
   List<String> status = [
     kPending,
     kReceiving,
@@ -22,14 +21,6 @@ class OrderStatusCtrl extends GetxController {
     kCanceled,
     kRejected,
   ];
-
-  // List<String> status = [
-  //   'Pending',
-  //   'In Progress',
-  //   'Completed',
-  //   'Cancelled',
-  //   'On Delivery',
-  // ];
 
   Future<void> changeStatusDialog(
     BuildContext context, {

@@ -10,6 +10,8 @@ import 'package:flutter/services.dart';
 import 'package:flutterfire_ui/i10n.dart';
 import 'package:get/get.dart';
 
+import 'binding/registration_binding.dart';
+
 //khaled basem awad .. my saved project // ...
 // dddtt
 
@@ -55,14 +57,13 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  // Bindings? _initialBinding() {
-  //   //TODO: test later
-  //   if (MySharedPreferences.isLogIn) {
-  //     return NavBarBinding();
-  //   } else {
-  //     return null;
-  //   }
-  // }
+  Bindings? _initialBinding() {
+    if (MySharedPreferences.isLogIn) {
+      return NavBarBinding();
+    } else {
+      return RegistrationBinding();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +80,7 @@ class _MyAppState extends State<MyApp> {
       theme: AppThemeData().materialTheme,
       home: _toggleScreen(),
       // home: TimerTest(),
-      initialBinding: NavBarBinding(),
+      initialBinding: _initialBinding(),
     );
   }
 }
