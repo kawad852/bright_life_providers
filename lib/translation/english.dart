@@ -102,4 +102,5 @@ const Map<String, String> en = {
   'Gallery': 'Gallery',
   'Camera': 'Camera',
   'Product added successfully': 'Product added successfully',
+  'do you need help?':'Do you need Help ?',
 };

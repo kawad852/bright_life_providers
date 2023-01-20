@@ -104,4 +104,5 @@ const Map<String, String> ar = {
   'Gallery': 'الأستوديو',
   'Camera': 'الكاميرا',
   'Product added successfully': 'تم إضافة المنتج بنجاح',
+  'do you need help?':'هل تحتاج مساعدة؟',
 };

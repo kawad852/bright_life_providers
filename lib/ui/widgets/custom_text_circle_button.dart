@@ -1,3 +1,4 @@
+import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextCircleButton extends StatelessWidget {
@@ -25,10 +26,22 @@ class CustomTextCircleButton extends StatelessWidget {
         ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            shape: const CircleBorder(),
-            fixedSize: const Size(50, 50),
+            backgroundColor: const Color(
+              0xFFC4DFAA,
+            ),
+            shape: CircleBorder(
+              side: BorderSide(
+                color: MyColors.greenFAA,
+              ),
+            ),
+            fixedSize: const Size(
+              50,
+              50,
+            ),
           ),
-          child: const Icon(Icons.arrow_forward),
+          child: const Icon(
+            Icons.arrow_forward,
+          ),
         ),
       ],
     );
