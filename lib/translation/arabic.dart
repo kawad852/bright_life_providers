@@ -104,5 +104,8 @@ const Map<String, String> ar = {
   'Gallery': 'الأستوديو',
   'Camera': 'الكاميرا',
   'Product added successfully': 'تم إضافة المنتج بنجاح',
-  'do you need help?':'هل تحتاج مساعدة؟',
+  'do you need help?': 'هل تحتاج مساعدة؟',
+  'done': 'تم',
+  'The product has been added to the checklist It will be approved soon':
+      'تمت إضافة المنتج إلى قائمة التحقق وسيتم الموافقة عليه قريبًا',
 };

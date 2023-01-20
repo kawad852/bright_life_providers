@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../add_product/widgets/added_product_successfully.dart';
+
 final createProductKey = GlobalKey<CreateProductScreenState>();
 
 enum Languages { english, arabic }
@@ -173,7 +175,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 20,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                ///TODO: edit
+                Get.dialog(AddedProductSuccessfully());
+              },
               child: Container(
                 height: 72,
                 padding: const EdgeInsets.symmetric(

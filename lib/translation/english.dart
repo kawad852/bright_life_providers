@@ -7,7 +7,8 @@ const Map<String, String> en = {
   "Email address or phone Number": "Email address or phone Number",
   "Password": "Password",
   "Sign in": "Sign in",
-  "Something went Wrong, try again later": "Something went Wrong, try again later",
+  "Something went Wrong, try again later":
+      "Something went Wrong, try again later",
   "Enter your email": "Enter your email",
   "Enter your password": "Enter your password",
   "Add New Order": "Add New Order",
@@ -71,7 +72,8 @@ const Map<String, String> en = {
   "Total recipient": "total recipient",
   "Balance": "Balance",
   "min": "min",
-  "Are you sure you want to change order status ?": "Are you sure you want to change order status ?",
+  "Are you sure you want to change order status ?":
+      "Are you sure you want to change order status ?",
   "Alert": "Alert",
   "Cancel": "Cancel",
   "Approve": "Approve",
@@ -89,12 +91,16 @@ const Map<String, String> en = {
   "Changes saved": "Changes saved",
   "Save": "Save",
   "Add": "Add",
-  "Click on the + button to add a group": "Click on the + button to add a group",
+  "Click on the + button to add a group":
+      "Click on the + button to add a group",
   kOptional: "Optional",
   kRequired: "Required",
-  'You must fill in all fields or delete unwanted ones before leaving the page': 'You must fill in all fields or delete unwanted ones before leaving the page',
-  'You must fill in all fields or delete unwanted ones before adding a new group': 'You must fill in all fields or delete unwanted ones before adding a new group',
-  'All fields must be filled before saving': 'All fields must be filled before saving',
+  'You must fill in all fields or delete unwanted ones before leaving the page':
+      'You must fill in all fields or delete unwanted ones before leaving the page',
+  'You must fill in all fields or delete unwanted ones before adding a new group':
+      'You must fill in all fields or delete unwanted ones before adding a new group',
+  'All fields must be filled before saving':
+      'All fields must be filled before saving',
   'Add groups': 'Add groups',
   'Title': 'Title',
   'Products have been added': 'Products have been added',
@@ -102,5 +108,8 @@ const Map<String, String> en = {
   'Gallery': 'Gallery',
   'Camera': 'Camera',
   'Product added successfully': 'Product added successfully',
-  'do you need help?':'Do you need Help ?',
+  'do you need help?': 'Do you need Help ?',
+  'done': 'Done',
+  'The product has been added to the checklist It will be approved soon':
+      'The product has been added to the checklist It will be approved soon',
 };
