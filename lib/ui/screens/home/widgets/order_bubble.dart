@@ -23,7 +23,7 @@ class OrderBubble extends StatelessWidget {
       ),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: MyColors.primary,
+        color: MyColors.greenFAA,
         borderRadius: BorderRadius.circular(
           10.0,
         ),
@@ -32,18 +32,17 @@ class OrderBubble extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            status.tr,
-            //TODO: color based on status for next version
-            style: const TextStyle(
-              fontSize: 16,
-              color: MyColors.primary,
-            ),
-          ),
-          Text(
             orderNum,
             style: const TextStyle(
               fontSize: 16,
               color: MyColors.textBlack,
+            ),
+          ),
+          Text(
+            status.tr,
+            style: TextStyle(
+              fontSize: 16,
+              color: status != 'canceled' ? MyColors.primary : MyColors.red400,
             ),
           ),
         ],

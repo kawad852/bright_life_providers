@@ -17,7 +17,10 @@ class WalletScreen extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 15,
         mainAxisSpacing: 15,
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 30,
+          vertical: 40,
+        ),
         children: [
           WalletItem(
             title: 'No. Orders'.tr,

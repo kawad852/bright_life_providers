@@ -23,7 +23,10 @@ class SearchScreen extends StatelessWidget {
         withBackButton: false,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 18,
+          vertical: 20,
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -34,7 +37,9 @@ class SearchScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: const EdgeInsets.all(
+                18.0,
+              ),
               child: CustomTextField(
                 fillColor: MyColors.greenFD4,
                 borderColor: MyColors.greenFD4,
@@ -57,22 +62,37 @@ class SearchScreen extends StatelessWidget {
                   : SearchCtrl.find.isLoading.value
                       ? const Expanded(
                           child: BaseShimmerLoading(
-                            padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                              20,
+                              0,
+                              20,
+                              20,
+                            ),
                           ),
                         )
                       : Expanded(
                           child: ListView.separated(
-                            padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
-                            separatorBuilder: (context, index) => const SizedBox(height: 15),
-                            itemCount: SearchCtrl.find.model.value!.data!.length,
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                              20,
+                              0,
+                              20,
+                              20,
+                            ),
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
+                              height: 15,
+                            ),
+                            itemCount:
+                                SearchCtrl.find.model.value?.data?.length ?? 0,
                             itemBuilder: (context, index) {
-                              final data = SearchCtrl.find.model.value!.data![index];
+                              final data =
+                                  SearchCtrl.find.model.value!.data![index];
                               return SearchTile(
                                 image: data.image!,
                                 title: data.name!,
                                 description: data.description!,
                                 location: data.location!,
-                                rating: data.avgPoints!,
+                                rating: data.avgPoints!.toDouble(),
                                 onTap: () {
                                   Get.to(
                                     OrderDetailsScreen(id: data.id!),

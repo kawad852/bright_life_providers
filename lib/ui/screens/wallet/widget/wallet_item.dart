@@ -20,13 +20,17 @@ class WalletItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 15),
+      padding: const EdgeInsets.symmetric(
+        vertical: 15,
+      ),
       height: 170,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: MyColors.green9F2,
         borderRadius: BorderRadius.all(
-          Radius.circular(35),
+          Radius.circular(
+            35,
+          ),
         ),
       ),
       child: Column(
@@ -52,7 +56,7 @@ class WalletItem extends StatelessWidget {
                       fontSize: 22,
                     ),
                     children: <TextSpan>[
-                       const TextSpan(
+                       TextSpan(
                         text: 'R ',
                         style: TextStyle(
                           color: MyColors.greenFAA,
@@ -85,11 +89,16 @@ class WalletItem extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                color: valueColor, fontSize: 30, fontWeight: FontWeight.w600),
+              color: valueColor,
+              fontSize: 30,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           withCurrency
               ? const Padding(
-                  padding: EdgeInsets.only(top: 10.0),
+                  padding: EdgeInsets.only(
+                    top: 10.0,
+                  ),
                   child: Text(
                     'JOD',
                     style: TextStyle(

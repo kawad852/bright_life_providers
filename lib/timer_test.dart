@@ -40,7 +40,8 @@ class _TimerTestState extends State<TimerTest> {
               builder: (context, snapshot) {
                 var value = snapshot.data!;
                 print("data:: ${snapshot.data!}");
-                final displayTime = StopWatchTimer.getDisplayTime(value, milliSecond: false);
+                final displayTime =
+                    StopWatchTimer.getDisplayTime(value, milliSecond: false);
                 return Text(
                   displayTime,
                   style: const TextStyle(
@@ -58,7 +59,7 @@ class _TimerTestState extends State<TimerTest> {
                 stopWatchTimer.onStartTimer();
               },
               child: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: MyColors.greenFAA,
                 ),
@@ -74,7 +75,7 @@ class _TimerTestState extends State<TimerTest> {
                 stopWatchTimer.onStopTimer();
               },
               child: Container(
-                decoration: const BoxDecoration(
+                decoration:  BoxDecoration(
                   shape: BoxShape.circle,
                   color: MyColors.greenFAA,
                 ),

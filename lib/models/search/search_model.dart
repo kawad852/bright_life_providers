@@ -1,221 +1,238 @@
-import 'dart:convert';
-
 class SearchModel {
-  SearchModel({
-    this.status,
-    this.code,
-    this.msg,
-    this.data,
-  });
-
   bool? status;
   int? code;
   String? msg;
-  List<Datum>? data;
+  List<Data>? data;
 
-  SearchModel searchModelFromJson(String str) => SearchModel.fromJson(json.decode(str));
+  SearchModel({this.status, this.code, this.msg, this.data});
 
-  String searchModelToJson() => json.encode(toJson());
+  SearchModel.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    code = json['code'];
+    msg = json['msg'];
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(Data.fromJson(v));
+      });
+    }
+  }
 
-  factory SearchModel.fromJson(Map<String, dynamic> json) => SearchModel(
-        status: json["status"],
-        code: json["code"],
-        msg: json["msg"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "status": status,
-        "code": code,
-        "msg": msg,
-        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['status'] = status;
+    data['code'] = code;
+    data['msg'] = msg;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
-class Datum {
-  Datum({
-    this.id,
-    this.name,
-    this.phone,
-    this.email,
-    this.avgPoints,
-    this.image,
-    this.cover,
-    this.location,
-    this.description,
-    this.categories,
-    this.products,
-  });
-
+class Data {
   int? id;
   String? name;
   String? phone;
   String? email;
-  double? avgPoints;
+  int? avgPoints;
   String? image;
   String? cover;
   String? location;
+  String? type;
   String? description;
-  List<Categor>? categories;
-  List<Product>? products;
+  List<Categories>? categories;
+  List<Products>? products;
 
-  Datum datumFromJson(String str) => Datum.fromJson(json.decode(str));
+  Data(
+      {this.id,
+      this.name,
+      this.phone,
+      this.email,
+      this.avgPoints,
+      this.image,
+      this.cover,
+      this.location,
+      this.type,
+      this.description,
+      this.categories,
+      this.products});
 
-  String datumToJson() => json.encode(toJson());
+  Data.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    phone = json['phone'];
+    email = json['email'];
+    avgPoints = json['avg_points'];
+    image = json['image'];
+    cover = json['cover'];
+    location = json['location'];
+    type = json['type'];
+    description = json['description'];
+    if (json['categories'] != null) {
+      categories = <Categories>[];
+      json['categories'].forEach((v) {
+        categories!.add(Categories.fromJson(v));
+      });
+    }
+    if (json['products'] != null) {
+      products = <Products>[];
+      json['products'].forEach((v) {
+        products!.add(Products.fromJson(v));
+      });
+    }
+  }
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-        id: json["id"],
-        name: json["name"],
-        phone: json["phone"],
-        email: json["email"],
-        avgPoints: double.parse(json["avg_points"].toString()),
-        image: json["image"] ?? '',
-        cover: json["cover"],
-        location: json["location"],
-        description: json["description"],
-        categories: List<Categor>.from(json["categories"].map((x) => Categor.fromJson(x))),
-        products: List<Product>.from(json["products"].map((x) => Product.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "phone": phone,
-        "email": email,
-        "avg_points": avgPoints,
-        "image": image,
-        "cover": cover,
-        "location": location,
-        "description": description,
-        "categories": List<dynamic>.from(categories!.map((x) => x.toJson())),
-        "products": List<dynamic>.from(products!.map((x) => x.toJson())),
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name'] = name;
+    data['phone'] = phone;
+    data['email'] = email;
+    data['avg_points'] = avgPoints;
+    data['image'] = image;
+    data['cover'] = cover;
+    data['location'] = location;
+    data['type'] = type;
+    data['description'] = description;
+    if (categories != null) {
+      data['categories'] = categories!.map((v) => v.toJson()).toList();
+    }
+    if (products != null) {
+      data['products'] = products!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
-class Categor {
-  Categor({
-    this.id,
-    this.name,
-  });
-
+class Categories {
   int? id;
   String? name;
 
-  Categor categorFromJson(String str) => Categor.fromJson(json.decode(str));
+  Categories({this.id, this.name});
 
-  String categorToJson() => json.encode(toJson());
+  Categories.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+  }
 
-  factory Categor.fromJson(Map<String, dynamic> json) => Categor(
-        id: json["id"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name'] = name;
+    return data;
+  }
 }
 
-class Product {
-  Product({
-    this.id,
-    this.name,
-    this.image,
-    this.price,
-    this.type,
-    this.categorise,
-    this.groups,
-  });
-
+class Products {
   int? id;
   String? name;
+  String? content;
   String? image;
   String? price;
   String? type;
-  List<Categor>? categorise;
-  List<Group>? groups;
+  List<Categories>? categorise;
+  List<Groups>? groups;
 
-  Product productFromJson(String str) => Product.fromJson(json.decode(str));
+  Products(
+      {this.id,
+      this.name,
+      this.content,
+      this.image,
+      this.price,
+      this.type,
+      this.categorise,
+      this.groups});
 
-  String productToJson() => json.encode(toJson());
+  Products.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    content = json['content'];
+    image = json['image'];
+    price = json['price'];
+    type = json['type'];
+    if (json['categorise'] != null) {
+      categorise = <Categories>[];
+      json['categorise'].forEach((v) {
+        categorise!.add(Categories.fromJson(v));
+      });
+    }
+    if (json['groups'] != null) {
+      groups = <Groups>[];
+      json['groups'].forEach((v) {
+        groups!.add(Groups.fromJson(v));
+      });
+    }
+  }
 
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
-        id: json["id"],
-        name: json["name"],
-        image: json["image"],
-        price: json["price"],
-        type: json["type"],
-        categorise: List<Categor>.from(json["categorise"].map((x) => Categor.fromJson(x))),
-        groups: List<Group>.from(json["groups"].map((x) => Group.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "image": image,
-        "price": price,
-        "type": type,
-        "categorise": List<dynamic>.from(categorise!.map((x) => x.toJson())),
-        "groups": List<dynamic>.from(groups!.map((x) => x.toJson())),
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name'] = name;
+    data['content'] = content;
+    data['image'] = image;
+    data['price'] = price;
+    data['type'] = type;
+    if (categorise != null) {
+      data['categorise'] = categorise!.map((v) => v.toJson()).toList();
+    }
+    if (groups != null) {
+      data['groups'] = groups!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
-class Group {
-  Group({
-    this.id,
-    this.name,
-    this.type,
-    this.items,
-  });
-
+class Groups {
   int? id;
   String? name;
   String? type;
-  List<Item>? items;
+  List<Items>? items;
 
-  Group groupFromJson(String str) => Group.fromJson(json.decode(str));
+  Groups({this.id, this.name, this.type, this.items});
 
-  String groupToJson() => json.encode(toJson());
+  Groups.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    type = json['type'];
+    if (json['items'] != null) {
+      items = <Items>[];
+      json['items'].forEach((v) {
+        items!.add(Items.fromJson(v));
+      });
+    }
+  }
 
-  factory Group.fromJson(Map<String, dynamic> json) => Group(
-        id: json["id"],
-        name: json["name"],
-        type: json["type"],
-        items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "type": type,
-        "items": List<dynamic>.from(items!.map((x) => x.toJson())),
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name'] = name;
+    data['type'] = type;
+    if (items != null) {
+      data['items'] = items!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
-class Item {
-  Item({
-    this.id,
-    this.name,
-    this.price,
-  });
-
+class Items {
   int? id;
   String? name;
-  int? price;
+  double? price;
 
-  Item itemFromJson(String str) => Item.fromJson(json.decode(str));
+  Items({this.id, this.name, this.price});
 
-  String itemToJson() => json.encode(toJson());
+  Items.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name '];
+    price = json['price'].toDouble();
+  }
 
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
-        id: json["id"],
-        name: json["name "],
-        price: json["price"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name ": name,
-        "price": price,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name '] = name;
+    data['price'] = price;
+    return data;
+  }
 }

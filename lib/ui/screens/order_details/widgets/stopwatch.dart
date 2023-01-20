@@ -73,7 +73,7 @@ class _CustomStopwatchState extends State<CustomStopwatch> {
                     stopWatchTimer.onStartTimer();
                   },
                   child: Container(
-                    decoration: const BoxDecoration(
+                    decoration:  BoxDecoration(
                       shape: BoxShape.circle,
                       color: MyColors.greenFAA,
                     ),
@@ -100,7 +100,7 @@ class _CustomStopwatchState extends State<CustomStopwatch> {
                     stopWatchTimer.onStopTimer();
                   },
                   child: Container(
-                    decoration: const BoxDecoration(
+                    decoration:  BoxDecoration(
                       shape: BoxShape.circle,
                       color: MyColors.greenFAA,
                     ),

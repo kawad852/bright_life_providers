@@ -71,7 +71,8 @@ const Map<String, String> ar = {
   "Balance": "الرصيد",
   "min": "دقيقة",
   "Alert": "تنبيه",
-  "Are you sure you want to change order status ?": "هل أنت متأكد أنك تريد تغيير حالة الطلب؟",
+  "Are you sure you want to change order status ?":
+      "هل أنت متأكد أنك تريد تغيير حالة الطلب؟",
   "Cancel": "ألغاء",
   "Approve": "الموافقة",
   "You cant change order status": "لا يمكنك تغيير حالة الطلب",
@@ -91,8 +92,10 @@ const Map<String, String> ar = {
   "Click on the + button to add a group": "انقر على زر + لإضافة مجموعة",
   kOptional: "إختاري",
   kRequired: "مطلوب",
-  'You must fill in all fields or delete unwanted ones before leaving the page': 'يجب ملئ جميع الحقول او حذف غير المرغوب فيه قبل مغادرة الصفحة',
-  'You must fill in all fields or delete unwanted ones before adding a new group': 'يجب ملئ جميع الحقول او حذف غير المرغوب فيه قبل إضافة مجموعة جديدة',
+  'You must fill in all fields or delete unwanted ones before leaving the page':
+      'يجب ملئ جميع الحقول او حذف غير المرغوب فيه قبل مغادرة الصفحة',
+  'You must fill in all fields or delete unwanted ones before adding a new group':
+      'يجب ملئ جميع الحقول او حذف غير المرغوب فيه قبل إضافة مجموعة جديدة',
   'All fields must be filled before saving': 'يجب ملء جميع الحقول قبل الحفظ',
   'Add groups': 'إضافة مجموعات',
   'Title': 'العنوان',

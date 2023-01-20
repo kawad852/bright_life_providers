@@ -12,8 +12,8 @@ class MyColors {
   //green
   static const Color green9AD = Color(0xFF73A9AD);
   static const Color green9F2 = Color(0xFFF4F9F2);
-  static const Color greenFAA = Color(0xFFC4DFAA);
-  static const Color greenFD4= Color(0xFFE1EFD4);
+  static Color greenFAA = const Color(0xFFC4DFAA).withOpacity(0.3);
+  static const Color greenFD4 = Color(0xFFE1EFD4);
 
   //white
   static const Color white = Color(0xFFFFFFFF);
@@ -30,9 +30,10 @@ class MyColors {
   //red
   static const Color red868 = Color(0xFFC76868);
   static const Color red303 = Color(0xFFDB0303);
+  static const Color red400 = Color(0xFFFF1400);
+
 
   static const Color orderAccepted = Color(0xFF73A9AD);
 
   static const textFormFieldBorder = Color.fromRGBO(39, 39, 49, 0.2);
-
 }
