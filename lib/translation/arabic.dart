@@ -108,4 +108,26 @@ const Map<String, String> ar = {
   'done': 'تم',
   'The product has been added to the checklist It will be approved soon':
       'تمت إضافة المنتج إلى قائمة التحقق وسيتم الموافقة عليه قريبًا',
+
+  //change password
+  "Old Password": "كلمة المرور القديمة",
+  "Enter some text": "أدخل نصًا",
+  "short password": "كلمة مرور قصيرة",
+  "New Password": "كلمة المرور الجديدة",
+  "Confirm Password": "تأكيد كلمة المرور",
+  "Doesn't match": "غير متطابق",
+  "Same as the old password": "مثل كلمة المرور القديمة",
+  //reset password
+  "Reset your password": "اعد ضبط كلمه السر",
+  "Enter your email and we will send you a link to reset your password": "أدخل بريدك الإلكتروني وسنرسل لك ارتباطًا لإعادة تعيين كلمة مرورك",
+  "Send": "ارسال",
+  "return": "عودة",
+  //login
+  "Welcome": "مرحبا",
+  "Back": "بعودتك",
+  "Enter your email or phone number": "أدخل بريدك الإلكتروني أو رقم هاتفك",
+  "Password is short": "كلمة المرور قصيرة",
+  "Forgot Password ?": "هل نسيت كلمة السر ؟",
+  "Sign In": "تسجيل الدخول",
+  "I don’t have an a account": "لا املك حساب",
 };

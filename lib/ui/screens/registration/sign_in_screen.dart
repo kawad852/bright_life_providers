@@ -6,6 +6,8 @@ import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'forgot_pass_screen.dart';
+
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
 
@@ -90,7 +92,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   Align(
                     alignment: AlignmentDirectional.centerEnd,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => const ForgotPassScreen());
+                      },
                       child: Text(
                         "Forgot Password?".tr,
                         style: const TextStyle(

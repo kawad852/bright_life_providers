@@ -10,7 +10,6 @@ import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-///TODO: does not extend getXController: what???
 class SignInCtrl extends GetxController {
   static SignInModel? model;
 

@@ -79,7 +79,6 @@ class _MyAppState extends State<MyApp> {
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       home: _toggleScreen(),
-      // home: TimerTest(),
       initialBinding: _initialBinding(),
     );
   }

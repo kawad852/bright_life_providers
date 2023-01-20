@@ -1,5 +1,6 @@
 import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/services/text_formatter.dart';
 
 class CustomTextField extends StatelessWidget {
   final String? label;
@@ -26,6 +27,7 @@ class CustomTextField extends StatelessWidget {
 
   final InputDecoration? decoration;
   final int? maxLength;
+  final List<LengthLimitingTextInputFormatter>? inputFormatters;
 
   const CustomTextField({
     Key? key,
@@ -52,6 +54,7 @@ class CustomTextField extends StatelessWidget {
     this.borderColor = MyColors.textFormFieldBorder,
     this.onChanged,
     this.padding,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -59,6 +62,7 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: padding ?? EdgeInsets.zero,
       child: TextFormField(
+        inputFormatters: inputFormatters,
         maxLength: maxLength,
         autovalidateMode: autoValidateMode,
         onTap: onTap,

@@ -112,4 +112,27 @@ const Map<String, String> en = {
   'done': 'Done',
   'The product has been added to the checklist It will be approved soon':
       'The product has been added to the checklist It will be approved soon',
+
+  //change password
+  "Old Password": "Old Password",
+  "Enter some text": "Enter some text",
+  "short password": "short password",
+  "New Password": "New Password",
+  "Confirm Password": "Confirm Password",
+  "Doesn't match": "Doesn't match",
+  "Same as the old password": "Same as the old password",
+  //reset password
+  "Reset your password": "Reset your password",
+  "Enter your email and we will send you a link to reset your password":
+      "Enter your email and we will send you a link to reset your password",
+  "Send": "Send",
+  "return": "return",
+  //login
+  "Welcome": "Welcome",
+  "Back": "Back",
+  "Enter your email or phone number": "Enter your email or phone number",
+  "Password is short": "Password is short",
+  "Forgot Password ?": "Forgot Password ?",
+  "Sign In": "Sign In",
+  "I don’t have an a account": "I don’t have an a account",
 };

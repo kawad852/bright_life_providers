@@ -5,6 +5,9 @@ class ApiUrl {
   static const String signIn = "/api/v1/login";
   static const String signUp = "/api/v1/user-reg";
   static const String signOut = "/api/v1/logout";
+  static const String verification = "/api/v1/otb-check";
+  static const String passwordOTP = "/api/v1/password-otb";
+  static const String forgotPass = "/api/v1/password-otb";
 
   //add product
   static const String addProduct = "/api/v1/products-create";
@@ -23,4 +26,7 @@ class ApiUrl {
 
   //image
   static const String uploadImage = "/api/v1/products/";
+
+  //change password
+  static const String changePassword = "/api/v1/change-password";
 }
