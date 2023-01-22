@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../../binding/base/nav_bar.dart';
 import '../../../controllers/registration/verfication.dart';
 import '../../../utils/base/colors.dart';
-import '../../base/nav_bar.dart';
 import '../../widgets/custom_back_button.dart';
 import '../../widgets/custom_text_circle_button.dart';
 

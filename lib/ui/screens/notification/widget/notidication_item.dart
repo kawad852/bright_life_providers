@@ -2,7 +2,6 @@ import 'package:bright_life_providers/utils/base/colors.dart';
 import 'package:bright_life_providers/utils/base/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class NotificationItem extends StatelessWidget {

@@ -1,4 +1,3 @@
-import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
 import 'package:bright_life_providers/ui/widgets/blur_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +7,6 @@ import '../../widgets/custom_back_button.dart';
 import 'widgets/password_appearance_widget.dart';
 import '../../widgets/custom_text_circle_button.dart';
 import '../../widgets/custom_text_field.dart';
-import '../../../utils/base/images.dart';
 
 class NewPassScreen extends StatefulWidget {
   final String phone;

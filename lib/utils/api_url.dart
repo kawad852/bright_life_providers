@@ -29,4 +29,7 @@ class ApiUrl {
 
   //change password
   static const String changePassword = "/api/v1/change-password";
+
+  //pages
+  static const String pages = '/api/v1/page/';
 }

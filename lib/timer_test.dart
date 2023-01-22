@@ -51,7 +51,7 @@ class _TimerTestState extends State<TimerTest> {
                 );
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             InkWell(

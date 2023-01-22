@@ -1,6 +1,8 @@
 import 'package:bright_life_providers/binding/create_order_binding.dart';
 import 'package:bright_life_providers/controllers/registration/sign_out_ctrl.dart';
 import 'package:bright_life_providers/ui/screens/add_product/create_product_screen.dart';
+import 'package:bright_life_providers/ui/screens/pages/about_us.dart';
+import 'package:bright_life_providers/ui/screens/pages/privacy_policy.dart';
 import 'package:bright_life_providers/ui/screens/profile/widget/custom_listtile.dart';
 import 'package:bright_life_providers/ui/screens/wallet/wallet.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
@@ -142,12 +144,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         CustomListTile(
                           icon: MyIcons.policy,
                           title: 'Privacy Policy'.tr,
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(() => const PrivacyPolicyScreen());
+                          },
                         ),
                         CustomListTile(
                           icon: MyIcons.info,
                           title: 'About App'.tr,
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(() => const AboutUsScreen());
+                          },
                         ),
                         CustomListTile(
                           icon: MyIcons.signInOut,
@@ -177,7 +183,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             GestureDetector(
               onTap: () {
                 ///TODO: edit
-                Get.dialog(AddedProductSuccessfully());
+                Get.dialog(const AddedProductSuccessfully());
               },
               child: Container(
                 height: 72,

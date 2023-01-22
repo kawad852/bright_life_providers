@@ -7,10 +7,8 @@ import 'package:get/get.dart';
 
 import '../../api/registration/forgot_pass_api.dart';
 import '../../api/registration/verfication.dart';
-import '../../binding/base/nav_bar.dart';
 import '../../models/registration/forgot_pass_model.dart';
 import '../../models/registration/verfication.dart';
-import '../../ui/base/nav_bar.dart';
 import '../../ui/surfaces/custom_overlay_loader.dart';
 import '../../utils/app_constants.dart';
 import '../../utils/shared_prefrences.dart';
