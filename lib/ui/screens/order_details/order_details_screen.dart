@@ -15,6 +15,7 @@ import 'package:bright_life_providers/utils/status.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
@@ -57,7 +58,7 @@ class OrderDetailsScreen extends StatelessWidget {
                     Row(
                       children: [
                         CustomNetworkImage(
-                          url: '${snapshot.data!.order!.user!.image}',
+                          url: '${snapshot.data?.order?.user?.image}',
                           border: 100,
                           width: 70,
                           height: 70,
@@ -69,14 +70,14 @@ class OrderDetailsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${snapshot.data!.order!.user!.name} ${snapshot.data!.order!.user!.lastName}',
+                              '${snapshot.data?.order?.user?.name} ${snapshot.data?.order?.user?.lastName}',
                               style: const TextStyle(
                                 fontSize: 16,
                                 color: MyColors.text,
                               ),
                             ),
                             Text(
-                              '${snapshot.data!.order!.user!.phone}',
+                              '${snapshot.data?.order?.user?.phone}',
                               style: const TextStyle(
                                 fontSize: 16,
                                 color: MyColors.text,
@@ -108,14 +109,14 @@ class OrderDetailsScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${snapshot.data!.order!.user!.address!.city} , ${snapshot.data!.order!.user!.address!.region}',
+                              '${snapshot.data?.order?.user?.address?.city} , ${snapshot.data?.order?.user?.address?.region}',
                               style: const TextStyle(
                                 color: MyColors.grey070,
                                 fontSize: 14,
                               ),
                             ),
                             Text(
-                              '${snapshot.data!.order!.user!.address!.street} , ${snapshot.data!.order!.user!.address!.apartmentNumber} , ${snapshot.data!.order!.user!.address!.floorNumber}',
+                              '${snapshot.data?.order?.user?.address?.street} , ${snapshot.data?.order?.user?.address?.apartmentNumber} , ${snapshot.data?.order?.user?.address?.floorNumber}',
                               style: const TextStyle(
                                 color: MyColors.grey070,
                                 fontSize: 14,
@@ -140,12 +141,12 @@ class OrderDetailsScreen extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.zero,
-                      itemCount: snapshot.data!.order!.products!.length,
+                      itemCount: snapshot.data?.order?.products?.length,
                       itemBuilder: (context, index) {
                         return OrderItemTile(
-                          count: snapshot.data!.order!.products![index].quantity ?? 0,
-                          title: '${snapshot.data!.order!.products![index].productName}',
-                          price: '${snapshot.data!.order!.products![index].price}',
+                          count: snapshot.data?.order?.products?[index].quantity ?? 0,
+                          title: '${snapshot.data?.order?.products?[index].productName}',
+                          price: '${snapshot.data?.order?.products?[index].price}',
                         );
                       },
                     ),
@@ -153,9 +154,9 @@ class OrderDetailsScreen extends StatelessWidget {
                       height: 25,
                       thickness: 1,
                     ),
-                    PriceItemTile(title: 'Total'.tr, price: '${snapshot.data!.order!.total}'),
-                    PriceItemTile(title: 'Tax'.tr, price: '${snapshot.data!.order!.tax}'),
-                    PriceItemTile(title: 'delivery fee'.tr, price: '${snapshot.data!.order!.deliveryFee}'),
+                    PriceItemTile(title: 'Total'.tr, price: '${snapshot.data?.order?.total}'),
+                    PriceItemTile(title: 'Tax'.tr, price: '${snapshot.data?.order?.tax}'),
+                    PriceItemTile(title: 'delivery fee'.tr, price: '${snapshot.data?.order?.deliveryFee}'),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 2),
                       child: Row(
@@ -169,7 +170,7 @@ class OrderDetailsScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '${snapshot.data!.order!.paymentMethod}',
+                            '${snapshot.data?.order?.paymentMethod}',
                             style: const TextStyle(
                               fontSize: 14,
                               color: MyColors.text,
@@ -178,9 +179,9 @@ class OrderDetailsScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    PriceItemTile(title: 'Discount'.tr, price: '${snapshot.data!.order!.discount}'),
-                    PriceItemTile(title: 'Bright Life Percentage'.tr, price: '${snapshot.data!.order!.percentage}'),
-                    PriceItemTile(title: 'order value'.tr, price: '${snapshot.data!.order!.orderValue}'),
+                    PriceItemTile(title: 'Discount'.tr, price: '${snapshot.data?.order?.discount}'),
+                    PriceItemTile(title: 'Bright Life Percentage'.tr, price: '${snapshot.data?.order?.percentage}'),
+                    PriceItemTile(title: 'order value'.tr, price: '${snapshot.data?.order?.orderValue}'),
                     const Divider(
                       height: 25,
                       thickness: 1,
@@ -195,64 +196,68 @@ class OrderDetailsScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    OrderStatusDropDown(docId: ViewOrderCtrl.find.docId),
-                    if (snapshot.data!.order!.type == 'perhour')
-                      GetBuilder<OrderStatusCtrl>(
-                        builder: (controller) {
-                          if (controller.statusDDV.value == kInProgress) {
-                            return Container(
-                              margin: const EdgeInsets.symmetric(vertical: 15),
-                              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                              decoration: BoxDecoration(
-                                color: MyColors.greenFAA.withOpacity(0.4),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              child: FutureBuilder<DocumentSnapshot<OrderModel>>(
-                                future: kOrderCollection
-                                    .doc(ViewOrderCtrl.find.docId)
-                                    .withConverter<OrderModel>(
-                                      fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
-                                      toFirestore: (order, _) => order.toJson(),
-                                    )
-                                    .get(),
-                                builder: (context, snapshot) {
-                                  switch (snapshot.connectionState) {
-                                    case ConnectionState.waiting:
-                                      return const Center(
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(vertical: 10.0),
-                                          child: CircularProgressIndicator(),
-                                        ),
-                                      );
-                                    case ConnectionState.done:
-                                    default:
-                                      if (snapshot.hasData) {
-                                        final data = snapshot.data!.data();
-                                        return CustomStopwatch(
-                                          docId: snapshot.data!.id,
-                                          initialTime: data!.workTime,
-                                        );
-                                      } else if (snapshot.hasError) {
-                                        return const FailedWidget();
-                                      } else {
-                                        return const FailedWidget();
-                                      }
-                                  }
-                                },
-                              ),
-                            );
-                          } else if (controller.statusDDV.value == kDelivering ||
-                              controller.statusDDV.value == kCompleted ||
-                              controller.statusDDV.value == kCanceled ||
-                              controller.statusDDV.value == kRejected) {
-                            return OrderTimeBox(docId: ViewOrderCtrl.find.docId);
-                          } else {
-                            return const SizedBox.shrink();
-                          }
-                        },
-                      )
+                    ///TODO: bring back
+                    // OrderStatusDropDown(docId: ViewOrderCtrl.find.docId),
+                    // if (snapshot.data?.order?.type == 'perhour')
+                    //   GetBuilder<OrderStatusCtrl>(
+                    //     builder: (controller) {
+                    //       if (controller.statusDDV.value == kInProgress) {
+                    //         return Container(
+                    //           margin: const EdgeInsets.symmetric(vertical: 15),
+                    //           padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    //           decoration: BoxDecoration(
+                    //             color: MyColors.greenFAA.withOpacity(0.4),
+                    //             borderRadius: const BorderRadius.all(
+                    //               Radius.circular(10),
+                    //             ),
+                    //           ),
+                    //           child: FutureBuilder<DocumentSnapshot<OrderModel>>(
+                    //             future: kOrderCollection
+                    //                 .doc(ViewOrderCtrl.find.docId)
+                    //                 .withConverter<OrderModel>(
+                    //                   fromFirestore: (snapshot, _) => OrderModel.fromJson(snapshot.data()!),
+                    //                   toFirestore: (order, _) => order.toJson(),
+                    //                 )
+                    //                 .get(),
+                    //             builder: (context, snapshot) {
+                    //               switch (snapshot.connectionState) {
+                    //                 case ConnectionState.waiting:
+                    //                   return const Center(
+                    //                     child: Padding(
+                    //                       padding: EdgeInsets.symmetric(vertical: 10.0),
+                    //                       child: CircularProgressIndicator(),
+                    //                     ),
+                    //                   );
+                    //                 case ConnectionState.done:
+                    //                 default:
+                    //                   if (snapshot.hasData) {
+                    //                     final data = snapshot.data!.data();
+                    //                     return CustomStopwatch(
+                    //                       docId: snapshot.data!.id,
+                    //                       initialTime: data!.workTime,
+                    //                     );
+                    //                   } else if (snapshot.hasError) {
+                    //                     return const FailedWidget();
+                    //                   } else {
+                    //                     return const FailedWidget();
+                    //                   }
+                    //               }
+                    //             },
+                    //           ),
+                    //         );
+                    //       } else if (controller.statusDDV.value == kDelivering ||
+                    //           controller.statusDDV.value == kCompleted ||
+                    //           controller.statusDDV.value == kCanceled ||
+                    //           controller.statusDDV.value == kRejected) {
+                    //         return OrderTimeBox(docId: ViewOrderCtrl.find.docId);
+                    //       } else {
+                    //         return const SizedBox.shrink();
+                    //       }
+                    //     },
+                    //   )
+///
+
+
 
                     // const SizedBox(height: 30),
                     // SizedBox(

@@ -92,20 +92,21 @@ class _SearchScreenState extends State<SearchScreen> {
                                 const SizedBox(
                               height: 15,
                             ),
-                            itemCount:
-                                SearchCtrl.find.model.value?.data?.length ?? 0,
+                            itemCount: SearchCtrl.find.model.value?.data != null
+                                ? 1
+                                : 0,
                             itemBuilder: (context, index) {
                               final data =
-                                  SearchCtrl.find.model.value!.data![index];
+                                  SearchCtrl.find.model.value!.data!;
                               return SearchTile(
-                                image: data.image!,
-                                title: data.name!,
-                                description: data.description!,
-                                location: data.location!,
-                                rating: data.avgPoints!.toDouble(),
+                                image: data.supplier!.image!,
+                                title: data.supplier!.name!,
+                                description: data.supplier!.phone!,
+                                location: data.address!.name!,
+                                rating: data.id!.toDouble(),
                                 onTap: () {
                                   Get.to(
-                                    OrderDetailsScreen(id: data.id!),
+                                    () => OrderDetailsScreen(id: data.id!),
                                     binding: ViewOrderBinding(id: data.id!),
                                   );
                                 },

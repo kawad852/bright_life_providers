@@ -22,7 +22,7 @@ class ApiUrl {
   static const String viewOrder = "/api/v1/view-order/";
 
   //search
-  static const String search = "/api/v1/users/search";
+  static const String search = "/api/v1/search-order";
 
   //image
   static const String uploadImage = "/api/v1/products/";

@@ -27,11 +27,15 @@ class ViewOrderCtrl extends GetxController {
 
   Future<ViewOrderModel?> fetchData(int id) async {
     viewOrderModel = await ViewOrderApi.data(id: id);
-    await kOrderCollection.where('order_id', isEqualTo: id).where('supplier_id', isEqualTo: MySharedPreferences.id).get().then((value) {
-      docId = value.docs[0].id;
-      time = value.docs[0].data()['work_time'];
-      OrderStatusCtrl.find.statusDDV.value = value.docs[0].data()['status'];
-    });
+    // await kOrderCollection
+    //     .where('order_id', isEqualTo: id)
+    //     .where('supplier_id', isEqualTo: MySharedPreferences.id)
+    //     .get()
+    //     .then((value) {
+    //   docId = value.docs[0].id;
+    //   time = value.docs[0].data()['work_time'];
+    //   OrderStatusCtrl.find.statusDDV.value = value.docs[0].data()['status'];
+    // });
     return viewOrderModel;
   }
 

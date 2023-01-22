@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:bright_life_providers/models/search/search_model.dart';
 import 'package:bright_life_providers/utils/api_url.dart';
+import 'package:bright_life_providers/utils/shared_prefrences.dart';
 import 'package:http/http.dart' as http;
 
 class SearchApi {
@@ -14,12 +15,14 @@ class SearchApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${MySharedPreferences.accessToken}'
       };
       var body = jsonEncode({
-        "keyword": text,
+        "id": text,
       });
       log("Response:: SearchResponse\nUrl:: $url\nheaders:: $headers\nbody:: $body");
-      http.Response response = await http.post(uri, body: body, headers: headers);
+      http.Response response =
+          await http.post(uri, body: body, headers: headers);
       log("SearchStatusCode:: ${response.statusCode}  SearchBody:: ${response.body}");
       SearchModel model = SearchModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
