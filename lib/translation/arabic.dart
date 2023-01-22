@@ -119,7 +119,8 @@ const Map<String, String> ar = {
   "Same as the old password": "مثل كلمة المرور القديمة",
   //reset password
   "Reset your password": "اعد ضبط كلمه السر",
-  "Enter your email and we will send you a link to reset your password": "أدخل بريدك الإلكتروني وسنرسل لك ارتباطًا لإعادة تعيين كلمة مرورك",
+  "Enter your email and we will send you a link to reset your password":
+      "أدخل بريدك الإلكتروني وسنرسل لك ارتباطًا لإعادة تعيين كلمة مرورك",
   "Send": "ارسال",
   "return": "عودة",
   //login
@@ -130,4 +131,24 @@ const Map<String, String> ar = {
   "Forgot Password ?": "هل نسيت كلمة السر ؟",
   "Sign In": "تسجيل الدخول",
   "I don’t have an a account": "لا املك حساب",
+  //forgot password
+  'Forget\nPassword ?': 'نسيت\nكلمة المرور؟',
+  'Enter your phone number to reset Password':
+      'أدخل رقم هاتفك لإعادة تعيين كلمة المرور',
+  'start from 7': 'تبدأ من 7',
+  'Enter your phone number': 'أدخل رقم هاتفك',
+  'Enter correct phone number': 'أدخل رقم الهاتف الصحيح',
+  'Phone Number': 'رقم الهاتف',
+  'Verification': 'تَحَقّق',
+  'Account': 'حساب',
+  'We send OTP code to your phone number Please enter it':
+      'نرسل رمز OTP إلى رقم هاتفك من فضلك أدخله',
+  'didn\'t receive a code?': 'ألم تتلق رمز؟',
+  'resend after': 'إعادة إرسال بعد',
+  'seconds': 'ثوان',
+  'resend now': 'إعادة الإرسال الآن',
+  'Reset Password':'إعادة تعيين كلمة المرور',
+  'New\nPassword':'كلمة\nالمرور الجديدة ',
+  'Enter new password':'أدخل كلمة السر الجديدة',
+  'password is short':'كلمة السر قصيرة',
 };

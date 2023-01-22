@@ -135,4 +135,25 @@ const Map<String, String> en = {
   "Forgot Password ?": "Forgot Password ?",
   "Sign In": "Sign In",
   "I don’t have an a account": "I don’t have an a account",
+  //forgot password
+  'Forget\nPassword ?': 'Forget\nPassword ?',
+  'Enter your phone number to reset Password':
+      'Enter your phone number to reset Password',
+  'start from 7': 'start from 7',
+  'Enter your phone number': 'Enter your phone number',
+  'Enter correct phone number': 'Enter correct phone number',
+  'Phone Number': 'Phone Number',
+  'Verification': 'Verification',
+  'Account': 'Account',
+  'We send OTP code to your phone number Please enter it':
+      'We send OTP code to your phone number Please enter it',
+  'didn\'t receive a code?':'didn\'t receive a code?',
+  'resend after':'resend after',
+  'seconds':'seconds',
+  'resend now':'resend now',
+  'Reset Password':'Reset Password',
+  'New\nPassword':'New\nPassword',
+  'Enter new password':'Enter new password',
+  'password is short':'password is short',
+
 };

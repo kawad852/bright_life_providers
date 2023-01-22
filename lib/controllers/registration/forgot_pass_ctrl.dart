@@ -1,4 +1,3 @@
-
 import 'package:bright_life_providers/ui/surfaces/custom_overlay_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
@@ -18,7 +17,7 @@ class ForgotPassCtrl {
     required String phoneNum,
     required BuildContext context,
   }) async {
-   CustomLoader.show(context);
+    CustomLoader.show(context);
     model = await ForgotPassApi.data(phoneNum: phoneNum);
     if (model == null) {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);
@@ -27,7 +26,8 @@ class ForgotPassCtrl {
     }
     if (model!.code == 200) {
       print("phone:: $phoneNum");
-      Get.to(() => const VerificationAccountScreen(), binding: VerificationBinding(phoneNum: phoneNum, route: 'new_pass'));
+      Get.to(() => VerificationAccountScreen(phoneNumber: phoneNum),
+          binding: VerificationBinding(phoneNum: phoneNum, route: 'new_pass'));
     } else if (model!.code == 500) {
       Fluttertoast.showToast(msg: 'Enter correct credentials');
     } else {

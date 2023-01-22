@@ -1,9 +1,10 @@
-
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
+import 'package:bright_life_providers/ui/widgets/blur_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/registration/change_password.dart';
+import '../../widgets/custom_back_button.dart';
 import 'widgets/password_appearance_widget.dart';
 import '../../widgets/custom_text_circle_button.dart';
 import '../../widgets/custom_text_field.dart';
@@ -47,95 +48,104 @@ class _NewPassScreenState extends State<NewPassScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const BaseAppBar(title: ''),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: Image.asset(
-                  MyImages.gradient,
-                  height: 200,
+      body: Stack(
+        children: [
+          const BlurImage(),
+          SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              child: Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 50,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CustomBackButton(),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Text(
+                        "New\nPassword".tr,
+                        style:
+                            Theme.of(context).textTheme.headlineLarge!.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        child: Text(
+                          "Enter new password".tr,
+                        ),
+                      ),
+                      CustomTextField(
+                        suffixIcon: PasswordAppearanceWidget(
+                          onTap: () {
+                            setState(() {
+                              isPassObscure = !isPassObscure;
+                            });
+                          },
+                          obscureText: isPassObscure,
+                        ),
+                        obscureText: isPassObscure,
+                        controller: passwordCtrl,
+                        label: "Password".tr,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter your password".tr;
+                          }
+                          if (value.length < 4) {
+                            return "password is short".tr;
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 18),
+                      CustomTextField(
+                        suffixIcon: PasswordAppearanceWidget(
+                          onTap: () {
+                            setState(() {
+                              isConfirmPassObscure = !isConfirmPassObscure;
+                            });
+                          },
+                          obscureText: isConfirmPassObscure,
+                        ),
+                        obscureText: isConfirmPassObscure,
+                        controller: confirmPasswordCtrl,
+                        label: "Confirm Password".tr,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter your password".tr;
+                          }
+                          if (value != passwordCtrl.text) {
+                            return "Doesn't match".tr;
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 50),
+                      CustomTextCircleButton(
+                        title: '',
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            ChangePasswordCtrl.fetchPasswordResetData(
+                              phoneNumber: widget.phone,
+                              password: passwordCtrl.text.trim(),
+                              context: context,
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Text(
-                "New\nPassword".tr,
-                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
-                child: Text(
-                  "Enter new password".tr,
-                ),
-              ),
-              CustomTextField(
-                suffixIcon: PasswordAppearanceWidget(
-                  onTap: () {
-                    setState(() {
-                      isPassObscure = !isPassObscure;
-                    });
-                  },
-                  obscureText: isPassObscure,
-                ),
-                obscureText: isPassObscure,
-                controller: passwordCtrl,
-                label: "Password".tr,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Enter your password".tr;
-                  }
-                  if (value.length < 4) {
-                    return "password is short".tr;
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 18),
-              CustomTextField(
-                suffixIcon: PasswordAppearanceWidget(
-                  onTap: () {
-                    setState(() {
-                      isConfirmPassObscure = !isConfirmPassObscure;
-                    });
-                  },
-                  obscureText: isConfirmPassObscure,
-                ),
-                obscureText: isConfirmPassObscure,
-                controller: confirmPasswordCtrl,
-                label: "Confirm Password".tr,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Enter your password".tr;
-                  }
-                  if (value != passwordCtrl.text) {
-                    return "Does'nt match".tr;
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 50),
-              CustomTextCircleButton(
-                title: '',
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    FocusManager.instance.primaryFocus?.unfocus();
-                    ChangePasswordCtrl.fetchPasswordResetData(
-                      phoneNumber: widget.phone,
-                      password: passwordCtrl.text.trim(),
-                      context: context,
-                    );
-                  }
-                },
-              ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
