@@ -4,7 +4,7 @@ class SearchModel {
   bool? status;
   int? code;
   String? msg;
-  Data? data;
+  List<Data?>? data;
 
   SearchModel({this.status, this.code, this.msg, this.data});
 
@@ -12,7 +12,12 @@ class SearchModel {
     status = json['status'];
     code = json['code'];
     msg = json['msg'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      data = [];
+      json['data'].forEach((v) {
+        data?.add(Data.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -21,7 +26,7 @@ class SearchModel {
     data['code'] = code;
     data['msg'] = msg;
     if (this.data != null) {
-      data['data'] = this.data!.toJson();
+      data['data'] = this.data?.map((v) => v?.toJson()).toList();
     }
     return data;
   }

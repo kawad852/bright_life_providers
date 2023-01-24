@@ -56,6 +56,7 @@ class OrdersBuilder extends StatelessWidget {
                     binding: ViewOrderBinding(id: data.orderId),
                   );
                 },
+                ///TODO: shouldn't this be number?
                 child: OrderBubble(
                   orderNum: '#${data.orderId}',
                   status: data.status,

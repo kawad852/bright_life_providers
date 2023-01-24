@@ -1,7 +1,4 @@
-import 'package:bright_life_providers/binding/view_order_binding.dart';
 import 'package:bright_life_providers/controllers/search/search.dart';
-import 'package:bright_life_providers/ui/screens/order_details/order_details_screen.dart';
-import 'package:bright_life_providers/ui/screens/search/widget/search_tile.dart';
 import 'package:bright_life_providers/ui/widgets/base_app_bar.dart';
 import 'package:bright_life_providers/ui/widgets/base_shimmer_loading.dart';
 import 'package:bright_life_providers/ui/widgets/custom_text_field.dart';
@@ -10,6 +7,8 @@ import 'package:bright_life_providers/utils/base/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+import '../home/widgets/order_bubble.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -90,26 +89,15 @@ class _SearchScreenState extends State<SearchScreen> {
                             ),
                             separatorBuilder: (context, index) =>
                                 const SizedBox(
-                              height: 15,
+                              height: 0,
                             ),
-                            itemCount: SearchCtrl.find.model.value?.data != null
-                                ? 1
-                                : 0,
+                            itemCount:
+                                SearchCtrl.find.model.value?.data?.length ?? 0,
                             itemBuilder: (context, index) {
-                              final data =
-                                  SearchCtrl.find.model.value!.data!;
-                              return SearchTile(
-                                image: data.supplier!.image!,
-                                title: data.supplier!.name!,
-                                description: data.supplier!.phone!,
-                                location: data.address!.name!,
-                                rating: data.id!.toDouble(),
-                                onTap: () {
-                                  Get.to(
-                                    () => OrderDetailsScreen(id: data.id!),
-                                    binding: ViewOrderBinding(id: data.id!),
-                                  );
-                                },
+                              final data = SearchCtrl.find.model.value!.data!;
+                              return OrderBubble(
+                                orderNum: '#${data[index]?.number}',
+                                status: data[index]?.status ?? '',
                               );
                             },
                           ),
