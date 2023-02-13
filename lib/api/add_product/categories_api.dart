@@ -14,6 +14,7 @@ class CategoriesApi {
       var headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
+        'app-locale':MySharedPreferences.language,
       };
       log("Response:: CategoriesResponse\nUrl:: $url\nheaders:: $headers");
       http.Response response = await http.get(uri, headers: headers);
@@ -22,6 +23,7 @@ class CategoriesApi {
       if (response.statusCode == 200) {
         return model;
       } else {
+        print('error ${model.msg}');
         throw "Categories Error";
       }
     } catch (e) {

@@ -53,7 +53,9 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomBackButton(),
+                       CustomBackButton( function: () {
+                         Get.back();
+                       },),
                       const SizedBox(
                         height: 25,
                       ),

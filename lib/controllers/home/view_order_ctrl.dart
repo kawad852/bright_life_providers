@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bright_life_providers/api/order/view_order.dart';
 import 'package:bright_life_providers/controllers/order_status_ctrl.dart';
 import 'package:bright_life_providers/models/orders/view_order_model.dart';
@@ -27,15 +29,16 @@ class ViewOrderCtrl extends GetxController {
 
   Future<ViewOrderModel?> fetchData(int id) async {
     viewOrderModel = await ViewOrderApi.data(id: id);
-    // await kOrderCollection
-    //     .where('order_id', isEqualTo: id)
-    //     .where('supplier_id', isEqualTo: MySharedPreferences.id)
-    //     .get()
-    //     .then((value) {
-    //   docId = value.docs[0].id;
-    //   time = value.docs[0].data()['work_time'];
-    //   OrderStatusCtrl.find.statusDDV.value = value.docs[0].data()['status'];
-    // });
+    await kOrderCollection
+        .where('order_id', isEqualTo: id)
+        .where('supplier_id', isEqualTo: MySharedPreferences.id)
+        .get()
+        .then((value) {
+      docId = value.docs[0].id;
+      time = value.docs[0].data()['work_time'];
+      log('time $time');
+      OrderStatusCtrl.find.statusDDV.value = value.docs[0].data()['status'];
+    });
     return viewOrderModel;
   }
 

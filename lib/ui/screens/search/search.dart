@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/nav_bar_ctrl.dart';
 import '../home/widgets/order_bubble.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -29,7 +30,8 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: BaseAppBar(
         title: 'Search'.tr,
-        withBackButton: false,
+        withBackButton: true,
+        function: (){ NavBarCtrl.find.navBarController.jumpToTab(0);},
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(

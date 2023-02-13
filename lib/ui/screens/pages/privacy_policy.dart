@@ -40,12 +40,14 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                     child: Column(
                       children: [
                         Row(
-                          children: const [
-                            SizedBox(
+                          children:  [
+                            const SizedBox(
                               width: 20,
                             ),
-                            CustomBackButton(),
-                            Spacer(),
+                            CustomBackButton( function: () {
+                              Get.back();
+                            },),
+                            const Spacer(),
                           ],
                         ),
                         const Spacer(),
@@ -73,7 +75,9 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                                 mainAxisAlignment:
                                 MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const CustomBackButton(),
+                                   CustomBackButton( function: () {
+                                    Get.back();
+                                  },),
                                   Text(
                                     snapshot.data!.data.title,
                                     style: const TextStyle(
@@ -102,12 +106,14 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                       child: Column(
                         children: [
                           Row(
-                            children: const [
-                              SizedBox(
+                            children:  [
+                              const SizedBox(
                                 width: 20,
                               ),
-                              CustomBackButton(),
-                              Spacer(),
+                              CustomBackButton( function: () {
+                                Get.back();
+                              },),
+                              const Spacer(),
                             ],
                           ),
                           const Spacer(),

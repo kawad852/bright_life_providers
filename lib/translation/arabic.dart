@@ -90,7 +90,7 @@ const Map<String, String> ar = {
   "Save": "حفظ",
   "Add": "إضافة",
   "Click on the + button to add a group": "انقر على زر + لإضافة مجموعة",
-  kOptional: "إختاري",
+  kOptional: "إختياري",
   kRequired: "مطلوب",
   'You must fill in all fields or delete unwanted ones before leaving the page':
       'يجب ملئ جميع الحقول او حذف غير المرغوب فيه قبل مغادرة الصفحة',

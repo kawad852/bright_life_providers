@@ -61,7 +61,9 @@ class _NewPassScreenState extends State<NewPassScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomBackButton(),
+                       CustomBackButton( function: () {
+                        Get.back();
+                      },),
                       const SizedBox(
                         height: 25,
                       ),

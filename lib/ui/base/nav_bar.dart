@@ -1,3 +1,4 @@
+import 'package:bright_life_providers/controllers/nav_bar_ctrl.dart';
 import 'package:bright_life_providers/ui/screens/home/home_screen.dart';
 import 'package:bright_life_providers/ui/screens/profile/profile.dart';
 import 'package:bright_life_providers/ui/screens/search/search.dart';
@@ -17,6 +18,13 @@ class BaseNavBar extends StatefulWidget {
 }
 
 class _BaseNavBarState extends State<BaseNavBar> {
+
+  @override
+  void initState() {
+    navBarController = NavBarCtrl.find.navBarController;
+    super.initState();
+  }
+
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
@@ -51,11 +59,6 @@ class _BaseNavBarState extends State<BaseNavBar> {
     ];
   }
 
-  @override
-  void initState() {
-    navBarController = PersistentTabController(initialIndex: 0);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +68,16 @@ class _BaseNavBarState extends State<BaseNavBar> {
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
-      backgroundColor: Colors.white, // Default is Colors.white.
-      handleAndroidBackButtonPress: true, // Default is true.
-      resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-      stateManagement: true, // Default is true.
-      hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+      backgroundColor: Colors.white,
+      // Default is Colors.white.
+      handleAndroidBackButtonPress: true,
+      // Default is true.
+      resizeToAvoidBottomInset: true,
+      // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+      stateManagement: true,
+      // Default is true.
+      hideNavigationBarWhenKeyboardShows: true,
+      // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
       decoration: const NavBarDecoration(
         colorBehindNavBar: Colors.white,
       ),
@@ -86,7 +94,8 @@ class _BaseNavBarState extends State<BaseNavBar> {
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
-      navBarStyle: NavBarStyle.style12, // Choose the nav bar style with this property.
+      navBarStyle:
+          NavBarStyle.style12, // Choose the nav bar style with this property.
     );
   }
 }

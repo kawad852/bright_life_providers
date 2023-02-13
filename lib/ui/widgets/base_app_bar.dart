@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool withBackButton;
+  final Function? function;
   const BaseAppBar({
     Key? key,
     required this.title,
     this.withBackButton = true,
+     this.function,
   }) : super(key: key);
 
   @override
@@ -16,15 +18,15 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(
         title,
-        style: const TextStyle(color: MyColors.text, fontSize: 18),
+        style: const TextStyle(color: MyColors.text, fontSize: 18,),
       ),
       centerTitle: true,
       backgroundColor: Colors.transparent,
       elevation: 0,
       leading: withBackButton
-          ? const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CustomBackButton(),
+          ?  Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomBackButton(function: function ?? (){},),
             )
           : null,
     );

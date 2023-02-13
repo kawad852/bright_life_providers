@@ -61,7 +61,9 @@ class VerificationAccountScreenState extends State<VerificationAccountScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomBackButton(),
+                       CustomBackButton( function: () {
+                        Get.back();
+                      },),
                       const SizedBox(
                         height: 25,
                       ),
@@ -268,7 +270,8 @@ class VerificationAccountScreenState extends State<VerificationAccountScreen> {
                         title: "Reset Password".tr,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            String code = codeFields[0].controller.text +
+                            String code =
+                                codeFields[0].controller.text +
                                 codeFields[1].controller.text +
                                 codeFields[2].controller.text +
                                 codeFields[3].controller.text;

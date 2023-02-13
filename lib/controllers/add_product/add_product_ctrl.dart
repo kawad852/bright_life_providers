@@ -10,6 +10,8 @@ import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
+import '../../ui/screens/add_product/widgets/added_product_successfully.dart';
+
 class AddProductsCtrl extends GetxController {
   static AddProductsCtrl get find => Get.find();
 
@@ -41,7 +43,7 @@ class AddProductsCtrl extends GetxController {
     }
     if (addProductModel!.code == 200) {
       Get.back();
-      Fluttertoast.showToast(msg: 'Product added successfully'.tr);
+      Get.dialog(const AddedProductSuccessfully());
     } else {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);
     }

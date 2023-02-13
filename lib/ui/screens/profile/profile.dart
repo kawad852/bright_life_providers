@@ -1,4 +1,5 @@
 import 'package:bright_life_providers/binding/create_order_binding.dart';
+import 'package:bright_life_providers/controllers/nav_bar_ctrl.dart';
 import 'package:bright_life_providers/controllers/registration/sign_out_ctrl.dart';
 import 'package:bright_life_providers/ui/screens/add_product/create_product_screen.dart';
 import 'package:bright_life_providers/ui/screens/pages/about_us.dart';
@@ -13,8 +14,6 @@ import 'package:bright_life_providers/utils/shared_prefrences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
-import '../add_product/widgets/added_product_successfully.dart';
 
 final createProductKey = GlobalKey<CreateProductScreenState>();
 
@@ -33,7 +32,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: BaseAppBar(
         title: 'Profile'.tr,
-        withBackButton: false,
+        withBackButton: true,
+        function: () {
+          NavBarCtrl.find.navBarController.jumpToTab(0);
+        },
       ),
       // floatingActionButton: const HelpButton(),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -183,7 +185,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             GestureDetector(
               onTap: () {
                 ///TODO: edit
-                Get.dialog(const AddedProductSuccessfully());
               },
               child: Container(
                 height: 72,

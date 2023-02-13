@@ -1,6 +1,6 @@
-
 import 'package:bright_life_providers/ui/widgets/blur_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/pages/pages_ctrl.dart';
@@ -8,7 +8,6 @@ import '../../../models/pages/page_model.dart';
 import '../../../utils/base/colors.dart';
 import '../../widgets/custom_back_button.dart';
 import '../../widgets/failed_widget.dart';
-import 'package:flutter_html/flutter_html.dart';
 
 class AboutUsScreen extends StatefulWidget {
   const AboutUsScreen({Key? key}) : super(key: key);
@@ -40,12 +39,16 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                     child: Column(
                       children: [
                         Row(
-                          children: const [
-                            SizedBox(
+                          children: [
+                            const SizedBox(
                               width: 20,
                             ),
-                            CustomBackButton(),
-                            Spacer(),
+                            CustomBackButton(
+                              function: () {
+                                Get.back();
+                              },
+                            ),
+                            const Spacer(),
                           ],
                         ),
                         const Spacer(),
@@ -73,7 +76,9 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const CustomBackButton(),
+                                   CustomBackButton( function: () {
+                                     Get.back();
+                                   },),
                                   Text(
                                     snapshot.data!.data.title,
                                     style: const TextStyle(
@@ -88,8 +93,8 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 20,horizontal: 20.0),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20, horizontal: 20.0),
                               child: Html(data: snapshot.data!.data.content),
                             ),
                           ],
@@ -102,12 +107,14 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                       child: Column(
                         children: [
                           Row(
-                            children: const [
-                              SizedBox(
+                            children:  [
+                              const SizedBox(
                                 width: 20,
                               ),
-                              CustomBackButton(),
-                              Spacer(),
+                              CustomBackButton( function: () {
+                                Get.back();
+                              },),
+                              const Spacer(),
                             ],
                           ),
                           const Spacer(),

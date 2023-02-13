@@ -78,6 +78,7 @@ class AddedProductSuccessfully extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Get.back();
+                  Get.back();
                 },
                 child: Container(
                   height: 54,
