@@ -151,4 +151,5 @@ const Map<String, String> ar = {
   'New\nPassword':'كلمة\nالمرور الجديدة ',
   'Enter new password':'أدخل كلمة السر الجديدة',
   'password is short':'كلمة السر قصيرة',
+  'my products / services':'منتجاتي / خدماتي',
 };

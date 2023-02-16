@@ -1,7 +1,9 @@
 import 'package:bright_life_providers/binding/create_order_binding.dart';
+import 'package:bright_life_providers/binding/my_products_binding.dart';
 import 'package:bright_life_providers/controllers/nav_bar_ctrl.dart';
 import 'package:bright_life_providers/controllers/registration/sign_out_ctrl.dart';
 import 'package:bright_life_providers/ui/screens/add_product/create_product_screen.dart';
+import 'package:bright_life_providers/ui/screens/my_products/my_products_screen.dart';
 import 'package:bright_life_providers/ui/screens/pages/about_us.dart';
 import 'package:bright_life_providers/ui/screens/pages/privacy_policy.dart';
 import 'package:bright_life_providers/ui/screens/profile/widget/custom_listtile.dart';
@@ -114,6 +116,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           title: 'My Wallet'.tr,
                           onTap: () {
                             Get.to(() => const WalletScreen());
+                          },
+                        ),
+                        CustomListTile(
+                          icon: MyIcons.orderBbD,
+                          title: 'my products / services'.tr,
+                          onTap: () {
+                            Get.to(
+                                  () => const MyProductsScreen(),
+                              binding: MyProductsBinding(),
+                            );
                           },
                         ),
                         ListTile(

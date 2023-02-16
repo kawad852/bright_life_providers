@@ -32,4 +32,8 @@ class ApiUrl {
 
   //pages
   static const String pages = '/api/v1/page/';
+
+  //my products
+  static const String myProducts = '/api/v1/my-products';
+
 }

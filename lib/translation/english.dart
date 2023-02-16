@@ -155,5 +155,6 @@ const Map<String, String> en = {
   'New\nPassword':'New\nPassword',
   'Enter new password':'Enter new password',
   'password is short':'password is short',
+  'my products / services':'My Products / Services',
 
 };
